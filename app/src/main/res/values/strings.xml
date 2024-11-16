@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Ejajan</string>
+    <string name="Deskripsi_logo">Logo E-Jajan</string>
+    <string name="Apps">E - Jajan</string>
+    <string name="welcome">Welcome\nE - Jajan</string>
+    <string name="btnlogin_student">Login Student</string>
+    <string name="btnlogin_parent_merchant">Login Parent or Merchant</string>
+    <string name="description_login">Please enter the account data that has been created</string>
+    <string name="invalid_email">Masukkan email dengan benar</string>
+    <string name="minimum_characters">Kata sandi harus minimal 8 karakter</string>
+    <string name="input_your_email">Masukkan email Anda</string>
+    <string name="input_your_password">Masukkan kata sandi Anda</string>
+    <string name="btnLogin">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>
