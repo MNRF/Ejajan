@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
     <application
@@ -17,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ejajan"
         tools:targetApi="31">
+        <activity
+            android:name=".view.onboarding.OnboardingViewPager"
+            android:exported="false" />
+        <activity
+            android:name=".view.onboarding.OnboardingActivity"
+            android:exported="false" />
         <activity
             android:name=".view.login.LoginParentMerchant"
             android:exported="false" />

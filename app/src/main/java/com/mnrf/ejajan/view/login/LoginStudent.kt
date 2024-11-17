@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -28,8 +29,15 @@ class LoginStudent : AppCompatActivity() {
         binding = ActivityLoginStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        onBackPressedDispatcher.addCallback(this) {
+            finishAffinity()
+        }
+
         cameraExecutor = Executors.newSingleThreadExecutor()
-        requestCameraPermission()
+
+        binding.buttonStartCamera.setOnClickListener {
+            requestCameraPermission()
+        }
     }
 
     override fun onResume() {

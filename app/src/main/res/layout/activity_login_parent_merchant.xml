@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/welcome"
         android:textSize="35sp"
-        android:layout_marginTop="30sp"
+        android:layout_marginTop="40sp"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:gravity="center"
@@ -33,14 +33,14 @@
         app:layout_constraintTop_toBottomOf="@id/welcome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:id="@+id/descriptionLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="@string/description_login"
         android:textAlignment="center"
