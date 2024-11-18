@@ -20,6 +20,14 @@
         android:theme="@style/Theme.Ejajan"
         tools:targetApi="31">
         <activity
+            android:name=".view.main.parent.ParentActivity"
+            android:exported="false"
+            android:label="@string/title_activity_parent" />
+        <activity
+            android:name=".view.main.merchant.MerchantActivity"
+            android:exported="false"
+            android:label="@string/title_activity_merchant" />
+        <activity
             android:name=".view.onboarding.OnboardingViewPager"
             android:exported="false" />
         <activity
@@ -32,7 +40,7 @@
             android:name=".view.login.LoginStudent"
             android:exported="false" />
         <activity
-            android:name=".view.SplashActivity"
+            android:name=".view.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

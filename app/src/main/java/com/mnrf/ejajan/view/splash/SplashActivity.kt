@@ -1,4 +1,4 @@
-package com.mnrf.ejajan.view
+package com.mnrf.ejajan.view.splash
 
 import android.content.Intent
 import android.os.Bundle
