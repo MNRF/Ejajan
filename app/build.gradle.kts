@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.androidx.camera.camera2)
     implementation(libs.camera.lifecycle)
     implementation(libs.camera.view)
+    implementation (libs.play.services.mlkit.face.detection)
 
     //onboarding
     implementation(libs.androidx.viewpager2)
