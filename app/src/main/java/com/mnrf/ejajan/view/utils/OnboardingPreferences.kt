@@ -20,12 +20,10 @@ class OnboardingPreferences(context: Context) {
         return preferences.getBoolean(ONBOARDING_COMPLETED, false)
     }
 
-    // Fungsi untuk menyimpan role
     fun setUserRole(role: String) {
         preferences.edit().putString(USER_ROLE, role).apply()
     }
 
-    // Fungsi untuk mendapatkan role
     fun getUserRole(): String? {
         return preferences.getString(USER_ROLE, null)
     }

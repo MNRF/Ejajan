@@ -40,4 +40,16 @@
     <string name="title_student">Student</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_merchant">Welcome Merchant</string>
+    <string name="deskripsi_homeMerchant">Have a nice Day</string>
+    <string name="saldo_rp_10_000">Saldo : Rp. 10.000</string>
+    <string name="status_pesanan_aktif">Status Pesanan Aktif</string>
+    <string name="see_all">See All</string>
+    <string name="welcome_parent">Welcome Parent</string>
+    <string name="deskripsi_homeWelcome">You can set limits, view purchase history, and monitor Student spending and nutrition</string>
+    <string name="top_up">Top Up</string>
+    <string name="saldo_rp_00_000">Saldo : Rp. 00.000</string>
+    <string name="recommendation">Recomendation</string>
+    <string name="fill_all_fields">Please fill in all fields</string>
+    <string name="invalid_role">Invalid role, please try again</string>
 </resources>
