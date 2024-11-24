@@ -21,6 +21,24 @@
         android:theme="@style/Theme.Ejajan"
         tools:targetApi="31">
         <activity
+            android:name=".view.main.parent.ui.topup.ConfirmationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.parent.ui.topup.TransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.parent.ui.setting.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.parent.ui.student.delete.DeleteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.parent.ui.student.change.ChangeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.parent.ui.student.add.AddActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.main.student.StudentActivity"
             android:exported="false" />
 
