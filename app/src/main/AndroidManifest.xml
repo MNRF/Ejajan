@@ -21,6 +21,12 @@
         android:theme="@style/Theme.Ejajan"
         tools:targetApi="31">
         <activity
+            android:name=".view.main.merchant.ui.activeorder.OrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.merchant.ui.activeorder.OrderListActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.main.merchant.ui.menu.add.AddIngredientsActivity"
             android:exported="false" />
         <activity
