@@ -13,7 +13,7 @@
     <string name="btnLogin">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="welcome_role">Welcome! \n \nSelect your role to start managing your account and enjoying our app features.</string>
+    <string name="welcome_role">Select your role to start managing your account and enjoying our app features.</string>
     <string name="student">Student</string>
     <string name="parent">Parent</string>
     <string name="merchant">Merchant</string>
@@ -52,4 +52,17 @@
     <string name="recommendation">Recomendation</string>
     <string name="fill_all_fields">Please fill in all fields</string>
     <string name="invalid_role">Invalid role, please try again</string>
+    <string name="text_judul">Secure Login</string>
+    <string name="text_judul2">Order with Ease</string>
+    <string name="text_judul3">Personalized Menus</string>
+    <string name="parent_judul1">Stay in Control</string>
+    <string name="parent_judul2">Monitor with Ease</string>
+    <string name="parent_judul3">Visualize Insights</string>
+    <string name="merchant_judul1">Create Menus Easily</string>
+    <string name="merchant_judul2">Process Orders</string>
+    <string name="merchant_judul3">Get Paid Quickly</string>
+    <string name="start_login">Ready to Start!</string>
+    <string name="welcome_text">Welcome E - Jajan</string>
+    <string name="skip">Skip</string>
+    <string name="back">Back</string>
 </resources>

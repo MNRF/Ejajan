@@ -31,6 +31,9 @@ class StudentOnboarding1 : Fragment() {
         binding.next.setOnClickListener {
             viewPager?.currentItem = 1
         }
+        binding.skip.setOnClickListener {
+            viewPager?.currentItem = 2
+        }
     }
 
 }

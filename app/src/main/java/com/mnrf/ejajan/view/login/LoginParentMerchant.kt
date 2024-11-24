@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mnrf.ejajan.R
 import com.mnrf.ejajan.view.main.parent.ParentActivity
 import com.mnrf.ejajan.view.main.merchant.MerchantActivity
+import com.mnrf.ejajan.view.main.student.StudentActivity
+import com.mnrf.ejajan.view.utils.OnboardingPreferences
 
 class LoginParentMerchant : AppCompatActivity() {
 
@@ -18,32 +20,26 @@ class LoginParentMerchant : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val emailEditText = findViewById<EditText>(R.id.ed_login_email)
-        val passwordEditText = findViewById<EditText>(R.id.ed_login_password)
+        val onboardingPreferences = OnboardingPreferences(this)
+        val userRole = onboardingPreferences.getUserRole()
+
         val loginButton = findViewById<Button>(R.id.buttonLoginParentMerchant)
 
         loginButton.setOnClickListener {
-            val email = emailEditText.text.toString().trim()
-            val password = passwordEditText.text.toString().trim()
-
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            when {
-                email.contains("parent") -> {
+            when (userRole) {
+                "parent" -> {
                     val intent = Intent(this, ParentActivity::class.java)
                     startActivity(intent)
                 }
-                email.contains("merchant") -> {
+                "merchant" -> {
                     val intent = Intent(this, MerchantActivity::class.java)
                     startActivity(intent)
                 }
                 else -> {
-                    Toast.makeText(this, getString(R.string.invalid_role), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Role tidak ditemukan!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 }
+

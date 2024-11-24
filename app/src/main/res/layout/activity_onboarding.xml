@@ -14,7 +14,7 @@
         android:layout_height="300dp"
         android:layout_marginTop="50dp"
         android:contentDescription="@string/image_chosee_role"
-        app:layout_constraintBottom_toTopOf="@id/role_text"
+        app:layout_constraintBottom_toTopOf="@id/welcome_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,18 +22,36 @@
         app:srcCompat="@drawable/chosee_role" />
 
     <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="@string/welcome_text"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:fontFamily="@font/inter28_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chosee_role"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp" />
+
+    <TextView
         android:id="@+id/role_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="@string/welcome_role"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="23sp"
+        android:textSize="18sp"
+        android:fontFamily="@font/inter24_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chosee_role"
+        app:layout_constraintTop_toBottomOf="@id/welcome_text"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp" />
 
