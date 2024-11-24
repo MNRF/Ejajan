@@ -21,6 +21,24 @@
         android:theme="@style/Theme.Ejajan"
         tools:targetApi="31">
         <activity
+            android:name=".view.main.merchant.ui.setting.balance.ConfirmationDisbursementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.merchant.ui.setting.balance.TransactionDisbursementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.merchant.ui.setting.profile.ProfileEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.merchant.ui.setting.report.ReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.merchant.ui.activeorder.OrderSuccessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.merchant.ui.activeorder.OrderConfirmationActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.main.merchant.ui.activeorder.OrderDetailActivity"
             android:exported="false" />
         <activity
