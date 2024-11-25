@@ -21,6 +21,36 @@
         android:theme="@style/Theme.Ejajan"
         tools:targetApi="31">
         <activity
+            android:name=".view.main.student.summary.OrderSummaryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.student.cart.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.student.face.FaceConfirmActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.student.detail.DetailMenuStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.student.menu.MenuStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.student.special.SpecialOffersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.student.drink.DrinkActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.student.food.FoodActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.student.healty.HealtyChoicesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.main.student.personal.PersonalPicksActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.main.merchant.ui.setting.balance.ConfirmationDisbursementActivity"
             android:exported="false" />
         <activity

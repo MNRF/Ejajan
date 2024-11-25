@@ -98,13 +98,13 @@
         app:layout_constraintTop_toBottomOf="@+id/cv_order_menu">
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"

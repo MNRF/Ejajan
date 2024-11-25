@@ -66,4 +66,9 @@
     <string name="skip">Skip</string>
     <string name="back">Back</string>
     <string name="orderconfirmation"><![CDATA[Please verify student identity using facial recognition to confirm order pickup.]]></string>
+    <string name="deskripsi_homeStudent">Come on, choose healthy and delicious food for you!</string>
+    <string name="welcome_student">Welcome Student</string>
+    <string name="personal_picks">Personalized Picks</string>
+    <string name="healty_choices">Healthy Choices</string>
+    <string name="special_offers">Special Offers</string>
 </resources>
