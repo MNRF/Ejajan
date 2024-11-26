@@ -28,7 +28,7 @@
         android:layout_height="200dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/Deskripsi_logo"
-        android:src="@drawable/slider1_merchant"
+        android:src="@drawable/image1_slider_merchant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"

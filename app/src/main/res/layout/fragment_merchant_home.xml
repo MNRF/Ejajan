@@ -4,24 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/utama"
     tools:context=".view.main.merchant.ui.home.HomeMerchantFragment">
 
     <TextView
         android:id="@+id/tv_merchantWelcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_merchant"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
-        android:textSize="20sp"
+        android:text="@string/welcome_merchant"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_merchant"
@@ -29,7 +27,7 @@
         android:layout_height="200dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/Deskripsi_logo"
-        android:src="@drawable/slider1_merchant"
+        android:src="@drawable/image1_slider_merchant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"

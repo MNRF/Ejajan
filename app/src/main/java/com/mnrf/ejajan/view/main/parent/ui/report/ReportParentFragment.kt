@@ -33,6 +33,7 @@ class ReportParentFragment : Fragment() {
         setupPieChart(binding.pieChart)
         setupBarChart(binding.barChart)
         setupRecyclerView()
+
     }
 
     private fun setupPieChart(pieChart: PieChart) {

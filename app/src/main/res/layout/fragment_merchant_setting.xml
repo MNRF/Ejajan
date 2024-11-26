@@ -48,7 +48,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:id="@+id/cv_setting_darkmode"
+        android:id="@+id/cv_setting_jambuka"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_edit">
@@ -79,10 +79,10 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:id="@+id/cv_setting_notification"
+        android:id="@+id/cv_setting_cairkan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_setting_darkmode">
+        app:layout_constraintTop_toBottomOf="@+id/cv_setting_jambuka">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -117,10 +117,10 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:id="@+id/cv_setting_language"
+        android:id="@+id/cv_setting_laporan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_setting_notification">
+        app:layout_constraintTop_toBottomOf="@+id/cv_setting_cairkan">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -156,7 +156,7 @@
         android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_setting_language"
+        app:layout_constraintTop_toBottomOf="@+id/cv_setting_laporan"
         tools:text="Logout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
