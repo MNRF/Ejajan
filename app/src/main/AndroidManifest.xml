@@ -21,7 +21,7 @@
         android:theme="@style/Theme.Ejajan"
         tools:targetApi="31">
         <activity
-            android:name=".view.main.parent.ui.setting.notification.NotificationActivity"
+            android:name=".view.main.parent.ui.setting.notification.NotificationParentActivity"
             android:exported="false" />
         <activity
             android:name=".view.main.parent.ui.setting.language.LanguageActivity"
@@ -99,16 +99,16 @@
             android:name=".view.main.parent.ui.topup.TransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".view.main.parent.ui.setting.profile.ProfileActivity"
+            android:name=".view.main.parent.ui.setting.profile.ProfileParentActivity"
             android:exported="false" />
         <activity
-            android:name=".view.main.parent.ui.student.delete.DeleteActivity"
+            android:name=".view.main.parent.ui.student.delete.DeleteConstraintActivity"
             android:exported="false" />
         <activity
-            android:name=".view.main.parent.ui.student.change.ChangeActivity"
+            android:name=".view.main.parent.ui.student.change.ChangeConstraintActivity"
             android:exported="false" />
         <activity
-            android:name=".view.main.parent.ui.student.add.AddActivity"
+            android:name=".view.main.parent.ui.student.add.AddConstraintActivity"
             android:exported="false" />
         <activity
             android:name=".view.main.student.StudentActivity"

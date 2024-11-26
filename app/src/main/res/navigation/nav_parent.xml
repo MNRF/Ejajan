@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home2"
-        android:name="com.mnrf.ejajan.view.main.parent.ui.home.HomeFragment"
+        android:name="com.mnrf.ejajan.view.main.parent.ui.home.HomeParentFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home2" />
+        tools:layout="@layout/fragment_parent_home" />
 
     <fragment
         android:id="@+id/navigation_report"
-        android:name="com.mnrf.ejajan.view.main.parent.ui.report.ReportFragment"
+        android:name="com.mnrf.ejajan.view.main.parent.ui.report.ReportParentFragment"
         android:label="@string/title_report"
-        tools:layout="@layout/fragment_report" />
+        tools:layout="@layout/fragment_parent_report" />
 
     <fragment
         android:id="@+id/navigation_student"
-        android:name="com.mnrf.ejajan.view.main.parent.ui.student.StudentFragment"
+        android:name="com.mnrf.ejajan.view.main.parent.ui.student.StudentParentFragment"
         android:label="@string/title_student"
-        tools:layout="@layout/fragment_student" />
+        tools:layout="@layout/fragment_parent_student" />
 
     <fragment
         android:id="@+id/navigation_setting2"
-        android:name="com.mnrf.ejajan.view.main.parent.ui.setting.Setting2Fragment"
+        android:name="com.mnrf.ejajan.view.main.parent.ui.setting.SettingParentFragment"
         android:label="@string/title_setting"
-        tools:layout="@layout/fragment_setting2" />
+        tools:layout="@layout/fragment_parent_setting" />
 </navigation>
