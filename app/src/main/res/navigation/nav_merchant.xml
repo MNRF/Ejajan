@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.mnrf.ejajan.view.main.merchant.ui.home.HomeFragment"
+        android:name="com.mnrf.ejajan.view.main.merchant.ui.home.HomeMerchantFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_merchant_home" />
 
     <fragment
         android:id="@+id/navigation_menu"
-        android:name="com.mnrf.ejajan.view.main.merchant.ui.menu.MenuFragment"
+        android:name="com.mnrf.ejajan.view.main.merchant.ui.menu.MenuMerchantFragment"
         android:label="@string/title_menu"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_merchant_menu" />
 
     <fragment
         android:id="@+id/navigation_setting"
-        android:name="com.mnrf.ejajan.view.main.merchant.ui.setting.SettingFragment"
+        android:name="com.mnrf.ejajan.view.main.merchant.ui.setting.SettingMerchantFragment"
         android:label="@string/title_setting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_merchant_setting" />
 </navigation>

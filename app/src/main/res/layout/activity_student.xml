@@ -37,7 +37,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 android:contentDescription="@string/Deskripsi_logo"
-                android:src="@drawable/slider1_merchant" />
+                android:src="@drawable/image1_slider_merchant" />
 
             <TextView
                 android:id="@+id/merchant_deskripsi"
@@ -48,7 +48,6 @@
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <!-- Personal Picks Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -221,5 +220,16 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_baseline_add_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:tint="@android:color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
