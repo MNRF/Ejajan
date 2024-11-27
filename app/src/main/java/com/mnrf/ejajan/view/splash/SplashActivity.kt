@@ -3,6 +3,7 @@ package com.mnrf.ejajan.view.splash
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.mnrf.ejajan.R
 import com.mnrf.ejajan.view.login.LoginParentMerchant
@@ -17,6 +18,7 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var onboardingPreferences: OnboardingPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 

@@ -57,7 +57,7 @@
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fried rice is rice fried in a pan with various spices and ingredients, such as garlic, shallots, sweet soy sauce, salt, and pepper."
+                android:text="@string/order_desc"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,9 +73,8 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_namefood"
-                app:layout_constraintMarginEnd="10dp"
-                app:layout_constraintMarginTop="10dp"/>
-
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

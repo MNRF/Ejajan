@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "592283841213",
+    "project_id": "ejajan-79fd0",
+    "storage_bucket": "ejajan-79fd0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592283841213:android:5bea1cb33ea8bc7097fdd4",
+        "android_client_info": {
+          "package_name": "com.mnrf.ejajan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQML9DlmbPetzasoM_XGiz5J8WXiyWiB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

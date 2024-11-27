@@ -3,11 +3,15 @@ package com.mnrf.ejajan.view.main.parent.ui.setting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.mnrf.ejajan.data.UserRepository
+import kotlinx.coroutines.launch
 
-class Setting2ViewModel : ViewModel() {
+class Setting2ViewModel(private val repository: UserRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is Setting Fragment"
+    fun logout() {
+        viewModelScope.launch {
+            repository.logout()
+        }
     }
-    val text: LiveData<String> = _text
 }

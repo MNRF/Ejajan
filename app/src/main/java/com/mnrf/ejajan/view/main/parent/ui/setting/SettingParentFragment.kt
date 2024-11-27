@@ -6,25 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.mnrf.ejajan.databinding.FragmentParentSettingBinding
 import com.mnrf.ejajan.view.login.LoginParentMerchant
 import com.mnrf.ejajan.view.main.parent.ui.setting.notification.NotificationParentActivity
 import com.mnrf.ejajan.view.main.parent.ui.setting.profile.ProfileParentActivity
+import com.mnrf.ejajan.view.utils.ViewModelFactory
 
 class SettingParentFragment : Fragment() {
 
     private var _binding: FragmentParentSettingBinding? = null
     private val binding get() = _binding!!
 
+    private val setting2ViewModel: Setting2ViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentParentSettingBinding.inflate(inflater, container, false)
-        return binding.root
 
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,10 +57,10 @@ class SettingParentFragment : Fragment() {
 
         binding.btnSettingLogout.setOnClickListener {
             // Tambahkan logika untuk logout
+            setting2ViewModel.logout()
             val intent = Intent(requireContext(), LoginParentMerchant::class.java)
             startActivity(intent)
         }
-
     }
 
 
