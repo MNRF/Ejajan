@@ -21,6 +21,8 @@ class ParentActivity : AppCompatActivity() {
         binding = ActivityParentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         val navView: BottomNavigationView = binding.navView
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_parent) as NavHostFragment
@@ -34,5 +36,10 @@ class ParentActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_activity_parent)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

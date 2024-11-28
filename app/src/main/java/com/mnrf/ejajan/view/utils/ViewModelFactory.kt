@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mnrf.ejajan.data.UserRepository
 import com.mnrf.ejajan.di.Injection
 import com.mnrf.ejajan.view.login.LoginParentMerchantViewModel
+import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel
 import com.mnrf.ejajan.view.main.parent.ParentViewModel
 import com.mnrf.ejajan.view.main.parent.ui.setting.Setting2ViewModel
 import com.mnrf.ejajan.view.splash.SplashViewModel
@@ -26,6 +27,9 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             }
             modelClass.isAssignableFrom(Setting2ViewModel::class.java) -> {
                 Setting2ViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
+                SettingViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

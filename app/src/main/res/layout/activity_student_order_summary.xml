@@ -37,6 +37,7 @@
                     android:id="@+id/img_about"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:contentDescription="@string/Deskripsi_logo"
                     android:scaleType="centerCrop"
                     tools:srcCompat="@tools:sample/avatars" />
             </androidx.cardview.widget.CardView>
@@ -47,17 +48,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
-                android:text="Pesanan berhasil!"
+                android:text="@string/pesanan_berhasil"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/sum_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Please wait for the order according to the pickup time."
+                android:text="@string/please_wait_for_the_order_according_to_the_pickup_time"
                 android:textSize="15sp"
                 android:gravity="center"
                 android:textColor="@android:color/darker_gray" />
@@ -79,7 +80,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Order Summary"
+                        android:text="@string/order_summary"
                         android:textStyle="bold"
                         android:textSize="18sp"
                         android:textColor="@android:color/black" />
@@ -88,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Tanggal Pemesanan: 22 November 2024"
+                        android:text="@string/tanggal_pemesanan_22_november_2024"
                         android:textSize="14sp"
                         android:textColor="@android:color/black" />
 
@@ -96,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="Makanan:"
+                        android:text="@string/makanan"
                         android:textStyle="bold"
                         android:textSize="14sp"
                         android:textColor="@android:color/black" />
@@ -142,7 +143,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="Catatan Pemesanan:"
+                        android:text="@string/catatan_pemesanan"
                         android:textStyle="bold"
                         android:textSize="14sp"
                         android:textColor="@android:color/black" />
@@ -158,7 +159,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="Waktu Pengambilan: 18:00 WIB"
+                        android:text="@string/waktu_pengambilan_18_00_wib"
                         android:textSize="14sp"
                         android:textColor="@android:color/black" />
 
@@ -166,7 +167,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="Total Pembayaran: Rp60.000"
+                        android:text="@string/total_pembayaran_rp60_000"
                         android:textStyle="bold"
                         android:textSize="14sp"
                         android:textColor="@android:color/black" />

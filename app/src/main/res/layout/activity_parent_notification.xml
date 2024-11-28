@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="300dp"
-            android:text="ToggleButton" />
+            android:text="@string/togglebutton" />
 
     </androidx.cardview.widget.CardView>
 
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="300dp"
-            android:text="ToggleButton" />
+            android:text="@string/togglebutton" />
 
     </androidx.cardview.widget.CardView>
 
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="300dp"
-            android:text="ToggleButton" />
+            android:text="@string/togglebutton" />
 
     </androidx.cardview.widget.CardView>
 
@@ -132,7 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="300dp"
-            android:text="ToggleButton" />
+            android:text="@string/togglebutton" />
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="15dp"
         android:clickable="true"
-        android:contentDescription="tambah"
+        android:contentDescription="@string/tambah"
         android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toTopOf="@+id/fb_kurang"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -37,7 +37,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="150dp"
         android:clickable="true"
-        android:contentDescription="kurang"
+        android:contentDescription="@string/kurang"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_minus_24" />
@@ -48,7 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="60dp"
-        android:text="Batal"
+        android:text="@string/batal"
+        android:backgroundTint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -58,7 +59,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="60dp"
-        android:text="Simpan"
+        android:text="@string/simpan"
+        android:backgroundTint="@color/btnlogin_student"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

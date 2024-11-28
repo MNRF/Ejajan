@@ -7,14 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.mnrf.ejajan.databinding.FragmentParentSettingBinding
 import com.mnrf.ejajan.view.login.LoginParentMerchant
 import com.mnrf.ejajan.view.main.parent.ui.setting.notification.NotificationParentActivity
 import com.mnrf.ejajan.view.main.parent.ui.setting.profile.ProfileParentActivity
 import com.mnrf.ejajan.view.utils.ViewModelFactory
+import kotlin.system.exitProcess
 
 class SettingParentFragment : Fragment() {
-
+    private lateinit var auth: FirebaseAuth
     private var _binding: FragmentParentSettingBinding? = null
     private val binding get() = _binding!!
 
@@ -27,12 +31,25 @@ class SettingParentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentParentSettingBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        auth = Firebase.auth
+
+        // Set up logout button functionality
+        binding.btnSettingLogout.setOnClickListener {
+            auth.signOut() // Now auth is properly initialized
+            setting2ViewModel.logout()
+
+            val intent = Intent(requireActivity(), LoginParentMerchant::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            startActivity(intent)
+            requireActivity().finishAffinity()
+        }
 
         binding.btnProfile.setOnClickListener {
             // Tambahkan logika untuk tombol Edit Profile
@@ -55,12 +72,6 @@ class SettingParentFragment : Fragment() {
             startActivity(Intent(android.provider.Settings.ACTION_LOCALE_SETTINGS))
         }
 
-        binding.btnSettingLogout.setOnClickListener {
-            // Tambahkan logika untuk logout
-            setting2ViewModel.logout()
-            val intent = Intent(requireContext(), LoginParentMerchant::class.java)
-            startActivity(intent)
-        }
     }
 
 

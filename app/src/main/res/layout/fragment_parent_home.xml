@@ -7,13 +7,15 @@
 
     <TextView
         android:id="@+id/tv_parentWelcome"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/welcome_parent"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
         android:textSize="20sp"
         android:textColor="@color/black"
+        android:fontFamily="@font/inter28_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -21,21 +23,42 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
 
-    <ImageView
-        android:id="@+id/iv_parentLogo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/Deskripsi_logo"
-        android:src="@drawable/image1_slider_merchant"
+<!--    <ImageView-->
+<!--        android:id="@+id/iv_parentLogo"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        android:contentDescription="@string/Deskripsi_logo"-->
+<!--        android:src="@drawable/image1_slider_merchant"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.094"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tv_parentWelcome" />-->
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_parentLogo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_parentWelcome" />
 
+    <LinearLayout
+        android:id="@+id/ll_circle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vp_parentLogo" />
+
     <TextView
         android:id="@+id/tv_parentDeskripsi"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="28dp"
@@ -43,10 +66,11 @@
         android:text="@string/deskripsi_homeWelcome"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:fontFamily="@font/inter28_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_parentLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/vp_parentLogo" />
 
     <LinearLayout
         android:id="@+id/ll_saldo"
@@ -69,7 +93,9 @@
             android:layout_marginEnd="8dp"
             android:paddingVertical="12dp"
             android:paddingHorizontal="16dp"
+            android:fontFamily="@font/inter18_regular"
             android:background="@drawable/button_background"
+            android:backgroundTint="@color/btnlogin_student"
             android:text="@string/saldo_rp_00_000"
             android:textSize="14sp"
             android:textColor="@color/black" />
@@ -83,7 +109,9 @@
             android:layout_marginStart="8dp"
             android:paddingVertical="12dp"
             android:paddingHorizontal="16dp"
+            android:fontFamily="@font/inter18_regular"
             android:background="@drawable/button_background"
+            android:backgroundTint="@color/btnlogin_student"
             android:text="@string/top_up"
             android:textSize="14sp"
             android:textColor="@color/black" />
@@ -97,6 +125,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/recommendation"
         android:textSize="18sp"
+        android:fontFamily="@font/inter28_bold"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_saldo" />

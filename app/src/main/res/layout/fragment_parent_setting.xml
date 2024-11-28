@@ -37,20 +37,23 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:src="@drawable/logo" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/btn_profile"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="15dp"
+            android:layout_marginEnd="80dp"
+            android:backgroundTint="@color/btnlogin_student"
+            android:text="@string/edit_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
-            android:text="Edit"/>
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
@@ -65,14 +68,15 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/tv_setting_darkmode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Dark Mode"
+                    android:text="@string/dark_mode"
                     android:textAlignment="center"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -105,7 +109,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="15dp">
 
                 <TextView
                     android:id="@+id/tv_setting_notification"
@@ -114,7 +119,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="5dp"
-                    android:text="Notification"
+                    android:text="@string/notification"
                     android:textAlignment="center"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -149,7 +154,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="15dp">
 
                 <TextView
                     android:id="@+id/tv_setting_language"
@@ -157,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="5dp"
-                    android:text="Select Language"
+                    android:text="@string/select_language"
                     android:textAlignment="center"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -181,13 +187,20 @@
 
         <Button
             android:id="@+id/btn_setting_logout"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="60dp"
+            android:layout_marginEnd="80dp"
+            android:backgroundTint="@color/red"
+            android:drawableLeft="@drawable/ic_baseline_logout_24"
+            android:drawableTint="@android:color/white"
+            android:text="@string/logout"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_setting_language"
-            android:text="Logout" />
+            app:layout_constraintTop_toBottomOf="@+id/cv_setting_language" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

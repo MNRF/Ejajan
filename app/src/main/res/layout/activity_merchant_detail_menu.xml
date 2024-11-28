@@ -28,6 +28,7 @@
                 android:id="@+id/img_about"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:contentDescription="@string/Deskripsi_logo"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +55,7 @@
             android:id="@+id/tv_namefood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name Food" />
+            android:text="@string/name_food" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -72,7 +73,7 @@
             android:id="@+id/tv_pricefood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Price Food" />
+            android:text="@string/price_food" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -91,7 +92,7 @@
             android:id="@+id/tv_preparation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Average Preparation Time" />
+            android:text="@string/average_preparation_time" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -110,7 +111,7 @@
             android:id="@+id/tv_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description" />
+            android:text="@string/description" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -127,7 +128,7 @@
             android:id="@+id/tv_basicIngredients"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Basic Ingredients" />
+            android:text="@string/basic_ingredients" />
     </androidx.cardview.widget.CardView>
 
     <Button
@@ -136,7 +137,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginBottom="119dp"
-        android:text="hapus"
+        android:text="@string/hapus"
+        android:backgroundTint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_update"
         app:layout_constraintStart_toStartOf="parent" />
@@ -148,7 +150,8 @@
         android:layout_marginStart="114dp"
         android:layout_marginEnd="57dp"
         android:layout_marginBottom="119dp"
-        android:text="ubah"
+        android:text="@string/ubah"
+        android:backgroundTint="@color/btnlogin_student"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_delete" />

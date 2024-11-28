@@ -55,7 +55,7 @@
                         android:id="@+id/name_food"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nasi Goreng"
+                        android:text="@string/name_food"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -66,7 +66,7 @@
                         android:id="@+id/merchant"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Merchant A"
+                        android:text="@string/merchant"
                         android:textColor="@color/gray"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +77,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Delicious fried rice with spices and toppings."
+                        android:text="@string/description"
                         android:textColor="@color/gray"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Pickup Time: 12:30 PM"
+                        android:text="@string/pickup_time"
                         android:textColor="@color/black"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +110,7 @@
                         android:id="@+id/order_note"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Order Note"
+                        android:text="@string/order_note"
                         android:textColor="@color/black"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toTopOf="@id/seeall_note"
@@ -154,11 +154,11 @@
 
                         <ImageButton
                             android:id="@+id/btn_minus"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:layout_marginEnd="8dp"
                             android:background="?android:attr/selectableItemBackgroundBorderless"
-                            android:contentDescription="Minus"
+                            android:contentDescription="@string/kurang"
                             android:src="@drawable/ic_baseline_minus_24" />
 
                         <TextView
@@ -172,10 +172,10 @@
 
                         <ImageButton
                             android:id="@+id/btn_add"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:background="?android:attr/selectableItemBackgroundBorderless"
-                            android:contentDescription="Add"
+                            android:contentDescription="@string/tambah"
                             android:src="@drawable/ic_baseline_add_24" />
                     </LinearLayout>
 
@@ -186,8 +186,8 @@
                         android:layout_marginStart="50dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="70dp"
-                        android:background="@color/btnlogin_student"
-                        android:text="Add to Cart"
+                        android:backgroundTint="@color/btnlogin_student"
+                        android:text="@string/add_to_cart"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"

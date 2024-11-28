@@ -24,9 +24,6 @@
             android:name=".view.main.parent.ui.setting.notification.NotificationParentActivity"
             android:exported="false" />
         <activity
-            android:name=".view.main.parent.ui.setting.language.LanguageActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.main.student.summary.OrderSummaryActivity"
             android:exported="false" />
         <activity

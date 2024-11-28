@@ -28,6 +28,7 @@
                 android:id="@+id/img_about"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:contentDescription="@string/Deskripsi_logo"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -46,9 +47,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_setting_image"
-        tools:text="Pengambilan Dana berhasil!"
-        tools:textSize="20sp"
-        tools:textStyle="bold"/>
+        android:text="@string/pengambilan_dana_berhasil"
+        android:textSize="20sp"
+        android:fontFamily="@font/inter28_black"/>
 
     <TextView
         android:id="@+id/tv_transaction_description"
@@ -57,7 +58,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="40dp"
-        android:text="Your balance has been successfully added to your child accounts."
+        android:text="@string/balance_confirm"
         android:textSize="15sp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +72,8 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="60dp"
-        android:text="Back to home"
+        android:text="@string/back_to_home"
+        android:backgroundTint="@color/btnlogin_student"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

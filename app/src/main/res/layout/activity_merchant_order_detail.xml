@@ -23,6 +23,7 @@
             android:id="@+id/img_about"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/Deskripsi_logo"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
     </androidx.cardview.widget.CardView>
@@ -45,7 +46,7 @@
                 android:id="@+id/tv_namefood"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nasi Goreng"
+                android:text="@string/name_food"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginStart="15dp"
@@ -67,7 +68,7 @@
                 android:id="@+id/tv_in_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="In Progress"
+                android:text="@string/in_progress"
                 android:textColor="@android:color/black"
                 android:padding="5dp"
                 android:textSize="14sp"
@@ -91,7 +92,7 @@
             android:id="@+id/order_notes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order Notes"
+            android:text="@string/order_notes"
             android:textStyle="bold"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"/>
@@ -100,7 +101,7 @@
             android:id="@+id/notes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="don't make it too spicy, the egg is half cooked, and it just has to be delicious."
+            android:text="@string/notes"
             android:layout_marginStart="15dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="15dp"/>
@@ -119,7 +120,7 @@
             android:id="@+id/tv_pickuptime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pickup Time"
+            android:text="@string/pickup_time"
             android:textStyle="bold"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"/>
@@ -128,7 +129,7 @@
             android:id="@+id/pickuptime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12:30"
+            android:text="@string/time"
             android:layout_marginStart="15dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="15dp"/>
@@ -147,7 +148,7 @@
             android:id="@+id/tv_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quantity"
+            android:text="@string/quantity"
             android:textStyle="bold"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"/>
@@ -156,7 +157,7 @@
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10"
+            android:text="@string/quantitiy"
             android:layout_marginStart="15dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="15dp"/>
@@ -166,7 +167,8 @@
         android:id="@+id/btn_confirm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Confirm Order"
+        android:text="@string/confirm_order"
+        android:backgroundTint="@color/btnlogin_student"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
