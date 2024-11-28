@@ -49,8 +49,9 @@
             android:layout_marginStart="80dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="80dp"
-            android:backgroundTint="@color/btnlogin_student"
+            android:backgroundTint="@color/blue1"
             android:text="@string/edit_profile"
+            android:textColorLink="#0B2C71"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />

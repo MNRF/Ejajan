@@ -48,7 +48,7 @@
     <string name="welcome_parent">Welcome Parent</string>
     <string name="deskripsi_homeWelcome">You can set limits, view purchase history, and monitor Student spending and nutrition</string>
     <string name="top_up">Top Up</string>
-    <string name="saldo_rp_00_000">Saldo : Rp. 00.000</string>
+    <string name="saldo_rp_0">Saldo : Rp0</string>
     <string name="recommendation">Recomendation</string>
     <string name="fill_all_fields">Please fill in all fields</string>
     <string name="invalid_role">Invalid role, please try again</string>

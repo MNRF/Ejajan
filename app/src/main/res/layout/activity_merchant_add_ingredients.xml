@@ -60,7 +60,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="60dp"
         android:text="@string/simpan"
-        android:backgroundTint="@color/btnlogin_student"
+        android:backgroundTint="@color/blue1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

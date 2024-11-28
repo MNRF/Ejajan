@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@color/btnlogin_student"
+        android:background="@color/blue1"
         android:elevation="0dp"
         app:itemIconSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"

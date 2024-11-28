@@ -194,7 +194,7 @@
                     android:layout_weight="1"
                     android:text="@string/confirm_order"
                     android:layout_marginStart="8dp"
-                    android:backgroundTint="@color/btnlogin_student"
+                    android:backgroundTint="@color/blue1"
                     android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>

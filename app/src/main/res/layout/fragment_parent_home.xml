@@ -39,11 +39,14 @@
         android:id="@+id/vp_parentLogo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_parentWelcome" />
+        app:layout_constraintTop_toBottomOf="@id/tv_parentWelcome"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="45dp"/>
 
     <LinearLayout
         android:id="@+id/ll_circle"
@@ -95,10 +98,10 @@
             android:paddingHorizontal="16dp"
             android:fontFamily="@font/inter18_regular"
             android:background="@drawable/button_background"
-            android:backgroundTint="@color/btnlogin_student"
-            android:text="@string/saldo_rp_00_000"
+            android:backgroundTint="@color/blue1"
+            android:text="@string/saldo_rp_0"
             android:textSize="14sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tv_topup"
@@ -111,10 +114,10 @@
             android:paddingHorizontal="16dp"
             android:fontFamily="@font/inter18_regular"
             android:background="@drawable/button_background"
-            android:backgroundTint="@color/btnlogin_student"
+            android:backgroundTint="@color/blue1"
             android:text="@string/top_up"
             android:textSize="14sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <TextView

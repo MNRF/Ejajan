@@ -91,7 +91,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginBottom="52dp"
-        android:backgroundTint="@color/btnlogin_student"
+        android:backgroundTint="@color/blue1"
         android:text="@string/next"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

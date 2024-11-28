@@ -186,7 +186,7 @@
                         android:layout_marginStart="50dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="70dp"
-                        android:backgroundTint="@color/btnlogin_student"
+                        android:backgroundTint="@color/blue1"
                         android:text="@string/add_to_cart"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"

@@ -50,7 +50,7 @@ class HomeParentFragment : Fragment() {
         // Contoh penggunaan binding untuk mengakses elemen dalam XML
         binding.tvParentWelcome.text = getString(R.string.welcome_parent)
         binding.tvParentDeskripsi.text = getString(R.string.deskripsi_homeWelcome)
-        binding.tvSaldo.text = getString(R.string.saldo_rp_00_000)
+        binding.tvSaldo.text = getString(R.string.saldo_rp_0)
         binding.tvTopup.text = getString(R.string.top_up)
 
         setupRecyclerView()
@@ -110,7 +110,7 @@ class HomeParentFragment : Fragment() {
         for (i in 0 until listImage.size) {
             circleImage[i].setTextColor(
                 if (i == position)
-                    ContextCompat.getColor(requireContext(), R.color.btnlogin_student) // Warna aktif
+                    ContextCompat.getColor(requireContext(), R.color.blue1) // Warna aktif
                 else
                     ContextCompat.getColor(requireContext(), R.color.white) // Warna tidak aktif
             )

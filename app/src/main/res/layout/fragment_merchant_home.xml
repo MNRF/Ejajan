@@ -84,7 +84,7 @@
         android:paddingHorizontal="12dp"
         android:paddingVertical="6dp"
         android:background="@drawable/button_background"
-        android:backgroundTint="@color/btnlogin_student"
+        android:backgroundTint="@color/blue1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_statusPesanan" />
 
