@@ -1,4 +1,29 @@
 <resources>
+    <string-array name="Allergy">
+        <item>Peanut</item>
+        <item>Tree Nut</item>
+        <item>Milk</item>
+        <item>Egg</item>
+        <item>Wheat</item>
+        <item>Soy</item>
+        <item>Fish</item>
+        <item>Shellfish</item>
+        <item>Sesame</item>
+        <item>Mustard</item>
+        <item>Corn</item>
+        <item>Gluten</item>
+        <item>Sulfites</item>
+        <item>Celery</item>
+        <item>Meat</item>
+        <item>Poultry</item>
+        <item>Fruits</item>
+        <item>Vegetables</item>
+        <item>Alcohol</item>
+        <item>Caffeine</item>
+        <item>Legumes</item>
+        <item>Poppy Seeds</item>
+        <item>Lupin</item>
+    </string-array>
     <string name="app_name">Ejajan</string>
     <string name="Deskripsi_logo">Logo E-Jajan</string>
     <string name="Apps">E - Jajan</string>
