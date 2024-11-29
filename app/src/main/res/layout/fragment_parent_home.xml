@@ -1,148 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.parent.ui.home.HomeParentFragment">
+    tools:context=".view.main.parent.ui.home.HomeParentFragment"
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tv_parentWelcome"
+    <!-- Welcome Message Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardWelcome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="15dp"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/inter28_bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="4dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
-
-<!--    <ImageView-->
-<!--        android:id="@+id/iv_parentLogo"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="200dp"-->
-<!--        android:layout_marginTop="25dp"-->
-<!--        android:contentDescription="@string/Deskripsi_logo"-->
-<!--        android:src="@drawable/image1_slider_merchant"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.094"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/tv_parentWelcome" />-->
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp_parentLogo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_parentWelcome"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="45dp"/>
-
-    <LinearLayout
-        android:id="@+id/ll_circle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical|center_horizontal"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vp_parentLogo" />
-
-    <TextView
-        android:id="@+id/tv_parentDeskripsi"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/deskripsi_homeWelcome"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:fontFamily="@font/inter28_regular"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vp_parentLogo" />
-
-    <LinearLayout
-        android:id="@+id/ll_saldo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_parentDeskripsi">
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@android:color/white">
 
         <TextView
-            android:id="@+id/tv_saldo"
-            android:layout_width="0dp"
+            android:id="@+id/tv_parentWelcome"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_marginEnd="8dp"
-            android:paddingVertical="12dp"
-            android:paddingHorizontal="16dp"
-            android:fontFamily="@font/inter18_regular"
-            android:background="@drawable/button_background"
-            android:backgroundTint="@color/blue1"
-            android:text="@string/saldo_rp_0"
-            android:textSize="14sp"
-            android:textColor="@color/white" />
+            android:layout_margin="16dp"
+            android:text="@string/welcome_parent"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter28_bold" />
+    </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/tv_topup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_marginStart="8dp"
-            android:paddingVertical="12dp"
-            android:paddingHorizontal="16dp"
-            android:fontFamily="@font/inter18_regular"
-            android:background="@drawable/button_background"
-            android:backgroundTint="@color/blue1"
-            android:text="@string/top_up"
-            android:textSize="14sp"
-            android:textColor="@color/white" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_recomendation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/recommendation"
-        android:textSize="18sp"
-        android:fontFamily="@font/inter28_bold"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_saldo" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_recommendation"
+    <!-- ViewPager Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewPager"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/cardWelcome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_recomendation"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@android:color/white">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_parentLogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Description Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cardViewPager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@android:color/white">
+
+        <TextView
+            android:id="@+id/tv_parentDeskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/deskripsi_homeWelcome"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:fontFamily="@font/inter28_regular" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Balance & Top-Up Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardSaldo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/cardDescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_saldo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="12dp"
+                android:background="@drawable/button_background"
+                android:backgroundTint="@color/blue1"
+                android:text="@string/saldo_rp_0"
+                android:fontFamily="@font/inter28_bold"
+                android:layout_marginEnd="8dp"
+                android:textSize="14sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_topup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="12dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter28_bold"
+                android:background="@drawable/button_background"
+                android:text="@string/top_up"
+                android:backgroundTint="@color/blue1"
+                android:textSize="14sp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Recommendation Section -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardRecommendation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/cardSaldo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_recomendation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recommendation"
+                android:textSize="18sp"
+                android:fontFamily="@font/inter28_bold"
+                android:textColor="@color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recommendation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

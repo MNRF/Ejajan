@@ -1,33 +1,35 @@
 package com.mnrf.ejajan.view.main.parent.ui.topup
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.midtrans.sdk.corekit.api.requestbuilder.cardtoken.CreditCardTokenRequestBuilder.Companion.CLIENT_KEY
-import com.midtrans.sdk.uikit.external.UiKitApi
 import com.mnrf.ejajan.R
 
 class TransactionActivity : AppCompatActivity() {
-    val CLIENT_KEY = "SB-Mid-client-STcLf66h68-oCykv"
-    val BASE_URL = "https://your-server.com/transaction-finish"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_parent_transaction)
-        UiKitApi.Builder()
-            .withMerchantClientKey(CLIENT_KEY) // client_key is mandatory
-            .withContext(this) // context is mandatory
-            .withMerchantUrl(BASE_URL) // set transaction finish callback (sdk callback)
-            .enableLog(true) // enable sdk log (optional)
-            .withFontFamily(ASSET_FONT)
-            .withColorTheme(CustomColorTheme("#FFE51255", "#B61548", "#FFE51255"))
-            .build()
-        setLocaleNew("en")
-    }
-    private fun setLocaleNew(languageCode: String?) {
-        val locales = LocaleListCompat.forLanguageTags(languageCode)
-        AppCompatDelegate.setApplicationLocales(locales)
+
+        // Menghubungkan komponen UI
+        val etAmount: EditText = findViewById(R.id.etAmount)
+        val btnConfirm: Button = findViewById(R.id.btnConfirm)
+
+        // Menambahkan logika untuk tombol Confirm
+        btnConfirm.setOnClickListener {
+            val amountText = etAmount.text.toString()
+            if (amountText.isNotEmpty()) {
+                val amount = amountText.toDoubleOrNull()
+                if (amount != null && amount > 0) {
+                    Toast.makeText(this, "Top Up Amount: Rp $amount", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Amount cannot be empty", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
