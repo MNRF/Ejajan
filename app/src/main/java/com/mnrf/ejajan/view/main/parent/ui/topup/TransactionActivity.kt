@@ -10,7 +10,7 @@ import com.midtrans.sdk.uikit.external.UiKitApi
 import com.mnrf.ejajan.R
 
 class TransactionActivity : AppCompatActivity() {
-    val CLIENT_KEY = "SB-Mid-client-STcLf66h68-oCykv"
+    /*val CLIENT_KEY = "SB-Mid-client-STcLf66h68-oCykv"
     val BASE_URL = "https://your-server.com/transaction-finish"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,5 +29,5 @@ class TransactionActivity : AppCompatActivity() {
     private fun setLocaleNew(languageCode: String?) {
         val locales = LocaleListCompat.forLanguageTags(languageCode)
         AppCompatDelegate.setApplicationLocales(locales)
-    }
+    }*/
 }

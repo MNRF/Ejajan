@@ -3,11 +3,10 @@ package com.mnrf.ejajan.view.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.mnrf.ejajan.data.pref.UserModel
@@ -19,7 +18,6 @@ import com.mnrf.ejajan.view.utils.ViewModelFactory
 
 class LoginParentMerchant : AppCompatActivity() {
     private lateinit var binding: ActivityLoginParentMerchantBinding
-    private lateinit var auth: FirebaseAuth
     private lateinit var userRole: String
 
     private val loginParentMerchantViewModel: LoginParentMerchantViewModel by viewModels {
@@ -28,10 +26,9 @@ class LoginParentMerchant : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        auth = Firebase.auth
 
         // Periksa apakah ada pengguna yang sudah login
-        val currentUser = auth.currentUser
+        val currentUser = Firebase.auth.currentUser
         if (currentUser != null) {
             navigateToRoleActivity()
         }
@@ -51,10 +48,14 @@ class LoginParentMerchant : AppCompatActivity() {
         // Observasi sesi login untuk menavigasi pengguna
         observeSession()
 
+        // Observe loading state for progress bar
+        loginParentMerchantViewModel.isLoading.observe(this) { isLoading ->
+            showLoading(isLoading)
+        }
+
         binding.buttonLoginParentMerchant.setOnClickListener {
             handleLogin()
         }
-
     }
 
     private fun observeSession() {
@@ -76,27 +77,12 @@ class LoginParentMerchant : AppCompatActivity() {
             return
         }
 
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
-                    saveUserSession(user)
-                    navigateToRoleActivity()
-                } else {
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    showAlert("Login gagal. Pastikan email dan password sudah benar.")
-                }
-            }
+        // Call the ViewModel's login function
+        loginParentMerchantViewModel.login(email, password)
     }
 
-    private fun saveUserSession(user: FirebaseUser?) {
-        user?.let {
-            val email = it.email ?: ""
-            val uid = it.uid
-            val userModel = UserModel(email, uid, true)
-            loginParentMerchantViewModel.saveSession(userModel)
-        }
+    private fun showLoading(isLoading: Boolean) {
+        binding.pbLoginparentmerchant.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun navigateToRoleActivity() {
@@ -126,10 +112,7 @@ class LoginParentMerchant : AppCompatActivity() {
         }
     }
 
-
     companion object {
         private const val TAG = "EmailPassword"
     }
 }
-
-

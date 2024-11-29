@@ -2,10 +2,10 @@
     <string name="app_name">Ejajan</string>
     <string name="Deskripsi_logo">Logo E-Jajan</string>
     <string name="Apps">E - Jajan</string>
-    <string name="welcome">Welcome\nE - Jajan</string>
+    <string name="welcome">EJajan</string>
     <string name="btnlogin_student">Login Student</string>
     <string name="btnlogin_parent_merchant">Login Parent or Merchant</string>
-    <string name="description_login">Please enter the account data that has been created</string>
+    <string name="description_login">Enter the provided login credential</string>
     <string name="invalid_email">Masukkan email dengan benar</string>
     <string name="minimum_characters">Kata sandi harus minimal 8 karakter</string>
     <string name="input_your_email">Masukkan email Anda</string>
@@ -22,7 +22,7 @@
     <string name="parent_desc2">As a Parent, you can monitor your student\'s account balance and purchase history</string>
     <string name="parent_desc3">As a Parent, you can view your student\'s spending and nutrition data in easy-to-understand graphical form</string>
     <string name="next">Next</string>
-    <string name="ready_to_start">Ready to Start?</string>
+    <string name="ready_to_start">Start</string>
     <string name="start_desc">You are ready to go! Find ease in every role and start a new experience with this application</string>
     <string name="merchant_desc1">As a Merchant, you can add new menus with details such as name, price, and description of the food</string>
     <string name="merchant_desc2">As a Merchant, you can take and confirm orders to ensure the process runs smoothly</string>
@@ -62,7 +62,7 @@
     <string name="merchant_judul2">Process Orders</string>
     <string name="merchant_judul3">Get Paid Quickly</string>
     <string name="start_login">Ready to Start!</string>
-    <string name="welcome_text">Welcome E - Jajan</string>
+    <string name="welcome_text">Choose your role</string>
     <string name="skip">Skip</string>
     <string name="back">Back</string>
     <string name="orderconfirmation"><![CDATA[Please verify student identity using facial recognition to confirm order pickup.]]></string>
