@@ -27,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
         onboardingPreferences = OnboardingPreferences(this)
 
         lifecycleScope.launch {
-            delay(3000)
+            delay(1000)
 
             if (onboardingPreferences.isOnboardingCompleted()) {
                 when (onboardingPreferences.getUserRole()) {
