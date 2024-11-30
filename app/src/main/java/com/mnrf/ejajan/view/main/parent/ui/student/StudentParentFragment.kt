@@ -12,8 +12,8 @@ import com.mnrf.ejajan.data.repository.ConstraintRepository
 import com.mnrf.ejajan.databinding.FragmentParentStudentBinding
 import com.mnrf.ejajan.view.main.parent.ui.student.add.AddConstraintActivity
 import com.mnrf.ejajan.view.main.parent.ui.student.add.AddConstraintViewModel
-import com.mnrf.ejajan.view.main.parent.ui.student.add.AllergyAdapter
-import com.mnrf.ejajan.view.main.parent.ui.student.add.SpendingAdapter
+import com.mnrf.ejajan.view.main.parent.ui.student.adapter.AllergyAdapter
+import com.mnrf.ejajan.view.main.parent.ui.student.adapter.SpendingAdapter
 import com.mnrf.ejajan.view.main.parent.ui.student.change.ChangeConstraintActivity
 import com.mnrf.ejajan.view.main.parent.ui.student.delete.DeleteConstraintActivity
 

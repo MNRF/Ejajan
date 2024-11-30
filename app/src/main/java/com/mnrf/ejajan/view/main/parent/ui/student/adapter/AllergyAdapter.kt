@@ -1,4 +1,4 @@
-package com.mnrf.ejajan.view.main.parent.ui.student.add
+package com.mnrf.ejajan.view.main.parent.ui.student.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
