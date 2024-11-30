@@ -182,12 +182,12 @@
 
     <!-- Save Button -->
     <Button
-        android:id="@+id/buttonLoginParentMerchant"
+        android:id="@+id/btn_save"
         style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="104dp"
-        android:text="@string/btnLogin"
+        android:text="@string/ubah"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

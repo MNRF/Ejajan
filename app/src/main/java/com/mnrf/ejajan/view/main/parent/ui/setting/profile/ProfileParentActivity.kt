@@ -34,7 +34,7 @@ class ProfileParentActivity : AppCompatActivity() {
             startGallery()
         }
 
-        binding. btnSave.setOnClickListener {
+        binding.btnSave.setOnClickListener {
             val intent = Intent(this, ProfileParentActivity::class.java)
             startActivity(intent)
         }
