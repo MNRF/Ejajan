@@ -194,4 +194,7 @@
     <string name="order_history">Order History</string>
     <string name="allergy_name">Allergy Name</string>
     <string name="spending_details">Amount: %d, Period: %s</string>
+    <string name="empty_name">Username cannot be empty</string>
+    <string name="name_too_short">Username must be at least 3 characters long</string>
+    <string name="password_not_matching">Passwords do not match</string>
 </resources>

@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.mnrf.ejajan.R
-import com.mnrf.ejajan.databinding.ItemSliderBinding
 
 class ImageSliderAdapter(private val imageList: List<ImageSliderData>) :
     RecyclerView.Adapter<ImageSliderAdapter.ImageSliderViewHolder>() {
