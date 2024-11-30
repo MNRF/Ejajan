@@ -1,4 +1,4 @@
-package com.mnrf.ejajan.view.utils
+package com.mnrf.ejajan.data.pref
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -1,6 +1,6 @@
-package com.mnrf.ejajan.data
+package com.mnrf.ejajan.data.repository
 
-import com.mnrf.ejajan.data.pref.UserModel
+import com.mnrf.ejajan.data.model.UserModel
 import com.mnrf.ejajan.data.pref.UserPreference
 /*import com.mnrf.ejajan.data.retrofit.ApiService*/
 import kotlinx.coroutines.flow.Flow

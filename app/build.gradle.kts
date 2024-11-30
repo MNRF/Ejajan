@@ -63,6 +63,10 @@ dependencies {
     implementation(libs.camera.lifecycle)
     implementation(libs.camera.view)
     implementation (libs.play.services.mlkit.face.detection)
+    implementation (libs.androidx.camera.camera.core)
+    implementation (libs.androidx.camera.extensions)
+    implementation (libs.guava)
+
 
     //onboarding
     implementation(libs.androidx.viewpager2)
@@ -78,12 +82,10 @@ dependencies {
     //Midtrans
     implementation (libs.uikit)
 
-    // Import the BoM for the Firebase platform
+    // firebase
     implementation(platform(libs.firebase.bom))
-
-    // Add the dependency for the Firebase Authentication library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
 
     //slider
     implementation (libs.glide)

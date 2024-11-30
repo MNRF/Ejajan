@@ -1,4 +1,4 @@
-package com.mnrf.ejajan.data.pref
+package com.mnrf.ejajan.data.model
 
 data class UserModel(
     val email: String,

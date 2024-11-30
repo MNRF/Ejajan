@@ -9,11 +9,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.mnrf.ejajan.data.pref.UserModel
 import com.mnrf.ejajan.databinding.ActivityLoginParentMerchantBinding
 import com.mnrf.ejajan.view.main.parent.ParentActivity
 import com.mnrf.ejajan.view.main.merchant.MerchantActivity
-import com.mnrf.ejajan.view.utils.OnboardingPreferences
+import com.mnrf.ejajan.data.pref.OnboardingPreferences
 import com.mnrf.ejajan.view.utils.ViewModelFactory
 
 class LoginParentMerchant : AppCompatActivity() {

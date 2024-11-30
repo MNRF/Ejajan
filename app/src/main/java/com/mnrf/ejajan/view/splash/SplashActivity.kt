@@ -9,7 +9,7 @@ import com.mnrf.ejajan.R
 import com.mnrf.ejajan.view.login.LoginParentMerchant
 import com.mnrf.ejajan.view.login.LoginStudent
 import com.mnrf.ejajan.view.onboarding.OnboardingActivity
-import com.mnrf.ejajan.view.utils.OnboardingPreferences
+import com.mnrf.ejajan.data.pref.OnboardingPreferences
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

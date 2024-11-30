@@ -8,8 +8,8 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.mnrf.ejajan.data.UserRepository
-import com.mnrf.ejajan.data.pref.UserModel
+import com.mnrf.ejajan.data.repository.UserRepository
+import com.mnrf.ejajan.data.model.UserModel
 import kotlinx.coroutines.launch
 
 class LoginParentMerchantViewModel(private val repository: UserRepository) : ViewModel() {

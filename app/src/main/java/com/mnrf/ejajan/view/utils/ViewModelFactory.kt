@@ -3,7 +3,8 @@ package com.mnrf.ejajan.view.utils
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mnrf.ejajan.data.UserRepository
+import com.mnrf.ejajan.data.repository.ConstraintRepository
+import com.mnrf.ejajan.data.repository.UserRepository
 import com.mnrf.ejajan.di.Injection
 import com.mnrf.ejajan.view.login.LoginParentMerchantViewModel
 import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel

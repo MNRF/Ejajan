@@ -1,10 +1,7 @@
 package com.mnrf.ejajan.view.splash
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import com.mnrf.ejajan.data.UserRepository
-import com.mnrf.ejajan.data.pref.UserModel
+import com.mnrf.ejajan.data.repository.UserRepository
 
 class SplashViewModel(private val repository: UserRepository) : ViewModel() {
 }

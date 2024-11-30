@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.mnrf.ejajan.databinding.StartToLoginBinding
 import com.mnrf.ejajan.view.login.LoginParentMerchant
 import com.mnrf.ejajan.view.login.LoginStudent
-import com.mnrf.ejajan.view.utils.OnboardingPreferences
+import com.mnrf.ejajan.data.pref.OnboardingPreferences
 
 class StartToLogin : Fragment() {
     private var _binding: StartToLoginBinding? = null

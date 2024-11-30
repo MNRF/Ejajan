@@ -1,8 +1,8 @@
 package com.mnrf.ejajan.di
 
 import android.content.Context
-import com.mnrf.ejajan.data.UserRepository
-import com.mnrf.ejajan.data.pref.UserModel
+import com.mnrf.ejajan.data.repository.UserRepository
+import com.mnrf.ejajan.data.model.UserModel
 import com.mnrf.ejajan.data.pref.UserPreference
 import com.mnrf.ejajan.data.pref.dataStore
 import kotlinx.coroutines.flow.firstOrNull

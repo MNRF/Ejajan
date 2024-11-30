@@ -1,4 +1,8 @@
 <resources>
+    <string-array name="Constraint">
+        <item>Allergy</item>
+        <item>Spending</item>
+    </string-array>
     <string-array name="Allergy">
         <item>Peanut</item>
         <item>Tree Nut</item>
@@ -23,6 +27,18 @@
         <item>Legumes</item>
         <item>Poppy Seeds</item>
         <item>Lupin</item>
+    </string-array>
+    <string-array name="Spending">
+        <item>Rp. 20.000</item>
+        <item>Rp. 40.000</item>
+        <item>Rp. 60.000</item>
+        <item>Rp. 80.000</item>
+        <item>Rp. 100.000</item>
+    </string-array>
+    <string-array name="Time">
+        <item>per hari</item>
+        <item>per minggu</item>
+        <item>per bulan</item>
     </string-array>
     <string name="app_name">Ejajan</string>
     <string name="Deskripsi_logo">Logo E-Jajan</string>
@@ -173,4 +189,8 @@
     <string name="waktu_pengambilan_18_00_wib">Waktu Pengambilan: 18:00 WIB</string>
     <string name="total_pembayaran_rp60_000">Total Pembayaran: Rp60.000</string>
     <string name="image_slider">Image Slider</string>
+    <string name="nutritional">Nutritional</string>
+    <string name="expenditure">Expenditure</string>
+    <string name="order_history">Order History</string>
+    <string name="allergy_name">Allergy Name</string>
 </resources>

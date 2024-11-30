@@ -50,6 +50,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="80dp"
             android:text="@string/edit_profile"
+            style="@style/Button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />

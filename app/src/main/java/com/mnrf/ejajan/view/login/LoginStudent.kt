@@ -69,7 +69,7 @@ class LoginStudent : AppCompatActivity() {
             val preview = Preview.Builder()
                 .build()
                 .also {
-                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                    it.surfaceProvider = binding.viewFinder.surfaceProvider
                 }
 
             imageCapture = ImageCapture.Builder().build()
@@ -101,7 +101,6 @@ class LoginStudent : AppCompatActivity() {
             }
         }, ContextCompat.getMainExecutor(this))
     }
-
 
     private fun requestCameraPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
