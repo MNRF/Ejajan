@@ -25,9 +25,19 @@ class ConstraintRepository {
     }
 
     fun addSpending(spending: SpendingModel, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
-        db.collection("spendings")
+        db.collection("spending")
             .add(spending)
             .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { e -> onFailure(e) }
+    }
+
+    fun getSpending(onSuccess: (List<SpendingModel>) -> Unit, onFailure: (Exception) -> Unit) {
+        db.collection("spending")
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val spending = snapshot.documents.mapNotNull { it.toObject(SpendingModel::class.java) }
+                onSuccess(spending)
+            }
             .addOnFailureListener { e -> onFailure(e) }
     }
 

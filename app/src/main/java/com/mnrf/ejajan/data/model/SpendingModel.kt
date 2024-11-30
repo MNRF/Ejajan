@@ -1,6 +1,6 @@
 package com.mnrf.ejajan.data.model
 
-class SpendingModel {
-    val amount: Int = 0
+data class SpendingModel(
+    val amount: String = "",
     val period: String = ""
-}
+)

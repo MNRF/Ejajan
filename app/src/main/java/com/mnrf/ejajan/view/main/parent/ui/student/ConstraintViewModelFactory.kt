@@ -1,11 +1,9 @@
-package com.mnrf.ejajan.view.main.parent.ui.student.add
+package com.mnrf.ejajan.view.main.parent.ui.student
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mnrf.ejajan.data.repository.ConstraintRepository
-import com.mnrf.ejajan.di.Injection
-import com.mnrf.ejajan.view.utils.ViewModelFactory
+import com.mnrf.ejajan.view.main.parent.ui.student.add.AddConstraintViewModel
 
 class ConstraintViewModelFactory(private val repository: ConstraintRepository) : ViewModelProvider.NewInstanceFactory() {
 

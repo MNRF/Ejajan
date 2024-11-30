@@ -13,16 +13,16 @@ import com.mnrf.ejajan.databinding.FragmentParentStudentBinding
 import com.mnrf.ejajan.view.main.parent.ui.student.add.AddConstraintActivity
 import com.mnrf.ejajan.view.main.parent.ui.student.add.AddConstraintViewModel
 import com.mnrf.ejajan.view.main.parent.ui.student.add.AllergyAdapter
-import com.mnrf.ejajan.view.main.parent.ui.student.add.ConstraintViewModelFactory
+import com.mnrf.ejajan.view.main.parent.ui.student.add.SpendingAdapter
 import com.mnrf.ejajan.view.main.parent.ui.student.change.ChangeConstraintActivity
 import com.mnrf.ejajan.view.main.parent.ui.student.delete.DeleteConstraintActivity
-import com.mnrf.ejajan.view.utils.ViewModelFactory
 
 class StudentParentFragment : Fragment() {
 
     private var _binding: FragmentParentStudentBinding? = null
     private val binding get() = _binding!!
     private lateinit var allergyAdapter: AllergyAdapter
+    private lateinit var spendingAdapter: SpendingAdapter
     private lateinit var viewModel: AddConstraintViewModel
 
     override fun onCreateView(
@@ -46,6 +46,12 @@ class StudentParentFragment : Fragment() {
         viewModel.allergyList.observe(viewLifecycleOwner) { allergies ->
             allergyAdapter.updateItems(allergies)
         }
+
+        viewModel.spendingList.observe(viewLifecycleOwner) { spending ->
+            spendingAdapter.updateItems(spending)
+        }
+
+        viewModel.loadSpending()
 
         viewModel.loadAllergies()
 
@@ -72,6 +78,12 @@ class StudentParentFragment : Fragment() {
         allergyAdapter = AllergyAdapter(mutableListOf())
         binding.rvAlergi.apply {
             adapter = allergyAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        spendingAdapter = SpendingAdapter(mutableListOf())
+        binding.rvSpending.apply {
+            adapter = spendingAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
     }
