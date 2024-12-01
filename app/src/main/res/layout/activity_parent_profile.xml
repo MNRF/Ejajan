@@ -107,6 +107,7 @@
                 android:hint="@string/enter_your_email"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
+                android:enabled="false"
                 android:paddingHorizontal="16dp"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>

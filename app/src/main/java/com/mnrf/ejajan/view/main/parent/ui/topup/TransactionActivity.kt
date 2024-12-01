@@ -1,29 +1,79 @@
 package com.mnrf.ejajan.view.main.parent.ui.topup
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.mnrf.ejajan.R
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.os.LocaleListCompat
+import com.midtrans.sdk.uikit.api.model.CustomColorTheme
+import com.midtrans.sdk.uikit.api.model.TransactionResult
+import com.midtrans.sdk.uikit.external.UiKitApi
+import com.midtrans.sdk.uikit.internal.util.UiKitConstants
+import com.mnrf.ejajan.databinding.ActivityParentTransactionBinding
 
 class TransactionActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityParentTransactionBinding
+
+    // Define the ActivityResultLauncher at the class level so it can be used in multiple methods
+    private val transactionLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val transactionResult = result.data?.getParcelableExtra<TransactionResult>(
+                    UiKitConstants.KEY_TRANSACTION_RESULT
+                )
+                if (transactionResult != null) {
+                    when (transactionResult.status) {
+                        "SUCCESS" -> {
+                            Toast.makeText(this, "Transaction Success. ID: ${transactionResult.transactionId}", Toast.LENGTH_LONG).show()
+                        }
+                        "PENDING" -> {
+                            Toast.makeText(this, "Transaction Pending. ID: ${transactionResult.transactionId}", Toast.LENGTH_LONG).show()
+                        }
+                        "FAILED" -> {
+                            Toast.makeText(this, "Transaction Failed. ID: ${transactionResult.transactionId}", Toast.LENGTH_LONG).show()
+                        }
+                        else -> {
+                            Toast.makeText(this, "Transaction Status Unknown", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "Transaction Invalid", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+    companion object {
+        const val CLIENT_KEY = "Mid-client-2LVVrrgDtQe6aUo0" // Replace with your client key
+        const val BASE_URL = "https://capstone-c242-ps370.et.r.appspot.com/" // Replace with your URL
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_parent_transaction)
+        binding = ActivityParentTransactionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Menghubungkan komponen UI
-        val etAmount: EditText = findViewById(R.id.etAmount)
-        val btnConfirm: Button = findViewById(R.id.btnConfirm)
+        // Check permission for READ_PHONE_STATE
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_PHONE_STATE),
+                101
+            )
+        }
 
-        // Menambahkan logika untuk tombol Confirm
-        btnConfirm.setOnClickListener {
-            val amountText = etAmount.text.toString()
+        // Button click listener to trigger the transaction process
+        binding.btnConfirm.setOnClickListener {
+            val amountText = binding.etAmount.text.toString()
             if (amountText.isNotEmpty()) {
                 val amount = amountText.toDoubleOrNull()
                 if (amount != null && amount > 0) {
                     Toast.makeText(this, "Top Up Amount: Rp $amount", Toast.LENGTH_SHORT).show()
+                    startTransaction()  // Proceed with the transaction
                 } else {
                     Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
                 }
@@ -31,5 +81,31 @@ class TransactionActivity : AppCompatActivity() {
                 Toast.makeText(this, "Amount cannot be empty", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun startTransaction() {
+        // Fetch the Snap Token from your backend (this should be done via an API call)
+        // For now, we use a mock token. In your production app, make sure to fetch the token from the backend.
+        val snapToken = "25e3659b-f00c-4d98-bfff-9f72978c8df5" // Replace with the actual Snap token retrieved from your server
+
+        // Initialize UiKitApi with your credentials and configuration
+        UiKitApi.Builder()
+            .withMerchantClientKey(CLIENT_KEY)
+            .withContext(this)
+            .withMerchantUrl(BASE_URL)
+            .enableLog(true)
+            .withColorTheme(CustomColorTheme("#FFE51255", "#B61548", "#FFE51255"))
+            .build()
+
+        // Now start the payment flow with the provided snapToken
+        UiKitApi.getDefaultInstance().startPaymentUiFlow(this, transactionLauncher, snapToken)
+
+        // Set locale (optional)
+        setLocaleNew("en")
+    }
+
+    private fun setLocaleNew(languageCode: String?) {
+        val locales = LocaleListCompat.forLanguageTags(languageCode)
+        AppCompatDelegate.setApplicationLocales(locales)
     }
 }

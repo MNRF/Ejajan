@@ -12,13 +12,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.mnrf.ejajan.R
+import com.mnrf.ejajan.data.pref.UserPreference
+import com.mnrf.ejajan.data.pref.dataStore
 import com.mnrf.ejajan.databinding.ActivityParentAddBinding
 import com.mnrf.ejajan.databinding.ActivityParentProfileBinding
 
 class ProfileParentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityParentProfileBinding
     private var currentImageUri: Uri? = null
+    private lateinit var userPreference: UserPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +33,9 @@ class ProfileParentActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             title = "Profile"
         }
+
+        userPreference = UserPreference.getInstance(dataStore)
+        observeUserSession()
 
         binding.cvSettingImage.setOnClickListener {
             startGallery()
@@ -61,6 +68,20 @@ class ProfileParentActivity : AppCompatActivity() {
             binding.imgAbout.setImageURI(it)
         }
     }
+
+    private fun observeUserSession() {
+        lifecycleScope.launchWhenStarted {
+            userPreference.getSession().collect { user ->
+                binding.edEmailProfile.apply {
+                    setText(user.email)
+                    isEnabled = false
+                    isFocusable = false
+                    isFocusableInTouchMode = false
+                }
+            }
+        }
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
