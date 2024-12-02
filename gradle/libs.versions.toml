@@ -26,6 +26,7 @@ lifecycleViewmodelKtx = "2.8.7"
 datastoreCoreAndroid = "1.1.1"
 datastorePreferences = "1.1.1"
 firebaseAuthKtx = "23.1.0"
+firebaseFirestoreKtx = "25.1.1"
 
 [libraries]
 androidx-camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "cameraExtensionsVersion" }
@@ -57,6 +58,7 @@ uikit = { module = "com.midtrans:uikit", version.ref = "uikit" }
 androidx-datastore-core-android = { group = "androidx.datastore", name = "datastore-core-android", version.ref = "datastoreCoreAndroid" }
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastorePreferences" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 
 
 [plugins]
