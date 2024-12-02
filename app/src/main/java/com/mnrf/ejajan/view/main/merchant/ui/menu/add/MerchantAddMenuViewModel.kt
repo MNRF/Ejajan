@@ -24,7 +24,7 @@ class MerchantAddMenuViewModel(private val repository: UserRepository) : ViewMod
     }
 
     fun addMenu (merchantUid: String, menuName: String, menuDescription: String, menuIngredients: String,
-                 menuPreparationtime: String): Boolean {
+                 menuPreparationtime: String, menuPrice: String): Boolean {
         var isSuccess: Boolean
         try {
             val user = hashMapOf(
@@ -33,8 +33,8 @@ class MerchantAddMenuViewModel(private val repository: UserRepository) : ViewMod
                 "menu_description" to menuDescription,
                 "menu_ingredients" to menuIngredients,
                 "menu_preparationtime" to menuPreparationtime,
+                "menu_price" to menuPrice
             )
-
             db.collection("menus")
                 .add(user)
                 .addOnSuccessListener { documentReference ->

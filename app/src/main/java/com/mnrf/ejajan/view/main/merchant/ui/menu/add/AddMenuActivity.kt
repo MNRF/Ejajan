@@ -47,7 +47,8 @@ class AddMenuActivity : AppCompatActivity() {
                         binding.etFoodName.text.toString(),
                         binding.etDescription.text.toString(),
                         binding.etBasicIngredients.text.toString(),
-                        binding.etAddPreparetime.text.toString()
+                        binding.etAddPreparetime.text.toString(),
+                        binding.etPriceFood.text.toString()
                     )
                     val intent = Intent(this, MerchantActivity::class.java)
                     startActivity(intent)

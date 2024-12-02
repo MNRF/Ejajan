@@ -7,14 +7,15 @@
     android:layout_gravity="center"
     android:layout_margin="16dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="8dp">
+    app:cardElevation="8dp"
+    android:id="@+id/cv_item_merchant_menu">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="250dp"
         android:layout_height="300dp"
         android:padding="16dp">
 
-        <View
+        <TextView
             android:id="@+id/placeholder_image"
             android:layout_width="0dp"
             android:layout_height="180dp"
@@ -23,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <View
+        <TextView
             android:id="@+id/placeholder_name"
             android:layout_width="0dp"
             android:layout_height="24dp"
@@ -33,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <View
+        <TextView
             android:id="@+id/placeholder_price"
             android:layout_width="120dp"
             android:layout_height="20dp"
@@ -42,7 +43,7 @@
             app:layout_constraintTop_toBottomOf="@id/placeholder_name"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <View
+        <TextView
             android:id="@+id/placeholder_time"
             android:layout_width="80dp"
             android:layout_height="20dp"
