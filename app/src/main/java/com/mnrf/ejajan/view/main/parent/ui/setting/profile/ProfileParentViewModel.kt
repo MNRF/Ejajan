@@ -1,6 +1,6 @@
 package com.mnrf.ejajan.view.main.parent.ui.setting.profile
 
-import com.mnrf.ejajan.data.repository.ProfileRepository
+import com.mnrf.ejajan.data.repository.UserRepository
 
-class ProfileParentViewModel(repository: ProfileRepository) {
+class ProfileParentViewModel(repository: UserRepository) {
 }

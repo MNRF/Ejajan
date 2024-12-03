@@ -4,8 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SpendingModel(
-    val amount: String = "",
-    val period: String = "",
+data class NutritionModel (
+    val name: String = "",
+    val mineral: String = "",
     val parentUid: String = ""
 ) : Parcelable

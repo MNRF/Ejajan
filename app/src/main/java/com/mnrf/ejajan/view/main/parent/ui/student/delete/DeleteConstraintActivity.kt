@@ -10,17 +10,20 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.mnrf.ejajan.R
+import com.mnrf.ejajan.data.pref.UserPreference
+import com.mnrf.ejajan.data.pref.dataStore
 import com.mnrf.ejajan.data.repository.ConstraintRepository
 import com.mnrf.ejajan.databinding.ActivityParentDeleteBinding
 import com.mnrf.ejajan.view.main.parent.ui.student.ConstraintViewModelFactory
+import com.mnrf.ejajan.view.main.parent.ui.student.add.AddConstraintViewModel
 
 class DeleteConstraintActivity : AppCompatActivity() {
     private lateinit var binding: ActivityParentDeleteBinding
-    private val repository = ConstraintRepository()
     private val viewModel: DeleteConstraintViewModel by viewModels {
-        ConstraintViewModelFactory(repository)
+        ConstraintViewModelFactory(
+            repository = ConstraintRepository(UserPreference.getInstance(this.dataStore)),
+        )
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityParentDeleteBinding.inflate(layoutInflater)
@@ -161,12 +164,16 @@ class DeleteConstraintActivity : AppCompatActivity() {
     }
 
     private fun showSuccessDialog(message: String) {
-        AlertDialog.Builder(this)
-            .setTitle("Success")
-            .setMessage(message)
-            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-            .create()
-            .show()
+        if (!isFinishing && !isDestroyed) {
+            AlertDialog.Builder(this)
+                .setTitle("Success")
+                .setMessage(message)
+                .setPositiveButton("OK") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+                .show()
+        }
     }
 
     private fun showInfoDialog() {

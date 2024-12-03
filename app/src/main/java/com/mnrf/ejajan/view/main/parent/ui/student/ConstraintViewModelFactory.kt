@@ -4,7 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mnrf.ejajan.data.repository.ConstraintRepository
 import com.mnrf.ejajan.view.main.parent.ui.student.add.AddConstraintViewModel
+import com.mnrf.ejajan.view.main.parent.ui.student.change.ChangeConstraintViewModel
 import com.mnrf.ejajan.view.main.parent.ui.student.delete.DeleteConstraintViewModel
+
+//import com.mnrf.ejajan.view.main.parent.ui.student.delete.DeleteConstraintViewModel
 
 class ConstraintViewModelFactory(private val repository: ConstraintRepository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -14,12 +17,22 @@ class ConstraintViewModelFactory(private val repository: ConstraintRepository) :
             modelClass.isAssignableFrom(AddConstraintViewModel::class.java) -> {
                 AddConstraintViewModel(repository) as T
             }
+
             modelClass.isAssignableFrom(DeleteConstraintViewModel::class.java) -> {
                 DeleteConstraintViewModel(repository) as T
             }
+
+            modelClass.isAssignableFrom(StudentViewModel::class.java) -> {
+                StudentViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ChangeConstraintViewModel::class.java) -> {
+                ChangeConstraintViewModel(repository) as T  // Correct repository passed here
+            }
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
+}
 
 //    companion object {
 //        @Volatile
@@ -34,4 +47,4 @@ class ConstraintViewModelFactory(private val repository: ConstraintRepository) :
 //            return INSTANCE as ViewModelFactory
 //        }
 //    }
-}
+//}

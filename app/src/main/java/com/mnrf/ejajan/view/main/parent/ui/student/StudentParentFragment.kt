@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.mnrf.ejajan.data.pref.UserPreference
+import com.mnrf.ejajan.data.pref.dataStore
 import com.mnrf.ejajan.data.repository.ConstraintRepository
 import com.mnrf.ejajan.databinding.FragmentParentStudentBinding
 import com.mnrf.ejajan.view.main.parent.ui.student.add.AddConstraintActivity
@@ -23,7 +26,7 @@ class StudentParentFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var allergyAdapter: AllergyAdapter
     private lateinit var spendingAdapter: SpendingAdapter
-    private lateinit var viewModel: AddConstraintViewModel
+    private lateinit var viewModel: StudentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,8 +43,10 @@ class StudentParentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-        val repository = ConstraintRepository()
-        viewModel = ViewModelProvider(this, ConstraintViewModelFactory(repository))[AddConstraintViewModel::class.java]
+
+        val userPreference = UserPreference.getInstance(requireContext().dataStore)
+        val repository = ConstraintRepository(userPreference)
+        viewModel = ViewModelProvider(this, ConstraintViewModelFactory(repository))[StudentViewModel::class.java]
 
         viewModel.allergyList.observe(viewLifecycleOwner) { allergies ->
             allergyAdapter.updateItems(allergies)
@@ -51,10 +56,15 @@ class StudentParentFragment : Fragment() {
             spendingAdapter.updateItems(spending)
         }
 
-        viewModel.loadSpending()
+        // Dapatkan UID pengguna
+        val user = FirebaseAuth.getInstance().currentUser
+        val parentUid = user?.uid ?: ""
 
-        viewModel.loadAllergies()
-
+        // Muat data alergi dan pengeluaran berdasarkan parentUid
+        if (parentUid.isNotEmpty()) {
+            viewModel.loadAllergies(parentUid)
+            viewModel.loadSpending(parentUid)
+        }
         binding.btnParentCreate.setOnClickListener {
             // Handle 'Tambah' button click
             val intent = Intent(requireContext(), AddConstraintActivity::class.java)
@@ -88,21 +98,6 @@ class StudentParentFragment : Fragment() {
         }
     }
 
-//    private fun loadAllergies() {
-//        Firebase.firestore.collection("allergies")
-//            .get()
-//            .addOnSuccessListener { result ->
-//                val allergies = result.map { document ->
-//                    AllergyModel(
-//                        name = document.getString("name") ?: ""
-//                    )
-//                }
-//                allergyAdapter.updateItems(allergies)
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(requireContext(), "Failed to load allergies", Toast.LENGTH_SHORT).show()
-//            }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -6,19 +6,30 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.mnrf.ejajan.R
 import com.mnrf.ejajan.data.model.AllergyModel
 import com.mnrf.ejajan.data.model.SpendingModel
+import com.mnrf.ejajan.data.pref.UserPreference
+import com.mnrf.ejajan.data.pref.dataStore
 import com.mnrf.ejajan.data.repository.ConstraintRepository
 import com.mnrf.ejajan.databinding.ActivityParentAddBinding
+import com.mnrf.ejajan.view.main.merchant.ui.menu.add.MerchantAddMenuViewModel
 import com.mnrf.ejajan.view.main.parent.ui.student.ConstraintViewModelFactory
+import com.mnrf.ejajan.view.utils.ViewModelFactory
 
 class AddConstraintActivity : AppCompatActivity() {
     private lateinit var binding: ActivityParentAddBinding
-    private lateinit var viewModel: AddConstraintViewModel
+    private val viewModel: AddConstraintViewModel by viewModels {
+        ConstraintViewModelFactory(
+            repository = ConstraintRepository(UserPreference.getInstance(this.dataStore)),
+        )
+    }
+
     private var isSpendingAdded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +41,6 @@ class AddConstraintActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             title = "Add Constraint"
         }
-
-        val repository = ConstraintRepository()
-        viewModel = ViewModelProvider(this, ConstraintViewModelFactory(repository))[AddConstraintViewModel::class.java]
 
         setupSpinner(binding.spConstraint, R.array.Constraint)
         setupSpinner(binding.spAlergi, R.array.Allergy)
@@ -46,10 +54,15 @@ class AddConstraintActivity : AppCompatActivity() {
                 "Allergy" -> {
                     val allergyName = binding.spAlergi.selectedItem.toString()
                     if (allergyName.isNotEmpty()) {
-                        val allergy = AllergyModel(name = allergyName)
-                        viewModel.addAllergy(allergy)
-                        showSuccessDialog("Allergy added successfully")
-                    } else {
+                        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+                        val allergy = AllergyModel(name = allergyName, parentUid = uid)
+                        viewModel.addAllergy(
+                            allergy,
+                            onSuccess = { showSuccessDialog("Allergy added successfully") },
+                            onFailure = { e -> Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show() }
+                        )
+                    }
+                    else {
                         Toast.makeText(this, "Pilih alergi terlebih dahulu", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -57,11 +70,17 @@ class AddConstraintActivity : AppCompatActivity() {
                     val spendingCategory = binding.spLimit.selectedItem.toString()
                     val period = binding.spPeriod.selectedItem.toString()
                     if (spendingCategory.isNotEmpty() && period.isNotEmpty() && !isSpendingAdded) {
-                        val spending = SpendingModel(amount = spendingCategory, period = period)
-                        viewModel.addSpending(spending)
-                        isSpendingAdded = true // Set flag after spending is added
-                        showSuccessDialog("Spending added successfully")
-                        checkIfSpendingAdded() // Call to update the spinner visibility
+                        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+                        val spending = SpendingModel(amount = spendingCategory, period = period, parentUid = uid)
+                        viewModel.addSpending(
+                            spending,
+                            onSuccess = {
+                                isSpendingAdded = true
+                                showSuccessDialog("Spending added successfully")
+                                checkIfSpendingAdded()
+                            },
+                            onFailure = { e -> Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show() }
+                        )
                     } else {
                         if (isSpendingAdded) {
                             Toast.makeText(this, "Spending sudah ditambahkan sebelumnya", Toast.LENGTH_SHORT).show()
@@ -82,7 +101,7 @@ class AddConstraintActivity : AppCompatActivity() {
     private fun setupSpinner(spinner: Spinner, arrayResId: Int) {
         val items = resources.getStringArray(arrayResId)
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // Use dropdown style for spinner
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -91,7 +110,7 @@ class AddConstraintActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Optionally handle "nothing selected" case here
+                // Handle "nothing selected" case here
             }
         }
     }
@@ -99,7 +118,6 @@ class AddConstraintActivity : AppCompatActivity() {
     private fun handleSpinnerSelection() {
         when (binding.spConstraint.selectedItem.toString()) {
             "Allergy" -> {
-                // Show only allergy section
                 binding.tvAlergi.visibility = View.VISIBLE
                 binding.spAlergi.visibility = View.VISIBLE
                 binding.spLimit.visibility = View.GONE
@@ -108,7 +126,6 @@ class AddConstraintActivity : AppCompatActivity() {
                 binding.tvPeriod.visibility = View.GONE
             }
             "Spending" -> {
-                // Show spending and time period section only if spending is not added
                 if (!isSpendingAdded) {
                     binding.spLimit.visibility = View.VISIBLE
                     binding.spPeriod.visibility = View.VISIBLE
@@ -119,7 +136,6 @@ class AddConstraintActivity : AppCompatActivity() {
                 binding.tvAlergi.visibility = View.GONE
             }
             else -> {
-                // Hide all sections if no valid option is selected
                 binding.spAlergi.visibility = View.GONE
                 binding.spLimit.visibility = View.GONE
                 binding.spPeriod.visibility = View.GONE
@@ -130,7 +146,6 @@ class AddConstraintActivity : AppCompatActivity() {
     }
 
     private fun checkIfSpendingAdded() {
-        // Check if spending has already been added
         if (isSpendingAdded) {
             disableSpendingSpinner()
         }
@@ -139,7 +154,6 @@ class AddConstraintActivity : AppCompatActivity() {
     private fun disableSpendingSpinner() {
         binding.spLimit.isEnabled = false
         binding.spPeriod.isEnabled = false
-        // Optionally hide the spinner for a cleaner UI
         binding.spLimit.visibility = View.GONE
         binding.spPeriod.visibility = View.GONE
         binding.tvLimit.visibility = View.GONE
@@ -151,7 +165,7 @@ class AddConstraintActivity : AppCompatActivity() {
         builder.setTitle("Success")
             .setMessage(message)
             .setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss() // Dismiss the dialog
+                dialog.dismiss()
             }
         builder.create().show()
     }
@@ -171,3 +185,4 @@ class AddConstraintActivity : AppCompatActivity() {
         return true
     }
 }
+

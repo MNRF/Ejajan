@@ -14,7 +14,7 @@ class MerchantAddMenuViewModel(private val repository: UserRepository) : ViewMod
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
 
     fun getSession(): LiveData<UserModel> {
         _isLoading.value = true

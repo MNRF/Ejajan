@@ -2,6 +2,7 @@
     <string-array name="Constraint">
         <item>Allergy</item>
         <item>Spending</item>
+        <item>Nutrition</item>
     </string-array>
     <string-array name="Allergy">
         <item>Peanut</item>
@@ -29,17 +30,43 @@
         <item>Lupin</item>
     </string-array>
     <string-array name="Spending">
+        <item>Rp. 5.000</item>
+        <item>Rp. 10.000</item>
+        <item>Rp. 15.000</item>
         <item>Rp. 20.000</item>
-        <item>Rp. 40.000</item>
-        <item>Rp. 60.000</item>
-        <item>Rp. 80.000</item>
-        <item>Rp. 100.000</item>
+        <item>Rp. 25.000</item>
     </string-array>
     <string-array name="Time">
         <item>per hari</item>
         <item>per minggu</item>
         <item>per bulan</item>
     </string-array>
+    <string-array name="Nutrision">
+        <item>Karbohidrat</item>
+        <item>Protein</item>
+        <item>Lemak</item>
+        <item>Serat</item>
+        <item>Vitamin A</item>
+        <item>Vitamin B</item>
+        <item>Vitamin C</item>
+        <item>Vitamin D</item>
+        <item>Vitamin E</item>
+        <item>Vitamin K</item>
+    </string-array>
+
+    <string-array name="Mineral">
+        <item>Kalsium</item>
+        <item>Besi</item>
+        <item>Seng</item>
+        <item>Magnesium</item>
+        <item>Kalium</item>
+        <item>Fosfor</item>
+        <item>Natrium</item>
+        <item>Klorida</item>
+        <item>Mangan</item>
+        <item>Fluor</item>
+    </string-array>
+
     <string name="app_name">Ejajan</string>
     <string name="Deskripsi_logo">Logo E-Jajan</string>
     <string name="Apps">E - Jajan</string>
@@ -197,4 +224,5 @@
     <string name="empty_name">Username cannot be empty</string>
     <string name="name_too_short">Username must be at least 3 characters long</string>
     <string name="password_not_matching">Passwords do not match</string>
+    <string name="change_to_update">Change To Update</string>
 </resources>
