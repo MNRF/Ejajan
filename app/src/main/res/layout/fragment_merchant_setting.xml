@@ -74,22 +74,32 @@
 
                 <TextView
                     android:id="@+id/tv_setting_jamBuka"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/jam_buka"
-                    android:textAlignment="center"
+                    android:text="@string/toko_anda_sedang_tutup"
+                    android:textAlignment="viewStart"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tb_setting_jamBuka"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ToggleButton
                     android:id="@+id/tb_setting_jamBuka"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
                     android:text="@string/togglebutton"
+                    android:textOff="@string/tutup"
+                    android:textOn="@string/buka"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_schedule"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_schedule"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jadwal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -119,7 +129,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="5dp"
                     android:text="@string/cair_saldo"
                     android:textAlignment="center"
                     android:textSize="20sp"
@@ -164,7 +173,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="5dp"
                     android:text="@string/laporan"
                     android:textAlignment="center"
                     android:textSize="20sp"
@@ -190,20 +198,18 @@
 
         <Button
             android:id="@+id/btn_setting_logout"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="60dp"
             android:backgroundTint="@color/red"
             android:drawableLeft="@drawable/ic_baseline_logout_24"
             android:drawableTint="@android:color/white"
             android:text="@string/logout"
             android:textColor="@android:color/white"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_setting_laporan" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

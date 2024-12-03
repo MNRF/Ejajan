@@ -227,4 +227,9 @@
     <string name="change_to_update">Change To Update</string>
     <string name="nutrition">Nutrition</string>
     <string name="mineral">Mineral</string>
+    <string name="buka">Buka</string>
+    <string name="tutup">Tutup</string>
+    <string name="toko_anda_sedang_buka">Toko anda sedang buka</string>
+    <string name="toko_anda_sedang_tutup">Toko anda sedang tutup</string>
+    <string name="jadwal">Jadwal</string>
 </resources>

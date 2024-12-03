@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.mnrf.ejajan.R
 import com.mnrf.ejajan.databinding.FragmentMerchantSettingBinding
 import com.mnrf.ejajan.view.login.LoginParentMerchant
 import com.mnrf.ejajan.view.main.merchant.ui.setting.balance.TransactionDisbursementActivity
@@ -21,9 +22,6 @@ class SettingMerchantFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     private var _binding: FragmentMerchantSettingBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     private val settingViewModel: SettingViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
@@ -34,10 +32,8 @@ class SettingMerchantFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentMerchantSettingBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,10 +67,29 @@ class SettingMerchantFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.cvSettingJamBuka.setOnClickListener {
-
+        settingViewModel.merchantProfile.observe(viewLifecycleOwner) { profile ->
+            val isOpen = profile?.daysopen?.first() == '1'
+            binding.tbSettingJamBuka.isChecked = isOpen
+            binding.tvSettingJamBuka.text = if (isOpen) {
+                getString(R.string.toko_anda_sedang_buka)
+            } else {
+                getString(R.string.toko_anda_sedang_tutup)
+            }
         }
 
+        binding.tbSettingJamBuka.setOnCheckedChangeListener { _, isChecked ->
+            settingViewModel.toggleMerchantOpen(isChecked)
+            binding.tvSettingJamBuka.text = if (isChecked) {
+                getString(R.string.toko_anda_sedang_buka)
+            } else {
+                getString(R.string.toko_anda_sedang_tutup)
+            }
+        }
+
+        binding.btnSchedule.setOnClickListener {
+            val intent = Intent(requireContext(), MerchantSettingSchedule::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {
