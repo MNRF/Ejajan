@@ -1,6 +1,7 @@
 package com.mnrf.ejajan.view.main.parent.ui.student.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,7 @@ class SpendingAdapter(private val items: MutableList<SpendingModel>) :
         val item = items[position]
         val combinedText = "${item.amount} ${item.period}"
         holder.binding.tvSpending.text = combinedText
+        holder.binding.tvSpending.setTextColor(Color.WHITE)
     }
 
     override fun getItemCount() = items.size

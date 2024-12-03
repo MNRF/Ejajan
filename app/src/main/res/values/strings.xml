@@ -41,7 +41,7 @@
         <item>per minggu</item>
         <item>per bulan</item>
     </string-array>
-    <string-array name="Nutrision">
+    <string-array name="Nutrition">
         <item>Karbohidrat</item>
         <item>Protein</item>
         <item>Lemak</item>
@@ -225,4 +225,6 @@
     <string name="name_too_short">Username must be at least 3 characters long</string>
     <string name="password_not_matching">Passwords do not match</string>
     <string name="change_to_update">Change To Update</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="mineral">Mineral</string>
 </resources>

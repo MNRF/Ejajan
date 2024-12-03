@@ -40,6 +40,7 @@ class DeleteConstraintActivity : AppCompatActivity() {
         // Fetch data
         viewModel.fetchAllergies()
         viewModel.fetchSpending()
+        viewModel.fetchNutrition()
 
         setupSpinner(binding.spConstraint, R.array.Constraint)
     }
@@ -61,6 +62,15 @@ class DeleteConstraintActivity : AppCompatActivity() {
                 setupSpinnerData(binding.spPeriod, spendingMap.map { it.value.second })
             } else {
                 showErrorToast("No spending data available")
+            }
+        }
+
+        viewModel.nutritionMap.observe(this) { nutritionMap ->
+            if (nutritionMap.isNotEmpty()) {
+                setupSpinnerData(binding.spNutrition, nutritionMap.map { it.value.first })
+                setupSpinnerData(binding.spMineral, nutritionMap.map { it.value.second })
+            } else {
+                showErrorToast("No Nutrition data available")
             }
         }
 
@@ -95,6 +105,18 @@ class DeleteConstraintActivity : AppCompatActivity() {
                         binding.tvAlergi.visibility = View.GONE
                         binding.spAlergi.visibility = View.GONE
                     }
+                    "Nutrition" -> {
+                        binding.tvNutrition.visibility = View.VISIBLE
+                        binding.spNutrition.visibility = View.VISIBLE
+                        binding.tvMineral.visibility = View.VISIBLE
+                        binding.spMineral.visibility = View.VISIBLE
+                        binding.tvLimit.visibility = View.GONE
+                        binding.spLimit.visibility = View.GONE
+                        binding.tvPeriod.visibility = View.GONE
+                        binding.spPeriod.visibility = View.GONE
+                        binding.tvAlergi.visibility = View.GONE
+                        binding.spAlergi.visibility = View.GONE
+                    }
                     else -> {
                         binding.tvAlergi.visibility = View.GONE
                         binding.spAlergi.visibility = View.GONE
@@ -114,6 +136,7 @@ class DeleteConstraintActivity : AppCompatActivity() {
             when (constraintType) {
                 "Allergy" -> handleDeleteAllergy()
                 "Spending" -> handleDeleteSpending()
+                "Nutrition" -> handleDeleteNutrition()
                 else -> showErrorToast("Invalid constraint selection")
             }
         }
@@ -147,6 +170,21 @@ class DeleteConstraintActivity : AppCompatActivity() {
             }
         } else {
             showErrorToast("Please select spending details to delete")
+        }
+    }
+
+    private fun handleDeleteNutrition() {
+        val name = binding.spNutrition.selectedItem?.toString()
+        val mineral = binding.spMineral.selectedItem?.toString()
+        if (!name.isNullOrEmpty() && !mineral.isNullOrEmpty()) {
+            val nutritionId = viewModel.nutritionMap.value?.filterValues { it == Pair(name, mineral) }?.keys?.firstOrNull()
+            if (nutritionId != null) {
+                viewModel.deleteNutrition(nutritionId)
+            } else {
+                showErrorToast("Invalid nutrition selection")
+            }
+        } else {
+            showErrorToast("Please select nutrition details to delete")
         }
     }
 

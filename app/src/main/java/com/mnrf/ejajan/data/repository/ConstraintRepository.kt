@@ -112,15 +112,15 @@ class ConstraintRepository (
 
     fun getNutrition(
         parentUid: String,
-        onSuccess: (List<AllergyModel>) -> Unit,
+        onSuccess: (List<NutritionModel>) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
         db.collection("nutrition")
             .whereEqualTo("parent_uid", parentUid)
             .get()
             .addOnSuccessListener { snapshot ->
-                val allergies = snapshot.documents.mapNotNull { it.toObject(AllergyModel::class.java) }
-                onSuccess(allergies)
+                val nutrition = snapshot.documents.mapNotNull { it.toObject(NutritionModel::class.java) }
+                onSuccess(nutrition)
             }
             .addOnFailureListener { e -> onFailure(e) }
     }
@@ -152,15 +152,17 @@ class ConstraintRepository (
             .addOnFailureListener { e -> onFailure(e) }
     }
 
-    fun getNutritionWithIds(onSuccess: (Map<String, String>) -> Unit, onFailure: (Exception) -> Unit) {
+    fun getNutritionWithIds(onSuccess: (Map<String, Pair<String, String>>) -> Unit, onFailure: (Exception) -> Unit) {
         db.collection("nutrition")
             .get()
             .addOnSuccessListener { snapshot ->
-                val allergies = snapshot.documents.associate {
-                    it.id to (it.getString("name") ?: "")
-                    it.id to (it.getString("mineral") ?: "")
+                val nutrition = snapshot.documents.associate {
+                    it.id to Pair(
+                        it.getString("name") ?: "",
+                        it.getString("mineral") ?: ""
+                    )
                 }
-                onSuccess(allergies)
+                onSuccess(nutrition)
             }
             .addOnFailureListener { e -> onFailure(e) }
     }

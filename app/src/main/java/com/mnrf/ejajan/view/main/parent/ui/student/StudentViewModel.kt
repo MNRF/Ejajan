@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mnrf.ejajan.data.model.AllergyModel
+import com.mnrf.ejajan.data.model.NutritionModel
 import com.mnrf.ejajan.data.model.SpendingModel
 import com.mnrf.ejajan.data.pref.UserPreference
 import com.mnrf.ejajan.data.repository.ConstraintRepository
@@ -19,6 +20,9 @@ class StudentViewModel(private val repository: ConstraintRepository
     private val _spendingList = MutableLiveData<List<SpendingModel>>()
     val spendingList: LiveData<List<SpendingModel>> get() = _spendingList
 
+    private val _nutritionList = MutableLiveData<List<NutritionModel>>()
+    val nutritionList: LiveData<List<NutritionModel>> get() = _nutritionList
+
     fun loadAllergies(parentUid: String) {
         repository.getAllergies(parentUid, { allergies ->
             _allergyList.value = allergies
@@ -30,6 +34,14 @@ class StudentViewModel(private val repository: ConstraintRepository
     fun loadSpending(parentUid: String) {
         repository.getSpending(parentUid, { spending ->
             _spendingList.value = spending
+        }, { e ->
+            Log.e("StudentViewModel", "Failed to load spending: ${e.message}")
+        })
+    }
+
+    fun loadNutrition(parentUid: String) {
+        repository.getNutrition(parentUid, { nutrition ->
+            _nutritionList.value = nutrition
         }, { e ->
             Log.e("StudentViewModel", "Failed to load spending: ${e.message}")
         })

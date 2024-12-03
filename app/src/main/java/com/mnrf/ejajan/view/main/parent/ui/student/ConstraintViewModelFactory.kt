@@ -26,7 +26,7 @@ class ConstraintViewModelFactory(private val repository: ConstraintRepository) :
                 StudentViewModel(repository) as T
             }
             modelClass.isAssignableFrom(ChangeConstraintViewModel::class.java) -> {
-                ChangeConstraintViewModel(repository) as T  // Correct repository passed here
+                ChangeConstraintViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

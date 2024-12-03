@@ -1,5 +1,6 @@
 package com.mnrf.ejajan.view.main.parent.ui.student.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,7 @@ class AllergyAdapter(private val items: MutableList<AllergyModel>) :
     override fun onBindViewHolder(holder: AllergyViewHolder, position: Int) {
         val item = items[position]
         holder.binding.tvAllergyName.text = item.name
+        holder.binding.tvAllergyName.setTextColor(Color.WHITE)
     }
 
     override fun getItemCount() = items.size

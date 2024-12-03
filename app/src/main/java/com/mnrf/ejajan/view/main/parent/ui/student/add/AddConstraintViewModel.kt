@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
 import com.mnrf.ejajan.data.model.AllergyModel
+import com.mnrf.ejajan.data.model.NutritionModel
 import com.mnrf.ejajan.data.model.SpendingModel
 import com.mnrf.ejajan.data.model.UserModel
 import com.mnrf.ejajan.data.repository.ConstraintRepository
@@ -33,6 +34,16 @@ class AddConstraintViewModel(
     ) {
         viewModelScope.launch {
             repository.addSpending(spending, onSuccess, onFailure)
+        }
+    }
+
+    fun addNutrition(
+        nutrition: NutritionModel,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        viewModelScope.launch {
+            repository.addNutrition(nutrition, onSuccess, onFailure)
         }
     }
 }

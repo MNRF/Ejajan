@@ -20,6 +20,9 @@ class ChangeConstraintViewModel(
     private val _updateSpendingStatus = MutableLiveData<String>()
     val updateSpendingStatus: LiveData<String> get() = _updateSpendingStatus
 
+    private val _updateNutritionStatus = MutableLiveData<String>()
+    val updateNutritionStatus: LiveData<String> get() = _updateNutritionStatus
+
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
 
@@ -28,6 +31,9 @@ class ChangeConstraintViewModel(
 
     private val _spendingMap = MutableLiveData<Map<String, Pair<String, String>>>() // ID -> (Amount, Period)
     val spendingMap: LiveData<Map<String, Pair<String, String>>> get() = _spendingMap
+
+    private val _nutritionMap = MutableLiveData<Map<String, Pair<String, String>>>() // ID -> (Amount, Period)
+    val nutritionMap: LiveData<Map<String, Pair<String, String>>> get() = _nutritionMap
 
     // Fetch session details
     fun getSession(): Flow<UserModel> {
@@ -46,6 +52,13 @@ class ChangeConstraintViewModel(
     fun fetchSpending() {
         repository.getSpendingWithIds(
             onSuccess = { data -> _spendingMap.postValue(data) },
+            onFailure = { e -> _errorMessage.postValue("Error fetching spending data: ${e.message}") }
+        )
+    }
+
+    fun fetchNutrition() {
+        repository.getNutritionWithIds(
+            onSuccess = { data -> _nutritionMap.postValue(data) },
             onFailure = { e -> _errorMessage.postValue("Error fetching spending data: ${e.message}") }
         )
     }
@@ -69,6 +82,16 @@ class ChangeConstraintViewModel(
             }
             .addOnFailureListener { exception ->
                 _updateSpendingStatus.postValue("Error updating spending: ${exception.message}")
+            }
+    }
+
+    fun updateNutrition(nutritionId: String, newName: String, newMineral: String) {
+        repository.updateNutrition(nutritionId, newName, newMineral)
+            .addOnSuccessListener {
+                _updateNutritionStatus.postValue("Spending updated successfully")
+            }
+            .addOnFailureListener { exception ->
+                _updateNutritionStatus.postValue("Error updating spending: ${exception.message}")
             }
     }
 }

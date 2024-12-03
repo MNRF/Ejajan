@@ -16,6 +16,7 @@ import com.mnrf.ejajan.databinding.FragmentParentStudentBinding
 import com.mnrf.ejajan.view.main.parent.ui.student.add.AddConstraintActivity
 import com.mnrf.ejajan.view.main.parent.ui.student.add.AddConstraintViewModel
 import com.mnrf.ejajan.view.main.parent.ui.student.adapter.AllergyAdapter
+import com.mnrf.ejajan.view.main.parent.ui.student.adapter.NutritionAdapter
 import com.mnrf.ejajan.view.main.parent.ui.student.adapter.SpendingAdapter
 import com.mnrf.ejajan.view.main.parent.ui.student.change.ChangeConstraintActivity
 import com.mnrf.ejajan.view.main.parent.ui.student.delete.DeleteConstraintActivity
@@ -26,6 +27,7 @@ class StudentParentFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var allergyAdapter: AllergyAdapter
     private lateinit var spendingAdapter: SpendingAdapter
+    private lateinit var nutritionAdapter: NutritionAdapter
     private lateinit var viewModel: StudentViewModel
 
     override fun onCreateView(
@@ -56,6 +58,10 @@ class StudentParentFragment : Fragment() {
             spendingAdapter.updateItems(spending)
         }
 
+        viewModel.nutritionList.observe(viewLifecycleOwner) { nutrition ->
+            nutritionAdapter.updateItems(nutrition)
+        }
+
         // Dapatkan UID pengguna
         val user = FirebaseAuth.getInstance().currentUser
         val parentUid = user?.uid ?: ""
@@ -64,6 +70,7 @@ class StudentParentFragment : Fragment() {
         if (parentUid.isNotEmpty()) {
             viewModel.loadAllergies(parentUid)
             viewModel.loadSpending(parentUid)
+            viewModel.loadNutrition(parentUid)
         }
         binding.btnParentCreate.setOnClickListener {
             // Handle 'Tambah' button click
@@ -96,6 +103,13 @@ class StudentParentFragment : Fragment() {
             adapter = spendingAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+
+        nutritionAdapter = NutritionAdapter(mutableListOf())
+        binding.rvNutrition.apply {
+            adapter = nutritionAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
     }
 
 

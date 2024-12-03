@@ -20,6 +20,9 @@ class DeleteConstraintViewModel(private val repository: ConstraintRepository) : 
     private val _spendingMap = MutableLiveData<Map<String, Pair<String, String>>>() // ID -> (Amount, Period)
     val spendingMap: LiveData<Map<String, Pair<String, String>>> get() = _spendingMap
 
+    private val _nutritionMap = MutableLiveData<Map<String, Pair<String, String>>>() // ID -> (Amount, Period)
+    val nutritionMap: LiveData<Map<String, Pair<String, String>>> get() = _nutritionMap
+
     fun fetchAllergies() {
         repository.getAllergiesWithIds(
             onSuccess = { data -> _allergiesMap.postValue(data) },
@@ -34,6 +37,13 @@ class DeleteConstraintViewModel(private val repository: ConstraintRepository) : 
         )
     }
 
+    fun fetchNutrition() {
+        repository.getNutritionWithIds(
+            onSuccess = { data -> _nutritionMap.postValue(data) },
+            onFailure = { e -> _errorMessage.postValue("Error fetching spending data: ${e.message}") }
+        )
+    }
+
     fun deleteAllergy(allergyId: String) {
         repository.deleteAllergyById(
             allergyId,
@@ -45,6 +55,14 @@ class DeleteConstraintViewModel(private val repository: ConstraintRepository) : 
     fun deleteSpending(spendingId: String) {
         repository.deleteSpendingById(
             spendingId,
+            onSuccess = { _deleteSuccess.postValue(true) },
+            onFailure = { e -> _errorMessage.postValue("Error deleting spending: ${e.message}") }
+        )
+    }
+
+    fun deleteNutrition(nutritionId: String) {
+        repository.deleteNutritionById(
+            nutritionId,
             onSuccess = { _deleteSuccess.postValue(true) },
             onFailure = { e -> _errorMessage.postValue("Error deleting spending: ${e.message}") }
         )

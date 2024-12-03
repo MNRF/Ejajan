@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.mnrf.ejajan.R
 import com.mnrf.ejajan.data.model.AllergyModel
+import com.mnrf.ejajan.data.model.NutritionModel
 import com.mnrf.ejajan.data.model.SpendingModel
 import com.mnrf.ejajan.data.pref.UserPreference
 import com.mnrf.ejajan.data.pref.dataStore
@@ -46,6 +47,8 @@ class AddConstraintActivity : AppCompatActivity() {
         setupSpinner(binding.spAlergi, R.array.Allergy)
         setupSpinner(binding.spLimit, R.array.Spending)
         setupSpinner(binding.spPeriod, R.array.Time)
+        setupSpinner(binding.spNutrition, R.array.Nutrition)
+        setupSpinner(binding.spMineral, R.array.Mineral)
 
         checkIfSpendingAdded()
 
@@ -87,6 +90,21 @@ class AddConstraintActivity : AppCompatActivity() {
                         } else {
                             Toast.makeText(this, "Pilih spending terlebih dahulu", Toast.LENGTH_SHORT).show()
                         }
+                    }
+                }
+                "Nutrition" -> {
+                    val nutritionName = binding.spNutrition.selectedItem.toString()
+                    val mineral = binding.spMineral.selectedItem.toString()
+                    if (nutritionName.isNotEmpty() && mineral.isNotEmpty()) {
+                        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+                        val nutrition = NutritionModel(name = nutritionName, mineral = mineral, parentUid = uid)
+                        viewModel.addNutrition(
+                            nutrition,
+                            onSuccess = { showSuccessDialog("Nutrition added successfully") },
+                            onFailure = { e -> Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show() }
+                        )
+                    } else {
+                        Toast.makeText(this, "Pilih jenis nutrisi terlebih dahulu", Toast.LENGTH_SHORT).show()
                     }
                 }
                 else -> Toast.makeText(this, "Pilih constraint terlebih dahulu", Toast.LENGTH_SHORT).show()
@@ -134,6 +152,19 @@ class AddConstraintActivity : AppCompatActivity() {
                 }
                 binding.spAlergi.visibility = View.GONE
                 binding.tvAlergi.visibility = View.GONE
+            }
+            "Nutrition" -> {
+                binding.spNutrition.visibility = View.VISIBLE
+                binding.tvNutrition.visibility = View.VISIBLE
+                binding.tvMineral.visibility = View.VISIBLE
+                binding.spMineral.visibility = View.VISIBLE
+
+                binding.spAlergi.visibility = View.GONE
+                binding.spLimit.visibility = View.GONE
+                binding.spPeriod.visibility = View.GONE
+                binding.tvAlergi.visibility = View.GONE
+                binding.tvLimit.visibility = View.GONE
+                binding.tvPeriod.visibility = View.GONE
             }
             else -> {
                 binding.spAlergi.visibility = View.GONE

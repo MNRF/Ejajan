@@ -46,11 +46,16 @@ class ChangeConstraintActivity : AppCompatActivity() {
 
         // ini buat spinner data baru full item string array
         setupSpinner(binding.spChangeAlergi, R.array.Allergy)
+
         setupSpinner(binding.spChangeLimit, R.array.Spending)
         setupSpinner(binding.spChangePeriod, R.array.Time)
 
+        setupSpinner(binding.spChangeNutrition, R.array.Nutrition)
+        setupSpinner(binding.spChangeMineral, R.array.Mineral)
+
         viewModel.fetchAllergies()
         viewModel.fetchSpending()
+        viewModel.fetchNutrition()
 
 //        binding.btnChange.setOnClickListener {
 //            val intent = Intent(this, ChangeConstraintActivity::class.java)
@@ -83,12 +88,25 @@ class ChangeConstraintActivity : AppCompatActivity() {
             }
         }
 
+        viewModel.nutritionMap.observe(this) { nutritionMap ->
+            if (nutritionMap.isNotEmpty()) {
+                setupSpinnerData(binding.spNutrition, nutritionMap.map { it.value.first })
+                setupSpinnerData(binding.spMineral, nutritionMap.map { it.value.second })
+            } else {
+                showErrorToast("No nutrition data available")
+            }
+        }
+
         viewModel.updateAllergyStatus.observe(this) { statusMessage ->
             statusMessage?.let { showSuccessDialog(it) }
         }
 
         // Observe deletion success or error
         viewModel.updateSpendingStatus.observe(this) { statusMessage ->
+            statusMessage?.let { showSuccessDialog(it) }
+        }
+
+        viewModel.updateNutritionStatus.observe(this) { statusMessage ->
             statusMessage?.let { showSuccessDialog(it) }
         }
 
@@ -120,10 +138,25 @@ class ChangeConstraintActivity : AppCompatActivity() {
                         binding.spAlergi.visibility = View.VISIBLE
                         binding.tvChangeAlergi.visibility = View.VISIBLE
                         binding.spChangeAlergi.visibility = View.VISIBLE
+                        binding.tvChange.visibility = View.VISIBLE
+
                         binding.tvLimit.visibility = View.GONE
                         binding.spLimit.visibility = View.GONE
                         binding.tvPeriod.visibility = View.GONE
                         binding.spPeriod.visibility = View.GONE
+                        binding.tvChangeLimit.visibility = View.GONE
+                        binding.spChangeLimit.visibility = View.GONE
+                        binding.tvChangePeriod.visibility = View.GONE
+                        binding.spChangePeriod.visibility = View.GONE
+
+                        binding.tvNutrition.visibility = View.GONE
+                        binding.spNutrition.visibility = View.GONE
+                        binding.tvMineral.visibility = View.GONE
+                        binding.spMineral.visibility = View.GONE
+                        binding.tvChangeNutrition.visibility = View.GONE
+                        binding.spChangeNutrition.visibility = View.GONE
+                        binding.tvChangeMineral.visibility = View.GONE
+                        binding.spChangeMineral.visibility = View.GONE
                     }
                     "Spending" -> {
                         // Tampilkan komponen yang terkait dengan spending
@@ -131,11 +164,51 @@ class ChangeConstraintActivity : AppCompatActivity() {
                         binding.spLimit.visibility = View.VISIBLE
                         binding.tvPeriod.visibility = View.VISIBLE
                         binding.spPeriod.visibility = View.VISIBLE
+                        binding.tvChangeLimit.visibility = View.VISIBLE
                         binding.spChangeLimit.visibility = View.VISIBLE
+                        binding.tvChangePeriod.visibility = View.VISIBLE
                         binding.spChangePeriod.visibility = View.VISIBLE
+                        binding.tvChange.visibility = View.VISIBLE
+
                         binding.tvAlergi.visibility = View.GONE
                         binding.spAlergi.visibility = View.GONE
                         binding.tvChangeAlergi.visibility = View.GONE
+                        binding.spChangeAlergi.visibility = View.GONE
+
+                        binding.tvNutrition.visibility = View.GONE
+                        binding.spNutrition.visibility = View.GONE
+                        binding.tvMineral.visibility = View.GONE
+                        binding.spMineral.visibility = View.GONE
+                        binding.tvChangeNutrition.visibility = View.GONE
+                        binding.spChangeNutrition.visibility = View.GONE
+                        binding.tvChangeMineral.visibility = View.GONE
+                        binding.spChangeMineral.visibility = View.GONE
+                    }
+                    "Nutrition" -> {
+                        // Tampilkan komponen yang terkait dengan nutrition
+                        binding.spNutrition.visibility = View.VISIBLE
+                        binding.tvNutrition.visibility = View.VISIBLE
+                        binding.tvMineral.visibility = View.VISIBLE
+                        binding.spMineral.visibility = View.VISIBLE
+                        binding.tvChangeNutrition.visibility = View.VISIBLE
+                        binding.spChangeNutrition.visibility = View.VISIBLE
+                        binding.tvChangeMineral.visibility = View.VISIBLE
+                        binding.spChangeMineral.visibility = View.VISIBLE
+                        binding.tvChange.visibility = View.VISIBLE
+
+                        binding.tvLimit.visibility = View.GONE
+                        binding.spLimit.visibility = View.GONE
+                        binding.tvPeriod.visibility = View.GONE
+                        binding.spPeriod.visibility = View.GONE
+                        binding.tvChangeLimit.visibility = View.GONE
+                        binding.spChangeLimit.visibility = View.GONE
+                        binding.tvChangePeriod.visibility = View.GONE
+                        binding.spChangePeriod.visibility = View.GONE
+
+                        binding.tvAlergi.visibility = View.GONE
+                        binding.spAlergi.visibility = View.GONE
+                        binding.tvChangeAlergi.visibility = View.GONE
+                        binding.spChangeAlergi.visibility = View.GONE
                     }
                 }
             }
@@ -148,6 +221,7 @@ class ChangeConstraintActivity : AppCompatActivity() {
             when (selectedConstraint) {
                 "Allergy" -> handleUpdateAllergy()
                 "Spending" -> handleUpdateSpending()
+                "Nutrition" -> handleUpdateNutrition()
             }
         }
         binding.infoIcon.setOnClickListener { showInfoDialog() }
@@ -187,6 +261,26 @@ class ChangeConstraintActivity : AppCompatActivity() {
         }
     }
 
+    private fun handleUpdateNutrition() {
+        val nutritionId = viewModel.nutritionMap.value
+            ?.filterValues {
+                it == Pair(
+                    binding.spNutrition.selectedItem?.toString(),
+                    binding.spMineral.selectedItem?.toString()
+                )
+            }
+            ?.keys?.firstOrNull()
+
+        val newName = binding.spChangeNutrition.selectedItem?.toString()
+        val newMineral = binding.spChangeMineral.selectedItem?.toString()
+
+        if (!nutritionId.isNullOrEmpty() && !newName.isNullOrEmpty() && !newMineral.isNullOrEmpty()) {
+            viewModel.updateNutrition(nutritionId, newName, newMineral)
+        } else {
+            showErrorToast("Invalid nutrition update")
+        }
+    }
+
     private fun setupSpinnerData(spinner: Spinner, items: List<String>) {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -218,5 +312,10 @@ class ChangeConstraintActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         builder.create().show()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
