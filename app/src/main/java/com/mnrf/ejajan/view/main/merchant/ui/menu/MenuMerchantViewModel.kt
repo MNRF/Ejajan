@@ -37,7 +37,8 @@ class MenuMerchantViewModel(private val repository: UserRepository) : ViewModel(
                                 description = document.getString("menu_description") ?: "",
                                 ingredients = document.getString("menu_ingredients") ?: "",
                                 preparationtime = document.getString("menu_preparationtime") ?: "",
-                                price = document.getString("menu_price") ?: ""
+                                price = document.getString("menu_price") ?: "",
+                                imageurl = document.getString("menu_imageurl") ?: ""
                             )
                         }
                         _menuList.value = menus

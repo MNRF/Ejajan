@@ -8,11 +8,11 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.mnrf.ejajan.data.repository.UserRepository
 import com.mnrf.ejajan.data.model.UserModel
+import com.mnrf.ejajan.data.repository.UserRepository
 import kotlinx.coroutines.launch
 
-class LoginParentMerchantViewModel(private val repository: UserRepository) : ViewModel() {
+class LoginStudentViewModel(private val repository: UserRepository) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -57,6 +57,6 @@ class LoginParentMerchantViewModel(private val repository: UserRepository) : Vie
     }
 
     companion object {
-        private const val TAG = "LoginParentMerchantViewModel"
+        private const val TAG = "LoginStudentViewModel"
     }
 }

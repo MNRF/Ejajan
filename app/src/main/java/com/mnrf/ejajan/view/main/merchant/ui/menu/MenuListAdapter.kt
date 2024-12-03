@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mnrf.ejajan.data.model.MenuModel
 import com.mnrf.ejajan.databinding.ItemMerchantMenuBinding
 import com.mnrf.ejajan.view.main.merchant.ui.menu.detail.DetailMenuActivity
@@ -17,6 +18,9 @@ class MenuListAdapter : ListAdapter<MenuModel, MenuListAdapter.MenuViewHolder>(D
 
         fun bind(menu: MenuModel) {
             binding.apply {
+                Glide.with(binding.placeholderImage.context)
+                    .load(menu.imageurl)
+                    .into(binding.placeholderImage)
                 placeholderName.text = menu.name
                 val menuPrice = "Rp.${menu.price}"
                 val prepTime = "${menu.preparationtime} minute"
@@ -30,6 +34,7 @@ class MenuListAdapter : ListAdapter<MenuModel, MenuListAdapter.MenuViewHolder>(D
                     intent.putExtra(DetailMenuActivity.MENU_INGREDIENTS, menu.ingredients)
                     intent.putExtra(DetailMenuActivity.MENU_PREPARATIONTIME, menu.preparationtime)
                     intent.putExtra(DetailMenuActivity.MENU_PRICE, menu.price)
+                    intent.putExtra(DetailMenuActivity.MENU_IMAGE, menu.imageurl)
                     this.cvItemMerchantMenu.context.startActivity(intent)
                 }
             }

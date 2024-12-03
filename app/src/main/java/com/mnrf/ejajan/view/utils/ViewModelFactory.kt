@@ -4,16 +4,15 @@ import MenuMerchantViewModel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mnrf.ejajan.data.repository.ConstraintRepository
 import com.mnrf.ejajan.data.repository.UserRepository
 import com.mnrf.ejajan.di.Injection
 import com.mnrf.ejajan.view.login.LoginParentMerchantViewModel
+import com.mnrf.ejajan.view.login.LoginStudentViewModel
 import com.mnrf.ejajan.view.main.merchant.ui.menu.add.MerchantAddMenuViewModel
 import com.mnrf.ejajan.view.main.merchant.ui.menu.detail.DetailMenuViewModel
 import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel
 import com.mnrf.ejajan.view.main.parent.ParentViewModel
 import com.mnrf.ejajan.view.main.parent.ui.setting.Setting2ViewModel
-import com.mnrf.ejajan.view.main.parent.ui.setting.profile.ProfileParentViewModel
 import com.mnrf.ejajan.view.splash.SplashViewModel
 
 class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -45,8 +44,8 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             modelClass.isAssignableFrom(DetailMenuViewModel::class.java) -> {
                 DetailMenuViewModel(repository) as T
             }
-            modelClass.isAssignableFrom(ProfileParentViewModel::class.java) -> {
-                ProfileParentViewModel(repository) as T
+            modelClass.isAssignableFrom(LoginStudentViewModel::class.java) -> {
+                LoginStudentViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

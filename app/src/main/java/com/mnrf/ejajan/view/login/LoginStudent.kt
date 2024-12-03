@@ -9,7 +9,9 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.activity.viewModels
 import androidx.annotation.OptIn
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalGetImage
@@ -25,8 +27,11 @@ import com.google.mlkit.vision.face.FaceContour
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
 import com.google.mlkit.vision.face.FaceLandmark
+import com.mnrf.ejajan.data.pref.OnboardingPreferences
 import com.mnrf.ejajan.databinding.ActivityLoginStudentBinding
+import com.mnrf.ejajan.view.login.LoginParentMerchant.Companion
 import com.mnrf.ejajan.view.main.student.StudentActivity
+import com.mnrf.ejajan.view.utils.ViewModelFactory
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -36,11 +41,22 @@ class LoginStudent : AppCompatActivity() {
     private lateinit var binding: ActivityLoginStudentBinding
     private lateinit var cameraExecutor: ExecutorService
     private var imageCapture: ImageCapture? = null
+    private var email = ""
+    private var password = ""
+    private lateinit var userRole: String
+
+    private val loginStudentViewModel: LoginStudentViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Ambil role pengguna dari OnboardingPreferences
+        val onboardingPreferences = OnboardingPreferences(this)
+        userRole = onboardingPreferences.getUserRole().toString()
 
         onBackPressedDispatcher.addCallback(this) {
             finishAffinity()
@@ -53,6 +69,19 @@ class LoginStudent : AppCompatActivity() {
         }
 
         binding.progressBar.visibility = View.GONE
+    }
+
+    private fun handleLogin(email: String, password: String) {
+
+        if (email.isBlank() || password.isBlank() ||
+            !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() || password.length < 8
+        ) {
+            showAlert("Isi dengan lengkap dan benar!")
+            return
+        }
+
+        // Call the ViewModel's login function
+        loginStudentViewModel.login(email, password)
     }
 
     override fun onResume() {
@@ -164,6 +193,9 @@ class LoginStudent : AppCompatActivity() {
 
                             runOnUiThread {
                                 Toast.makeText(this, "Wajah berhasil terdeteksi.", Toast.LENGTH_SHORT).show()
+                                email = "student.1234@student.ejajan.com"
+                                password = "student.1234"
+                                handleLogin(email, password)
                             }
 
                             val intent = Intent(this@LoginStudent, StudentActivity::class.java)
@@ -211,8 +243,22 @@ class LoginStudent : AppCompatActivity() {
         cameraExecutor.shutdown()
     }
 
+    private fun showAlert(message: String, onDismiss: (() -> Unit)? = null) {
+        Log.d(TAG, "showAlert dipanggil dengan pesan: $message")
+        AlertDialog.Builder(this).apply {
+            setTitle("Informasi")
+            setMessage(message)
+            setPositiveButton("Lanjut") { _, _ ->
+                Log.d(TAG, "Dialog ditutup, memanggil onDismiss.")
+                onDismiss?.invoke()
+            }
+            create()
+            show()
+        }
+    }
+
     companion object {
-        private const val TAG = "CameraActivity"
+        private const val TAG = "LoginStudent"
         private const val CAMERA_PERMISSION_REQUEST_CODE = 1001
     }
 }

@@ -71,6 +71,10 @@ class SettingMerchantFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.cvSettingJamBuka.setOnClickListener {
+
+        }
+
     }
 
     override fun onDestroyView() {

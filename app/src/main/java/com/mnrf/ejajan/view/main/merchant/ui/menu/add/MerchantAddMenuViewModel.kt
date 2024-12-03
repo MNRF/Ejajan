@@ -7,14 +7,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.storage
 import com.mnrf.ejajan.data.model.UserModel
 import com.mnrf.ejajan.data.repository.UserRepository
+import kotlinx.coroutines.tasks.await
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileInputStream
 
 class MerchantAddMenuViewModel(private val repository: UserRepository) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val db = Firebase.firestore
+    val db = Firebase.firestore
+    val storage = Firebase.storage
 
     fun getSession(): LiveData<UserModel> {
         _isLoading.value = true
@@ -23,8 +30,9 @@ class MerchantAddMenuViewModel(private val repository: UserRepository) : ViewMod
         }
     }
 
-    fun addMenu (merchantUid: String, menuName: String, menuDescription: String, menuIngredients: String,
-                 menuPreparationtime: String, menuPrice: String): Boolean {
+    suspend fun addMenu (merchantUid: String, menuName: String, menuDescription: String, menuIngredients: String,
+                 menuPreparationtime: String, menuPrice: String, menuImageFile: File): Boolean {
+        val uploadedImageUrl = uploadImage(menuImageFile)
         var isSuccess: Boolean
         try {
             val user = hashMapOf(
@@ -33,7 +41,8 @@ class MerchantAddMenuViewModel(private val repository: UserRepository) : ViewMod
                 "menu_description" to menuDescription,
                 "menu_ingredients" to menuIngredients,
                 "menu_preparationtime" to menuPreparationtime,
-                "menu_price" to menuPrice
+                "menu_price" to menuPrice,
+                "menu_imageurl" to uploadedImageUrl
             )
             db.collection("menus")
                 .add(user)
@@ -49,6 +58,21 @@ class MerchantAddMenuViewModel(private val repository: UserRepository) : ViewMod
             isSuccess = false
         }
         return isSuccess
+    }
+
+    private suspend fun uploadImage(image: File): String {
+        var downloadUrl = ""
+        try {
+            val storageRef: StorageReference = storage.reference
+            val fileRef = storageRef.child("images/${image.name}")
+            val stream = FileInputStream(image)
+            val uploadTask = fileRef.putStream(stream)
+            uploadTask.await()
+            downloadUrl = fileRef.downloadUrl.await().toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return downloadUrl
     }
 
     fun addPrePackagedMenu (merchantUid: String, menuName: String, menuDescription: String, menuBrand: String,

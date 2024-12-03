@@ -10,5 +10,6 @@ data class MenuModel (
     val description: String,
     val ingredients: String,
     val preparationtime: String,
-    val price: String
+    val price: String,
+    val imageurl: String
 ) : Parcelable
