@@ -231,6 +231,8 @@
     <string name="tutup">Tutup</string>
     <string name="toko_anda_sedang_buka">Toko anda sedang buka</string>
     <string name="toko_anda_sedang_tutup">Toko anda sedang tutup</string>
+    <string name="scheduled_open_is_active">Scheduled open is active</string>
+    <string name="scheduled_open_is_inactive">Scheduled open is inactive</string>
     <string name="jadwal">Jadwal</string>
     <string name="food">Top Food</string>
     <string name="drink">Top Drink</string>

@@ -67,18 +67,10 @@ class SettingMerchantFragment : Fragment() {
             startActivity(intent)
         }
 
-        settingViewModel.merchantProfile.observe(viewLifecycleOwner) { profile ->
-            val isOpen = profile?.daysopen?.first() == '1'
-            binding.tbSettingJamBuka.isChecked = isOpen
-            binding.tvSettingJamBuka.text = if (isOpen) {
-                getString(R.string.toko_anda_sedang_buka)
-            } else {
-                getString(R.string.toko_anda_sedang_tutup)
-            }
-        }
+
 
         binding.tbSettingJamBuka.setOnCheckedChangeListener { _, isChecked ->
-            settingViewModel.toggleMerchantOpen(isChecked)
+            settingViewModel.toggleDaysopen(isChecked, 1)
             binding.tvSettingJamBuka.text = if (isChecked) {
                 getString(R.string.toko_anda_sedang_buka)
             } else {
@@ -89,6 +81,26 @@ class SettingMerchantFragment : Fragment() {
         binding.btnSchedule.setOnClickListener {
             val intent = Intent(requireContext(), MerchantSettingSchedule::class.java)
             startActivity(intent)
+            onPause()
+        }
+
+        refresh()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refresh()
+    }
+
+    private fun refresh() {
+        settingViewModel.merchantProfile.observe(viewLifecycleOwner) { profile ->
+            val isOpen = profile?.daysopen?.first() == '1'
+            binding.tbSettingJamBuka.isChecked = isOpen
+            binding.tvSettingJamBuka.text = if (isOpen) {
+                getString(R.string.toko_anda_sedang_buka)
+            } else {
+                getString(R.string.toko_anda_sedang_tutup)
+            }
         }
     }
 

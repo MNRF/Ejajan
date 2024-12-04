@@ -16,7 +16,10 @@ import com.mnrf.ejajan.view.main.parent.ui.setting.Setting2ViewModel
 import com.mnrf.ejajan.view.main.student.StudentViewModel
 import com.mnrf.ejajan.view.splash.SplashViewModel
 
-class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(
+    private val repository: UserRepository,
+    private val appContext: Context // Add appContext parameter
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -34,7 +37,8 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
                 Setting2ViewModel(repository) as T
             }
             modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
-                SettingViewModel(repository) as T
+                // Pass appContext to SettingViewModel
+                SettingViewModel(repository, appContext) as T
             }
             modelClass.isAssignableFrom(MerchantAddMenuViewModel::class.java) -> {
                 MerchantAddMenuViewModel(repository) as T
@@ -58,11 +62,12 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
+
         @JvmStatic
         fun getInstance(context: Context): ViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
+                    INSTANCE = ViewModelFactory(Injection.provideRepository(context), context)
                 }
             }
             return INSTANCE as ViewModelFactory

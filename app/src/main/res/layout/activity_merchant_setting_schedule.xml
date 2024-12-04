@@ -1,10 +1,409 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.main.merchant.ui.setting.MerchantSettingSchedule">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        style="@style/Card"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Monday -->
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/toggleButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:text="Monday"
+                android:textOff="MONDAY"
+                android:textOn="MONDAY"
+                app:layout_constraintBottom_toTopOf="@+id/toggleButton2"
+                app:layout_constraintEnd_toStartOf="@+id/textClock"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextClock
+                android:id="@+id/textClock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/toggleButton"
+                app:layout_constraintEnd_toStartOf="@+id/textView9"
+                app:layout_constraintTop_toTopOf="@+id/toggleButton" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="to"
+                app:layout_constraintBottom_toBottomOf="@+id/textClock"
+                app:layout_constraintEnd_toStartOf="@+id/textClock2"
+                app:layout_constraintTop_toTopOf="@+id/textClock" />
+
+            <TextClock
+                android:id="@+id/textClock2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+            <!-- Tuesday -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/toggleButton2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:text="Tuesday"
+                android:textOff="TUESDAY"
+                android:textOn="TUESDAY"
+                app:layout_constraintBottom_toTopOf="@+id/toggleButton3"
+                app:layout_constraintEnd_toStartOf="@+id/textClockTuesday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+
+            <TextClock
+                android:id="@+id/textClockTuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/toggleButton2"
+                app:layout_constraintEnd_toStartOf="@+id/textViewTuesday"
+                app:layout_constraintTop_toTopOf="@+id/toggleButton2" />
+
+            <TextView
+                android:id="@+id/textViewTuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="to"
+                app:layout_constraintBottom_toBottomOf="@+id/textClockTuesday"
+                app:layout_constraintEnd_toStartOf="@+id/textClockTuesday2"
+                app:layout_constraintTop_toTopOf="@+id/textClockTuesday" />
+
+            <TextClock
+                android:id="@+id/textClockTuesday2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewTuesday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewTuesday" />
+
+            <!-- Wednesday -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/toggleButton3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:text="Wednesday"
+                android:textOff="WEDNESDAY"
+                android:textOn="WEDNESDAY"
+                app:layout_constraintBottom_toTopOf="@+id/toggleButton4"
+                app:layout_constraintEnd_toStartOf="@+id/textClockWednesday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toggleButton2" />
+
+            <TextClock
+                android:id="@+id/textClockWednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/toggleButton3"
+                app:layout_constraintEnd_toStartOf="@+id/textViewWednesday"
+                app:layout_constraintTop_toTopOf="@+id/toggleButton3" />
+
+            <TextView
+                android:id="@+id/textViewWednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="to"
+                app:layout_constraintBottom_toBottomOf="@+id/textClockWednesday"
+                app:layout_constraintEnd_toStartOf="@+id/textClockWednesday2"
+                app:layout_constraintTop_toTopOf="@+id/textClockWednesday" />
+
+            <TextClock
+                android:id="@+id/textClockWednesday2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewWednesday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewWednesday" />
+
+            <!-- Thursday -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/toggleButton4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:text="Thursday"
+                android:textOff="THURSDAY"
+                android:textOn="THURSDAY"
+                app:layout_constraintBottom_toTopOf="@+id/toggleButton5"
+                app:layout_constraintEnd_toStartOf="@+id/textClockThursday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toggleButton3" />
+
+            <TextClock
+                android:id="@+id/textClockThursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/toggleButton4"
+                app:layout_constraintEnd_toStartOf="@+id/textViewThursday"
+                app:layout_constraintTop_toTopOf="@+id/toggleButton4" />
+
+            <TextView
+                android:id="@+id/textViewThursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="to"
+                app:layout_constraintBottom_toBottomOf="@+id/textClockThursday"
+                app:layout_constraintEnd_toStartOf="@+id/textClockThursday2"
+                app:layout_constraintTop_toTopOf="@+id/textClockThursday" />
+
+            <TextClock
+                android:id="@+id/textClockThursday2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewThursday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewThursday" />
+
+            <!-- Friday -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/toggleButton5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:text="Friday"
+                android:textOff="FRIDAY"
+                android:textOn="FRIDAY"
+                app:layout_constraintBottom_toTopOf="@+id/toggleButton6"
+                app:layout_constraintEnd_toStartOf="@+id/textClockFriday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
+
+            <TextClock
+                android:id="@+id/textClockFriday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/toggleButton5"
+                app:layout_constraintEnd_toStartOf="@+id/textViewFriday"
+                app:layout_constraintTop_toTopOf="@+id/toggleButton5" />
+
+            <TextView
+                android:id="@+id/textViewFriday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="to"
+                app:layout_constraintBottom_toBottomOf="@+id/textClockFriday"
+                app:layout_constraintEnd_toStartOf="@+id/textClockFriday2"
+                app:layout_constraintTop_toTopOf="@+id/textClockFriday" />
+
+            <TextClock
+                android:id="@+id/textClockFriday2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewFriday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewFriday" />
+
+            <!-- Saturday -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/toggleButton6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:text="Saturday"
+                android:textOff="SATURDAY"
+                android:textOn="SATURDAY"
+                app:layout_constraintBottom_toTopOf="@+id/toggleButton7"
+                app:layout_constraintEnd_toStartOf="@+id/textClockSaturday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toggleButton5" />
+
+            <TextClock
+                android:id="@+id/textClockSaturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/toggleButton6"
+                app:layout_constraintEnd_toStartOf="@+id/textViewSaturday"
+                app:layout_constraintTop_toTopOf="@+id/toggleButton6" />
+
+            <TextView
+                android:id="@+id/textViewSaturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="to"
+                app:layout_constraintBottom_toBottomOf="@+id/textClockSaturday"
+                app:layout_constraintEnd_toStartOf="@+id/textClockSaturday2"
+                app:layout_constraintTop_toTopOf="@+id/textClockSaturday" />
+
+            <TextClock
+                android:id="@+id/textClockSaturday2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewSaturday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewSaturday" />
+
+            <!-- Sunday -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/toggleButton7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="Sunday"
+                android:textOff="SUNDAY"
+                android:textOn="SUNDAY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textClockSunday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toggleButton6" />
+
+            <TextClock
+                android:id="@+id/textClockSunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/toggleButton7"
+                app:layout_constraintEnd_toStartOf="@+id/textViewSunday"
+                app:layout_constraintTop_toTopOf="@+id/toggleButton7" />
+
+            <TextView
+                android:id="@+id/textViewSunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="to"
+                app:layout_constraintBottom_toBottomOf="@+id/textClockSunday"
+                app:layout_constraintEnd_toStartOf="@+id/textClockSunday2" />
+
+            <TextClock
+                android:id="@+id/textClockSunday2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewSunday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewSunday" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:text="Weekly open schedule"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        style="@style/Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swc_schedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_merchant_scheduledopen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="Scheduled open is not active"
+                app:layout_constraintBottom_toBottomOf="@+id/swc_schedule"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/swc_schedule" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
