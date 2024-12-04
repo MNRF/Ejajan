@@ -232,4 +232,12 @@
     <string name="toko_anda_sedang_buka">Toko anda sedang buka</string>
     <string name="toko_anda_sedang_tutup">Toko anda sedang tutup</string>
     <string name="jadwal">Jadwal</string>
+    <string name="food">Top Food</string>
+    <string name="drink">Top Drink</string>
+    <string name="cart">Cart</string>
+    <string name="logout_confirmation">Apakah Anda yakin ingin keluar?</string>
+    <string name="exit">Keluar dari aplikasi</string>
+    <string name="ya">Ya</string>
+    <string name="tidak">Tidak</string>
+
 </resources>

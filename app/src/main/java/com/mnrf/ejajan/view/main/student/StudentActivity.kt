@@ -2,49 +2,192 @@ package com.mnrf.ejajan.view.main.student
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.activity.enableEdgeToEdge
+import android.os.Handler
+import android.os.Looper
+import android.text.Html
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.TextView
+import androidx.activity.addCallback
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.core.content.ContextCompat
+import androidx.viewpager2.widget.ViewPager2
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.mnrf.ejajan.R
+import com.mnrf.ejajan.databinding.ActivityStudentBinding
+import com.mnrf.ejajan.view.login.LoginStudent
+import com.mnrf.ejajan.view.main.student.cart.CartActivity
 import com.mnrf.ejajan.view.main.student.drink.DrinkActivity
 import com.mnrf.ejajan.view.main.student.food.FoodActivity
 import com.mnrf.ejajan.view.main.student.healty.HealtyChoicesActivity
 import com.mnrf.ejajan.view.main.student.menu.MenuStudentActivity
 import com.mnrf.ejajan.view.main.student.personal.PersonalPicksActivity
 import com.mnrf.ejajan.view.main.student.special.SpecialOffersActivity
+import com.mnrf.ejajan.view.slider.ImageSliderAdapter
+import com.mnrf.ejajan.view.slider.ImageSliderData
+import com.mnrf.ejajan.view.utils.ViewModelFactory
 
 class StudentActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityStudentBinding
+    private lateinit var auth: FirebaseAuth
+    private lateinit var imageSliderAdapter: ImageSliderAdapter
+    private val listImage = ArrayList<ImageSliderData>()
+    private val circleImage = ArrayList<TextView>()
+
+    private val sliderHandler = Handler(Looper.getMainLooper())
+    private val sliderRunnable = Runnable {
+        binding.vpStudentLogo.currentItem =
+            (binding.vpStudentLogo.currentItem + 1) % listImage.size
+    }
+
+    private val studentViewModel: StudentViewModel by viewModels {
+        ViewModelFactory.getInstance(this@StudentActivity)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_student, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.cart -> startActivity(Intent(this, CartActivity::class.java))
+            R.id.logout -> showLogoutConfirmationDialog()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_student)
+        binding = ActivityStudentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        findViewById<View>(R.id.seeall_personal).setOnClickListener {
-            startActivity(Intent(this, PersonalPicksActivity::class.java))
+        auth = Firebase.auth
+
+        setupListeners()
+        setupImageSlider()
+
+        onBackPressedDispatcher.addCallback(this) {
+            showExitConfirmationDialog()
+        }
+    }
+
+    private fun setupListeners() {
+        with(binding) {
+            seeallPersonal.setOnClickListener {
+                startActivity(Intent(this@StudentActivity, PersonalPicksActivity::class.java))
+            }
+
+            seeallHealty.setOnClickListener {
+                startActivity(Intent(this@StudentActivity, HealtyChoicesActivity::class.java))
+            }
+
+            seeallSpecial.setOnClickListener {
+                startActivity(Intent(this@StudentActivity, SpecialOffersActivity::class.java))
+            }
+
+            seeallFood.setOnClickListener {
+                startActivity(Intent(this@StudentActivity, FoodActivity::class.java))
+            }
+
+            seeallDrink.setOnClickListener {
+                startActivity(Intent(this@StudentActivity, DrinkActivity::class.java))
+            }
+
+            fab.setOnClickListener {
+                startActivity(Intent(this@StudentActivity, MenuStudentActivity::class.java))
+            }
+        }
+    }
+
+
+    private fun setupImageSlider() {
+        listImage.apply {
+            add(ImageSliderData(R.drawable.image1_slider_student))
+            add(ImageSliderData(R.drawable.image2_slider_student))
+            add(ImageSliderData(R.drawable.image3_slider_student))
         }
 
-        findViewById<View>(R.id.seeall_healty).setOnClickListener {
-            startActivity(Intent(this, HealtyChoicesActivity::class.java))
-        }
+        // Inisialisasi adapter dan set ke ViewPager2
+        imageSliderAdapter = ImageSliderAdapter(listImage)
+        binding.vpStudentLogo.adapter = imageSliderAdapter
 
-        findViewById<View>(R.id.seeall_special).setOnClickListener {
-            startActivity(Intent(this, SpecialOffersActivity::class.java))
-        }
+        setupCircleIndicator()
 
-        findViewById<View>(R.id.seeall_food).setOnClickListener {
-            startActivity(Intent(this, FoodActivity::class.java))
-        }
+        binding.vpStudentLogo.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                setupSelectedIndicator(position)
 
-        findViewById<View>(R.id.seeall_drink).setOnClickListener {
-            startActivity(Intent(this, DrinkActivity::class.java))
-        }
+                // Restart auto-slide timer
+                sliderHandler.removeCallbacks(sliderRunnable)
+                sliderHandler.postDelayed(sliderRunnable, 3000)
+            }
+        })
 
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener {
-            val intent = Intent(this, MenuStudentActivity::class.java)
-            startActivity(intent)
+        // Mulai auto-slide
+        sliderHandler.postDelayed(sliderRunnable, 3000)
+    }
+
+    private fun setupCircleIndicator() {
+        binding.llCircle.removeAllViews()
+        for (i in 0 until listImage.size) {
+            val indicator = TextView(this).apply {
+                text = Html.fromHtml("&#9679", Html.FROM_HTML_MODE_LEGACY).toString()
+                textSize = 18f
+                setTextColor(ContextCompat.getColor(this@StudentActivity, R.color.white))
+            }
+            circleImage.add(indicator)
+            binding.llCircle.addView(indicator)
         }
+    }
+
+    private fun setupSelectedIndicator(position: Int) {
+        circleImage.forEachIndexed { index, textView ->
+            textView.setTextColor(
+                if (index == position)
+                    ContextCompat.getColor(this, R.color.blue1)
+                else
+                    ContextCompat.getColor(this, R.color.white)
+            )
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sliderHandler.removeCallbacks(sliderRunnable)
+    }
+
+    private fun showLogoutConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.logout)
+            .setMessage(R.string.logout_confirmation)
+            .setPositiveButton(R.string.ya) { _, _ ->
+                auth.signOut()
+                studentViewModel.logout()
+                val intent = Intent(this, LoginStudent::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }
+            .setNegativeButton(R.string.tidak) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun showExitConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.exit)
+            .setMessage(R.string.logout_confirmation)
+            .setPositiveButton(R.string.ya) { _, _ ->
+                finish()
+            }
+            .setNegativeButton(R.string.tidak) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }

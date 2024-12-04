@@ -1,4 +1,4 @@
-package com.mnrf.ejajan.view.main.parent.ui.slider
+package com.mnrf.ejajan.view.slider
 
 data class ImageSliderData (
     val image: Int

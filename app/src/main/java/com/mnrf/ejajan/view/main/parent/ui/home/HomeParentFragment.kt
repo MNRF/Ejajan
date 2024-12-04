@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.mnrf.ejajan.R
 import com.mnrf.ejajan.databinding.FragmentParentHomeBinding
-import com.mnrf.ejajan.view.main.parent.ui.slider.ImageSliderAdapter
-import com.mnrf.ejajan.view.main.parent.ui.slider.ImageSliderData
 import com.mnrf.ejajan.view.main.parent.ui.topup.TransactionActivity
+import com.mnrf.ejajan.view.slider.ImageSliderAdapter
+import com.mnrf.ejajan.view.slider.ImageSliderData
 
 class HomeParentFragment : Fragment() {
 

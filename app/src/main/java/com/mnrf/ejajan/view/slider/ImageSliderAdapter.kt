@@ -1,4 +1,4 @@
-package com.mnrf.ejajan.view.main.parent.ui.slider
+package com.mnrf.ejajan.view.slider
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,7 @@ class ImageSliderAdapter(private val imageList: List<ImageSliderData>) :
     RecyclerView.Adapter<ImageSliderAdapter.ImageSliderViewHolder>() {
 
     class ImageSliderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.findViewById(R.id.iv_slider) // Ensure this ID exists
+        val imageView: ImageView = view.findViewById(R.id.iv_slider)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageSliderViewHolder {
@@ -26,7 +26,6 @@ class ImageSliderAdapter(private val imageList: List<ImageSliderData>) :
         holder.imageView.adjustViewBounds = true
         holder.imageView.scaleType = ImageView.ScaleType.CENTER_CROP
 
-        // Sesuaikan tinggi ImageView berdasarkan rasio aspek gambar
         holder.imageView.post {
             val aspectRatio = holder.imageView.drawable.intrinsicWidth.toFloat() /
                     holder.imageView.drawable.intrinsicHeight

@@ -58,9 +58,9 @@ class LoginStudent : AppCompatActivity() {
         val onboardingPreferences = OnboardingPreferences(this)
         userRole = onboardingPreferences.getUserRole().toString()
 
-        onBackPressedDispatcher.addCallback(this) {
-            finishAffinity()
-        }
+//        onBackPressedDispatcher.addCallback(this) {
+//            finishAffinity()
+//        }
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 

@@ -13,6 +13,7 @@ import com.mnrf.ejajan.view.main.merchant.ui.menu.detail.DetailMenuViewModel
 import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel
 import com.mnrf.ejajan.view.main.parent.ParentViewModel
 import com.mnrf.ejajan.view.main.parent.ui.setting.Setting2ViewModel
+import com.mnrf.ejajan.view.main.student.StudentViewModel
 import com.mnrf.ejajan.view.splash.SplashViewModel
 
 class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -46,6 +47,9 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             }
             modelClass.isAssignableFrom(LoginStudentViewModel::class.java) -> {
                 LoginStudentViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(StudentViewModel::class.java) -> {
+                StudentViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
