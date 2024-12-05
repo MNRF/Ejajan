@@ -84,6 +84,7 @@ class SettingMerchantFragment : Fragment() {
             startActivityForResult(intent, scheduleRequestCode)
         }
 
+        // Fetch the latest profile when fragment is first displayed
         refresh()
     }
 
@@ -101,13 +102,19 @@ class SettingMerchantFragment : Fragment() {
     }
 
     private fun refresh() {
+        // Fetch the latest merchant profile from Firestore
+        settingViewModel.fetchMerchantProfile()
+
         settingViewModel.merchantProfile.observe(viewLifecycleOwner) { profile ->
-            val isOpen = profile?.daysopen?.first() == '1'
-            binding.tbSettingJamBuka.isChecked = isOpen
-            binding.tvSettingJamBuka.text = if (isOpen) {
-                getString(R.string.toko_anda_sedang_buka)
-            } else {
-                getString(R.string.toko_anda_sedang_tutup)
+            profile?.let {
+                // Ensure tbSettingJamBuka and tvSettingJamBuka reflect the latest daysopen state
+                val isOpen = it.daysopen.first() == '1'
+                binding.tbSettingJamBuka.isChecked = isOpen
+                binding.tvSettingJamBuka.text = if (isOpen) {
+                    getString(R.string.toko_anda_sedang_buka)
+                } else {
+                    getString(R.string.toko_anda_sedang_tutup)
+                }
             }
         }
     }

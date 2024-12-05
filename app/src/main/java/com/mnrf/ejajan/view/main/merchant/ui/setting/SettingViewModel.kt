@@ -141,31 +141,55 @@ class SettingViewModel(private val repository: UserRepository,
     fun setupRepeatingAlarm() {
         val profile = _merchantProfile.value ?: return
         val daysOpen = profile.daysopen
-        if (daysOpen.lastOrNull() == '1') {
-            val currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-            val timeField = when (currentDay) {
-                Calendar.MONDAY -> profile.start1
-                Calendar.TUESDAY -> profile.start2
-                Calendar.WEDNESDAY -> profile.start3
-                Calendar.THURSDAY -> profile.start4
-                Calendar.FRIDAY -> profile.start5
-                Calendar.SATURDAY -> profile.start6
-                Calendar.SUNDAY -> profile.start7
-                else -> null
-            }
 
-            if (!timeField.isNullOrEmpty()) {
-                setAlarm(timeField)
-            } else {
-                Log.e(TAG, "Time field is empty or null for the current day.")
-            }
-        } else {
+        // Ensure no alarms are set if the last digit of `daysopen` is '0'
+        if (daysOpen.lastOrNull() != '1') {
             cancelAlarm()
+            Log.d(TAG, "Alarms canceled as the last digit of daysopen is not active (0).")
+            return
+        }
+
+        val currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+
+        // Fetch start and end times based on the current day
+        val startField = when (currentDay) {
+            Calendar.MONDAY -> profile.start1
+            Calendar.TUESDAY -> profile.start2
+            Calendar.WEDNESDAY -> profile.start3
+            Calendar.THURSDAY -> profile.start4
+            Calendar.FRIDAY -> profile.start5
+            Calendar.SATURDAY -> profile.start6
+            Calendar.SUNDAY -> profile.start7
+            else -> null
+        }
+        val endField = when (currentDay) {
+            Calendar.MONDAY -> profile.end1
+            Calendar.TUESDAY -> profile.end2
+            Calendar.WEDNESDAY -> profile.end3
+            Calendar.THURSDAY -> profile.end4
+            Calendar.FRIDAY -> profile.end5
+            Calendar.SATURDAY -> profile.end6
+            Calendar.SUNDAY -> profile.end7
+            else -> null
+        }
+
+        // Set alarms for both start and end times
+        if (!startField.isNullOrEmpty()) {
+            setAlarm(startField, isStart = true)
+        } else {
+            Log.e(TAG, "Start time field is empty or null for the current day.")
+        }
+
+        if (!endField.isNullOrEmpty()) {
+            setAlarm(endField, isStart = false)
+        } else {
+            Log.e(TAG, "End time field is empty or null for the current day.")
         }
     }
 
+
     @RequiresApi(Build.VERSION_CODES.S)
-    fun setAlarm(time: String) {
+    fun setAlarm(time: String, isStart: Boolean) {
         try {
             val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
             if (alarmManager == null) {
@@ -173,20 +197,21 @@ class SettingViewModel(private val repository: UserRepository,
                 return
             }
 
-            // Check if the app can schedule exact alarms
             if (!alarmManager.canScheduleExactAlarms()) {
                 Log.e(TAG, "Exact alarm permission is not granted. Requesting permission.")
                 requestExactAlarmPermission()
                 return
             }
 
+            val action = if (isStart) "com.mnrf.ejajan.START_ALARM" else "com.mnrf.ejajan.STOP_ALARM"
             val intent = Intent(appContext, AlarmReceiver::class.java).apply {
-                action = "com.mnrf.ejajan.START_ALARM"
+                this.action = action
                 putExtra("uid", _merchantProfile.value?.uid)
             }
+            val requestCode = if (isStart) ALARM_REQUEST_CODE_START else ALARM_REQUEST_CODE_END
             val pendingIntent = PendingIntent.getBroadcast(
                 appContext,
-                ALARM_REQUEST_CODE,
+                requestCode,
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
@@ -209,7 +234,7 @@ class SettingViewModel(private val repository: UserRepository,
                 pendingIntent
             )
 
-            Log.d(TAG, "Exact alarm set for time: $time")
+            Log.d(TAG, "Exact alarm set for ${if (isStart) "start" else "end"} time: $time")
         } catch (e: SecurityException) {
             Log.e(TAG, "Failed to set exact alarm due to missing permission: ${e.message}")
             requestExactAlarmPermission()
@@ -217,6 +242,7 @@ class SettingViewModel(private val repository: UserRepository,
             Log.e(TAG, "Failed to set alarm: ${e.message}")
         }
     }
+
 
     @RequiresApi(Build.VERSION_CODES.S)
     private fun requestExactAlarmPermission() {
@@ -244,7 +270,7 @@ class SettingViewModel(private val repository: UserRepository,
             }
             val pendingIntent = PendingIntent.getBroadcast(
                 appContext,
-                ALARM_REQUEST_CODE,
+                ALARM_REQUEST_CODE_END,
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
@@ -265,158 +291,7 @@ class SettingViewModel(private val repository: UserRepository,
 
     companion object {
         const val TAG = "SettingViewModel"
-        const val ALARM_REQUEST_CODE = 1001
+        const val ALARM_REQUEST_CODE_START = 1001
+        const val ALARM_REQUEST_CODE_END = 1002
     }
 }
-
-
-
-
-/*package com.mnrf.ejajan.view.main.merchant.ui.setting
-
-import android.app.TimePickerDialog
-import android.os.Bundle
-import android.widget.TextClock
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.mnrf.ejajan.R
-import com.mnrf.ejajan.databinding.ActivityMerchantSettingScheduleBinding
-import com.mnrf.ejajan.view.utils.ViewModelFactory
-import java.text.SimpleDateFormat
-import java.util.Locale
-
-class MerchantSettingSchedule : AppCompatActivity() {
-    private lateinit var binding: ActivityMerchantSettingScheduleBinding
-    private val settingViewModel: SettingViewModel by viewModels {
-        ViewModelFactory.getInstance(this)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
-        binding = ActivityMerchantSettingScheduleBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        setupTimePickers()
-
-        binding.toggleButton.setOnClickListener {
-            settingViewModel.toggleDaysopen(binding.toggleButton.isChecked, 2)
-            refresh()
-        }
-        binding.toggleButton2.setOnClickListener {
-            settingViewModel.toggleDaysopen(binding.toggleButton2.isChecked, 3)
-            refresh()
-        }
-        binding.toggleButton3.setOnClickListener {
-            settingViewModel.toggleDaysopen(binding.toggleButton3.isChecked, 4)
-            refresh()
-        }
-        binding.toggleButton4.setOnClickListener {
-            settingViewModel.toggleDaysopen(binding.toggleButton4.isChecked, 5)
-            refresh()
-        }
-        binding.toggleButton5.setOnClickListener {
-            settingViewModel.toggleDaysopen(binding.toggleButton5.isChecked, 6)
-            refresh()
-        }
-        binding.toggleButton6.setOnClickListener {
-            settingViewModel.toggleDaysopen(binding.toggleButton6.isChecked, 7)
-            refresh()
-        }
-        binding.toggleButton7.setOnClickListener {
-            settingViewModel.toggleDaysopen(binding.toggleButton7.isChecked, 8)
-            refresh()
-        }
-        binding.swcSchedule.setOnClickListener {
-            settingViewModel.toggleDaysopen(binding.swcSchedule.isChecked, 9)
-            refresh()
-        }
-
-        refresh()
-    }
-
-    private fun setupTimePickers() {
-        setupTimePicker(binding.textClock, "start1")
-        setupTimePicker(binding.textClock2, "end1")
-        setupTimePicker(binding.textClockTuesday, "start2")
-        setupTimePicker(binding.textClockTuesday2, "end2")
-        setupTimePicker(binding.textClockWednesday, "start3")
-        setupTimePicker(binding.textClockWednesday2, "end3")
-        setupTimePicker(binding.textClockThursday, "start4")
-        setupTimePicker(binding.textClockThursday2, "end4")
-        setupTimePicker(binding.textClockFriday, "start5")
-        setupTimePicker(binding.textClockFriday2, "end5")
-        setupTimePicker(binding.textClockSaturday, "start6")
-        setupTimePicker(binding.textClockSaturday2, "end6")
-        setupTimePicker(binding.textClockSunday, "start7")
-        setupTimePicker(binding.textClockSunday2, "end7")
-    }
-
-    private fun setupTimePicker(textClock: TextClock, timeKey: String) {
-        textClock.setOnClickListener {
-            val currentTime = textClock.text.toString()
-            val hour = currentTime.substring(0, 2).toIntOrNull() ?: 0
-            val minute = currentTime.substring(3, 5).toIntOrNull() ?: 0
-
-            TimePickerDialog(this, { _, selectedHour, selectedMinute ->
-                val updatedTime = String.format("%02d%02d", selectedHour, selectedMinute)
-                textClock.text = updatedTime
-                settingViewModel.updateMerchantTime(timeKey, updatedTime)
-            }, hour, minute, true).show()
-        }
-    }
-
-    private fun refresh() {
-        settingViewModel.merchantProfile.observe(this) { profile ->
-            profile?.let {
-                binding.textClock.text = formatTime(it.start1)
-                binding.textClock2.text = formatTime(it.end1)
-                binding.textClockTuesday.text = formatTime(it.start2)
-                binding.textClockTuesday2.text = formatTime(it.end2)
-                binding.textClockWednesday.text = formatTime(it.start3)
-                binding.textClockWednesday2.text = formatTime(it.end3)
-                binding.textClockThursday.text = formatTime(it.start4)
-                binding.textClockThursday2.text = formatTime(it.end4)
-                binding.textClockFriday.text = formatTime(it.start5)
-                binding.textClockFriday2.text = formatTime(it.end5)
-                binding.textClockSaturday.text = formatTime(it.start6)
-                binding.textClockSaturday2.text = formatTime(it.end6)
-                binding.textClockSunday.text = formatTime(it.start7)
-                binding.textClockSunday2.text = formatTime(it.end7)
-                if (binding.swcSchedule.isChecked) {
-                    binding.tvMerchantScheduledopen.text =
-                        getString(R.string.scheduled_open_is_active)
-                } else {
-                    binding.tvMerchantScheduledopen.text =
-                        getString(R.string.scheduled_open_is_inactive)
-                }
-                settingViewModel.setupRepeatingAlarm()
-            }
-        }
-    }
-
-    private fun formatTime(time: String?): String {
-        return try {
-            val sdf = SimpleDateFormat("HHmm", Locale.getDefault())
-            val parsedDate = sdf.parse(time ?: "0000")
-            SimpleDateFormat("HH:mm", Locale.getDefault()).format(parsedDate!!)
-        } catch (e: Exception) {
-            "00:00"
-        }
-    }
-
-    companion object {
-        const val MERCHANT_PROFILE = "merchant_profile"
-    }
-}
-*/

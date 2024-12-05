@@ -161,11 +161,11 @@ class MerchantSettingSchedule : AppCompatActivity() {
             val isActive8 = profile?.daysopen?.get(8) == '1'
             binding.swcSchedule.isChecked = isActive8
 
-            if (binding.swcSchedule.isChecked) {
+            /*if (binding.swcSchedule.isChecked) {
                 binding.cardView3.setCardBackgroundColor(getResources().getColor(R.color.utama))
             } else {
                 binding.cardView3.setCardBackgroundColor(getResources().getColor(R.color.gray))
-            }
+            }*/
             settingViewModel.setupRepeatingAlarm()
         }
     }
