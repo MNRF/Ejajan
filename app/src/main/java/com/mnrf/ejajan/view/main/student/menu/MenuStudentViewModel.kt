@@ -29,7 +29,7 @@ class MenuStudentViewModel(private val repository: UserRepository) : ViewModel()
         getSession().observeForever { user ->
             if (user != null) {
                 db.collection("menus")
-                    .whereEqualTo("merchant_uid", user.token)
+                    /*.whereEqualTo("ford", "d")*/
                     .get()
                     .addOnSuccessListener { result ->
                         val menus = result.map { document ->

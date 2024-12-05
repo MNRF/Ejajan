@@ -1,5 +1,6 @@
 package com.mnrf.ejajan.view.main.merchant.ui.setting
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,6 +27,8 @@ class SettingMerchantFragment : Fragment() {
     private val settingViewModel: SettingViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
+
+    private val scheduleRequestCode = 2001
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,8 +70,6 @@ class SettingMerchantFragment : Fragment() {
             startActivity(intent)
         }
 
-
-
         binding.tbSettingJamBuka.setOnCheckedChangeListener { _, isChecked ->
             settingViewModel.toggleDaysopen(isChecked, 1)
             binding.tvSettingJamBuka.text = if (isChecked) {
@@ -80,8 +81,7 @@ class SettingMerchantFragment : Fragment() {
 
         binding.btnSchedule.setOnClickListener {
             val intent = Intent(requireContext(), MerchantSettingSchedule::class.java)
-            startActivity(intent)
-            onPause()
+            startActivityForResult(intent, scheduleRequestCode)
         }
 
         refresh()
@@ -90,6 +90,14 @@ class SettingMerchantFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         refresh()
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == scheduleRequestCode && resultCode == Activity.RESULT_OK) {
+            refresh() // Refresh data after returning from MerchantSettingSchedule activity
+        }
     }
 
     private fun refresh() {
