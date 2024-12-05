@@ -1,4 +1,4 @@
-package com.mnrf.ejajan.view.main.merchant.ui.menu
+package com.mnrf.ejajan.view.main.student.menu
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -11,14 +11,14 @@ import com.mnrf.ejajan.data.model.MenuModel
 import com.mnrf.ejajan.data.model.UserModel
 import com.mnrf.ejajan.data.repository.UserRepository
 
-class MenuMerchantViewModel(private val repository: UserRepository) : ViewModel() {
+class MenuStudentViewModel(private val repository: UserRepository) : ViewModel() {
     private val _menuList = MutableLiveData<List<MenuModel>>()
     val menuList: LiveData<List<MenuModel>> get() = _menuList
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
 
     fun getSession(): LiveData<UserModel> {
         _isLoading.value = true
@@ -36,12 +36,12 @@ class MenuMerchantViewModel(private val repository: UserRepository) : ViewModel(
                             MenuModel(
                                 id = document.id,
                                 name = document.getString("menu_name") ?: "",
-//                                typeMerchant = document.getString("type_merchants") ?: "",
                                 description = document.getString("menu_description") ?: "",
                                 ingredients = document.getString("menu_ingredients") ?: "",
                                 preparationtime = document.getString("menu_preparationtime") ?: "",
                                 price = document.getString("menu_price") ?: "",
-                                imageurl = document.getString("menu_imageurl") ?: ""
+                                imageurl = document.getString("menu_imageurl") ?: "",
+//                                typeMerchant = document.getString("type_merchants") ?: ""
                             )
                         }
                         _menuList.value = menus
@@ -60,6 +60,6 @@ class MenuMerchantViewModel(private val repository: UserRepository) : ViewModel(
     }
 
     companion object {
-        const val TAG = "MenuMerchantViewModel"
+        const val TAG = "MenuStudentViewModel"
     }
 }

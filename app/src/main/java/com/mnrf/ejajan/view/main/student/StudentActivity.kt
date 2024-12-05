@@ -74,6 +74,7 @@ class StudentActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this) {
             showExitConfirmationDialog()
         }
+
     }
 
     private fun setupListeners() {

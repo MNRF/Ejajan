@@ -1,15 +1,12 @@
 package com.mnrf.ejajan.view.main.merchant.ui.menu
 
-import MenuMerchantViewModel
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mnrf.ejajan.databinding.FragmentMerchantMenuBinding
 import com.mnrf.ejajan.view.main.merchant.ui.menu.add.AddMenuActivity
@@ -38,10 +35,11 @@ class MenuMerchantFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-/*        menuMerchantViewModel = ViewModelProvider(this)[MenuMerchantViewModel::class.java]*/
+/*        menuMerchantViewModel = ViewModelProvider(this)[com.mnrf.ejajan.view.main.merchant.ui.menu.MenuMerchantViewModel::class.java]*/
         adapter = MenuListAdapter()
 
         binding.rvMenu.layoutManager = LinearLayoutManager(requireContext())
+//        binding.rvMenu.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvMenu.adapter = adapter
 
         // Observe the menu list

@@ -1,6 +1,6 @@
 package com.mnrf.ejajan.view.utils
 
-import MenuMerchantViewModel
+import com.mnrf.ejajan.view.main.merchant.ui.menu.MenuMerchantViewModel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +14,7 @@ import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel
 import com.mnrf.ejajan.view.main.parent.ParentViewModel
 import com.mnrf.ejajan.view.main.parent.ui.setting.Setting2ViewModel
 import com.mnrf.ejajan.view.main.student.StudentViewModel
+import com.mnrf.ejajan.view.main.student.menu.MenuStudentViewModel
 import com.mnrf.ejajan.view.splash.SplashViewModel
 
 class ViewModelFactory(
@@ -54,6 +55,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(StudentViewModel::class.java) -> {
                 StudentViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(MenuStudentViewModel::class.java) -> {
+                MenuStudentViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
