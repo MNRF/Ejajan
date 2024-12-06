@@ -12,7 +12,9 @@ import com.mnrf.ejajan.view.main.merchant.ui.menu.add.MerchantAddMenuViewModel
 import com.mnrf.ejajan.view.main.merchant.ui.menu.detail.DetailMenuViewModel
 import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel
 import com.mnrf.ejajan.view.main.parent.ParentViewModel
+import com.mnrf.ejajan.view.main.parent.ui.home.HomeViewModel
 import com.mnrf.ejajan.view.main.parent.ui.setting.Setting2ViewModel
+import com.mnrf.ejajan.view.main.parent.ui.topup.TopUpViewModel
 import com.mnrf.ejajan.view.main.student.StudentViewModel
 import com.mnrf.ejajan.view.main.student.menu.MenuStudentViewModel
 import com.mnrf.ejajan.view.splash.SplashViewModel
@@ -38,7 +40,6 @@ class ViewModelFactory(
                 Setting2ViewModel(repository) as T
             }
             modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
-                // Pass appContext to SettingViewModel
                 SettingViewModel(repository, appContext) as T
             }
             modelClass.isAssignableFrom(MerchantAddMenuViewModel::class.java) -> {
@@ -58,6 +59,12 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(MenuStudentViewModel::class.java) -> {
                 MenuStudentViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(TopUpViewModel::class.java) -> {
+                TopUpViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

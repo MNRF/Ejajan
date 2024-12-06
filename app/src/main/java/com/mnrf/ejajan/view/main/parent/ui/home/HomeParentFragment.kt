@@ -11,17 +11,25 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.mnrf.ejajan.R
 import com.mnrf.ejajan.databinding.FragmentParentHomeBinding
+import com.mnrf.ejajan.view.main.merchant.ui.menu.MenuMerchantViewModel
 import com.mnrf.ejajan.view.main.parent.ui.topup.TransactionActivity
 import com.mnrf.ejajan.view.slider.ImageSliderAdapter
 import com.mnrf.ejajan.view.slider.ImageSliderData
+import com.mnrf.ejajan.view.utils.ViewModelFactory
 
 class HomeParentFragment : Fragment() {
 
     private var _binding: FragmentParentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val homeViewModel: HomeViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
+
 
     private lateinit var imageSliderAdapter: ImageSliderAdapter
     private val listImage = ArrayList<ImageSliderData>()
@@ -50,7 +58,6 @@ class HomeParentFragment : Fragment() {
         // Contoh penggunaan binding untuk mengakses elemen dalam XML
         binding.tvParentWelcome.text = getString(R.string.welcome_parent)
         binding.tvParentDeskripsi.text = getString(R.string.deskripsi_homeWelcome)
-        binding.tvSaldo.text = getString(R.string.saldo_rp_0)
         binding.tvTopup.text = getString(R.string.top_up)
 
         setupRecyclerView()
@@ -59,6 +66,10 @@ class HomeParentFragment : Fragment() {
         binding.tvTopup.setOnClickListener {
             val intent = Intent(requireContext(), TransactionActivity::class.java)
             startActivity(intent)
+        }
+
+        homeViewModel.parentProfile.observe(viewLifecycleOwner) { parentProfile ->
+            binding.tvSaldo.text = "Saldo: Rp.${parentProfile.balance}"
         }
     }
 

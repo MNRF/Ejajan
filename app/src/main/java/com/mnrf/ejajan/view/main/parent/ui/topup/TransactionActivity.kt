@@ -1,6 +1,7 @@
 package com.mnrf.ejajan.view.main.parent.ui.topup
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -47,11 +48,6 @@ class TransactionActivity : AppCompatActivity() {
             }
         }
 
-    companion object {
-        const val CLIENT_KEY = "Mid-client-2LVVrrgDtQe6aUo0" // Replace with your client key
-        const val BASE_URL = "https://capstone-c242-ps370.et.r.appspot.com/" // Replace with your URL
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityParentTransactionBinding.inflate(layoutInflater)
@@ -69,9 +65,9 @@ class TransactionActivity : AppCompatActivity() {
         // Button click listener to trigger the transaction process
         binding.btnConfirm.setOnClickListener {
             val amountText = binding.etAmount.text.toString()
-            if (amountText.isNotEmpty()) {
+            /*if (amountText.isNotEmpty()) {
                 val amount = amountText.toDoubleOrNull()
-                if (amount != null && amount > 0) {
+                if (amount != null && amount > 10000) {
                     Toast.makeText(this, "Top Up Amount: Rp $amount", Toast.LENGTH_SHORT).show()
                     startTransaction()  // Proceed with the transaction
                 } else {
@@ -79,14 +75,18 @@ class TransactionActivity : AppCompatActivity() {
                 }
             } else {
                 Toast.makeText(this, "Amount cannot be empty", Toast.LENGTH_SHORT).show()
-            }
+            }*/
+            intent = Intent(this, ConfirmationActivity::class.java)
+            intent.putExtra(ConfirmationActivity.TRANSACTION_SUCCESS, amountText)
+            startActivity(intent)
+            finish()
         }
     }
 
     private fun startTransaction() {
         // Fetch the Snap Token from your backend (this should be done via an API call)
         // For now, we use a mock token. In your production app, make sure to fetch the token from the backend.
-        val snapToken = "25e3659b-f00c-4d98-bfff-9f72978c8df5" // Replace with the actual Snap token retrieved from your server
+        val snapToken = "25e3659b-f00c-4d98-bfff-9f72978c8df5"
 
         // Initialize UiKitApi with your credentials and configuration
         UiKitApi.Builder()
@@ -107,5 +107,10 @@ class TransactionActivity : AppCompatActivity() {
     private fun setLocaleNew(languageCode: String?) {
         val locales = LocaleListCompat.forLanguageTags(languageCode)
         AppCompatDelegate.setApplicationLocales(locales)
+    }
+
+    companion object {
+        const val CLIENT_KEY = "SB-Mid-client-STcLf66h68-oCykv"
+        const val BASE_URL = "https://midtrans-api-934253159531.asia-southeast2.run.app/"
     }
 }

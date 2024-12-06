@@ -4,22 +4,43 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.viewModels
 import com.mnrf.ejajan.R
+import com.mnrf.ejajan.databinding.ActivityParentConfirmationBinding
+import com.mnrf.ejajan.databinding.ActivityParentTransactionBinding
 import com.mnrf.ejajan.databinding.FragmentMerchantHomeBinding
+import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel
+import com.mnrf.ejajan.view.main.parent.ParentActivity
+import com.mnrf.ejajan.view.main.parent.ui.home.HomeViewModel
+import com.mnrf.ejajan.view.utils.ViewModelFactory
 
 class ConfirmationActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityParentConfirmationBinding
+    private val TopUpViewModel: TopUpViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_parent_confirmation)
+        binding = ActivityParentConfirmationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val topUpAmount = intent.getStringExtra(TRANSACTION_SUCCESS)
+        if (topUpAmount != null) {
+            TopUpViewModel.topUp(topUpAmount.toInt())
+        }
 
-        val btnBack = findViewById<Button>(R.id.btn_back_to_home)
-
-        btnBack.setOnClickListener {
-            val intent = Intent(this, FragmentMerchantHomeBinding::class.java)
+        binding.btnBackToHome.setOnClickListener {
+            val intent = Intent(this, ParentActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    companion object {
+        const val TRANSACTION_SUCCESS = "transaction_success"
+        const val TRANSACTION_FAILED = "transaction_failed"
     }
 }
