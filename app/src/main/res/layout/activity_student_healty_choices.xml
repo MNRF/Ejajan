@@ -34,9 +34,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/button_background"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
+                android:background="@drawable/btn_background_selector"
                 android:text="@string/all_product"
                 android:textColor="@color/black" />
 
@@ -46,7 +46,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/button_background"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
                 android:text="@string/low_calories"
@@ -58,7 +57,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/button_background"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
                 android:text="@string/high_protein"
@@ -69,7 +67,6 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_background"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
                 android:text="@string/vegetarian"
@@ -79,15 +76,26 @@
     </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/rv_healty_choices"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintTop_toBottomOf="@id/filter_scroll_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Widget.AppCompat.ProgressBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

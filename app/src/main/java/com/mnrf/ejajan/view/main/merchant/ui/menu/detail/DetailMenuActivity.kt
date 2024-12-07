@@ -48,7 +48,6 @@ class DetailMenuActivity : AppCompatActivity() {
         binding = ActivityMerchantDetailMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Load existing data
         currentImageUrl = intent.getStringExtra(MENU_IMAGE)
         Glide.with(binding.imgAbout.context)
             .load(currentImageUrl)

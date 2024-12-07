@@ -241,5 +241,13 @@
     <string name="exit">Keluar dari aplikasi</string>
     <string name="ya">Ya</string>
     <string name="tidak">Tidak</string>
-
+    <string name="pickup">Pick up time = %1$d minute</string>
+    <string name="price_format">Rp %s</string>
+    <string name="notess">Notes</string>
+    <string name="quantity_text">%d</string>
+    <string name="cart_items">Cart Item</string>
+    <string name="original_price_format">Rp.%1$d</string>
+    <string name="discounted_price_format">Rp.%1$d</string>
+    <string name="quantity_format">Qty: %s</string>
+    <string name="price">%d</string>
 </resources>

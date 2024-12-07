@@ -94,4 +94,6 @@ dependencies {
 
     //slider
     implementation (libs.glide)
+
+    implementation (libs.gson)
 }

@@ -2,29 +2,66 @@ package com.mnrf.ejajan.view.main.student.cart
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mnrf.ejajan.R
-import com.mnrf.ejajan.view.main.student.detail.DetailMenuStudentActivity
+import com.mnrf.ejajan.data.pref.CartPreferences
+import com.mnrf.ejajan.databinding.ActivityStudentCartBinding
+import com.mnrf.ejajan.view.main.student.adapter.CartAdapter
+import com.mnrf.ejajan.view.main.student.adapter.OrderSummaryAdapter
 import com.mnrf.ejajan.view.main.student.face.FaceConfirmActivity
-import com.mnrf.ejajan.view.main.student.personal.PersonalPicksActivity
 
 class CartActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityStudentCartBinding
+
+    private lateinit var adapter: CartAdapter
+    private lateinit var cartPreferences: CartPreferences
+    private lateinit var summaryAdapter: OrderSummaryAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_student_cart)
+        binding = ActivityStudentCartBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        findViewById<Button>(R.id.btn_cancel).setOnClickListener {
-            startActivity(Intent(this, DetailMenuStudentActivity::class.java))
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = "Cart Item"
         }
 
-        findViewById<Button>(R.id.btn_confirm).setOnClickListener {
+        cartPreferences = CartPreferences(this)
+        val cartItems = cartPreferences.getCartItems()
+        cartPreferences.getItemSummaries()
+
+        adapter = CartAdapter(cartItems)
+        binding.rvCart.layoutManager = LinearLayoutManager(this)
+        binding.rvCart.adapter = adapter
+
+        summaryAdapter = OrderSummaryAdapter()
+        binding.rvOrderSummary.layoutManager = LinearLayoutManager(this)
+        binding.rvOrderSummary.adapter = summaryAdapter
+
+        val totalPayment = cartItems.sumOf {
+            (it.price.toIntOrNull() ?: 0) * (it.quantity.toIntOrNull() ?: 0)
+        }
+
+        binding.tvTotalPayment.text = getString(R.string.price, totalPayment)
+
+        binding.btnConfirm.setOnClickListener {
             startActivity(Intent(this, FaceConfirmActivity::class.java))
         }
 
+        binding.btnCancel.setOnClickListener {
+            cartPreferences.clearCartItems()
+            cartPreferences.clearSummaryItems()
+            adapter.notifyDataSetChanged()
+            binding.tvTotalPayment.text = getString(R.string.price_format, 0.toString())
+            startActivity(Intent(this, CartActivity::class.java))
+            finish()
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

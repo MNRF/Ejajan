@@ -4,6 +4,7 @@ androidxCameraCore = "1.4.0"
 cameraExtensionsVersion = "1.4.0"
 firebaseBom = "33.6.0"
 glide = "4.16.0"
+gson = "2.10.1"
 guava = "31.1-android"
 kotlin = "2.0.21"
 coreKtx = "1.15.0"
@@ -40,6 +41,7 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 firebase-storage = { module = "com.google.firebase:firebase-storage" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

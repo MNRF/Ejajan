@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -20,6 +21,9 @@ import com.google.firebase.auth.auth
 import com.mnrf.ejajan.R
 import com.mnrf.ejajan.databinding.ActivityStudentBinding
 import com.mnrf.ejajan.view.login.LoginStudent
+import com.mnrf.ejajan.view.main.student.adapter.MenuHomeStudentListAdapter
+import com.mnrf.ejajan.view.main.student.adapter.SeeAllListAdapter
+import com.mnrf.ejajan.view.main.student.adapter.SpecialAdapter
 import com.mnrf.ejajan.view.main.student.cart.CartActivity
 import com.mnrf.ejajan.view.main.student.drink.DrinkActivity
 import com.mnrf.ejajan.view.main.student.food.FoodActivity
@@ -48,6 +52,11 @@ class StudentActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this@StudentActivity)
     }
 
+    private lateinit var foodAdapter: MenuHomeStudentListAdapter
+    private lateinit var drinkAdapter: MenuHomeStudentListAdapter
+    private lateinit var healtAdapter: MenuHomeStudentListAdapter
+    private lateinit var specialAdapter: SpecialAdapter
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_student, menu)
         return true
@@ -55,7 +64,7 @@ class StudentActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.cart -> startActivity(Intent(this, CartActivity::class.java))
+//            R.id.cart -> startActivity(Intent(this, CartActivity::class.java))
             R.id.logout -> showLogoutConfirmationDialog()
         }
         return super.onOptionsItemSelected(item)
@@ -75,6 +84,38 @@ class StudentActivity : AppCompatActivity() {
             showExitConfirmationDialog()
         }
 
+        foodAdapter = MenuHomeStudentListAdapter()
+        drinkAdapter = MenuHomeStudentListAdapter()
+        healtAdapter = MenuHomeStudentListAdapter()
+        specialAdapter = SpecialAdapter()
+
+        binding.rvFood.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvFood.adapter = foodAdapter
+
+        binding.rvDrink.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvDrink.adapter = drinkAdapter
+
+        binding.rvHealty.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvHealty.adapter = healtAdapter
+
+        binding.rvSpecial.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvSpecial.adapter = specialAdapter
+
+        studentViewModel.foodMenuList.observe(this) { menuList ->
+            foodAdapter.submitList(menuList)
+        }
+
+        studentViewModel.drinkMenuList.observe(this) { menuList ->
+            drinkAdapter.submitList(menuList)
+        }
+
+        studentViewModel.healtMenuList.observe(this) { menuList ->
+            healtAdapter.submitList(menuList)
+        }
+
+        studentViewModel.specialMenuList.observe(this) { menuList ->
+            specialAdapter.submitList(menuList)
+        }
     }
 
     private fun setupListeners() {
@@ -100,7 +141,7 @@ class StudentActivity : AppCompatActivity() {
             }
 
             fab.setOnClickListener {
-                startActivity(Intent(this@StudentActivity, MenuStudentActivity::class.java))
+                startActivity(Intent(this@StudentActivity, CartActivity::class.java))
             }
         }
     }

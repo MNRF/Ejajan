@@ -1,4 +1,4 @@
-package com.mnrf.ejajan.view.main.merchant.ui.menu
+package com.mnrf.ejajan.view.main.student.special
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -11,14 +11,14 @@ import com.mnrf.ejajan.data.model.MenuModel
 import com.mnrf.ejajan.data.model.UserModel
 import com.mnrf.ejajan.data.repository.UserRepository
 
-class MenuMerchantViewModel(private val repository: UserRepository) : ViewModel() {
+class SpecialOffersViewModel(private val repository: UserRepository) : ViewModel() {
     private val _menuList = MutableLiveData<List<MenuModel>>()
     val menuList: LiveData<List<MenuModel>> get() = _menuList
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
 
     fun getSession(): LiveData<UserModel> {
         _isLoading.value = true
@@ -29,14 +29,13 @@ class MenuMerchantViewModel(private val repository: UserRepository) : ViewModel(
         getSession().observeForever { user ->
             if (user != null) {
                 db.collection("menus")
-                    .whereEqualTo("merchant_uid", user.token)
+                    .whereEqualTo("isDiscount", "10")
                     .get()
                     .addOnSuccessListener { result ->
                         val menus = result.map { document ->
                             MenuModel(
                                 id = document.id,
                                 name = document.getString("menu_name") ?: "",
-//                                typeMerchant = document.getString("type_merchants") ?: "",
                                 description = document.getString("menu_description") ?: "",
                                 ingredients = document.getString("menu_ingredients") ?: "",
                                 preparationtime = document.getString("menu_preparationtime") ?: "",
@@ -60,6 +59,6 @@ class MenuMerchantViewModel(private val repository: UserRepository) : ViewModel(
     }
 
     companion object {
-        const val TAG = "MenuMerchantViewModel"
+        const val TAG = "SpecialOffersViewModel"
     }
 }

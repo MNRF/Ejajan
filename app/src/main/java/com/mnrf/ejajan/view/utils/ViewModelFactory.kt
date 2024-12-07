@@ -16,7 +16,14 @@ import com.mnrf.ejajan.view.main.parent.ui.home.HomeViewModel
 import com.mnrf.ejajan.view.main.parent.ui.setting.Setting2ViewModel
 import com.mnrf.ejajan.view.main.parent.ui.topup.TopUpViewModel
 import com.mnrf.ejajan.view.main.student.StudentViewModel
+import com.mnrf.ejajan.view.main.student.detail.DetailMenuStudentViewModel
+import com.mnrf.ejajan.view.main.student.detail.NotesDetailViewModel
+import com.mnrf.ejajan.view.main.student.drink.DrinkViewModel
+import com.mnrf.ejajan.view.main.student.face.FaceConfirmViewModel
+import com.mnrf.ejajan.view.main.student.food.FoodViewModel
+import com.mnrf.ejajan.view.main.student.healty.HealtyViewModel
 import com.mnrf.ejajan.view.main.student.menu.MenuStudentViewModel
+import com.mnrf.ejajan.view.main.student.special.SpecialOffersViewModel
 import com.mnrf.ejajan.view.splash.SplashViewModel
 
 class ViewModelFactory(
@@ -40,6 +47,7 @@ class ViewModelFactory(
                 Setting2ViewModel(repository) as T
             }
             modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
+                // Pass appContext to SettingViewModel
                 SettingViewModel(repository, appContext) as T
             }
             modelClass.isAssignableFrom(MerchantAddMenuViewModel::class.java) -> {
@@ -60,11 +68,32 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(MenuStudentViewModel::class.java) -> {
                 MenuStudentViewModel(repository) as T
             }
+            modelClass.isAssignableFrom(FoodViewModel::class.java) -> {
+                FoodViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(DrinkViewModel::class.java) -> {
+                DrinkViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(HealtyViewModel::class.java) -> {
+                HealtyViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(DetailMenuStudentViewModel::class.java) -> {
+                DetailMenuStudentViewModel(repository) as T
+            }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(repository) as T
             }
             modelClass.isAssignableFrom(TopUpViewModel::class.java) -> {
                 TopUpViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(NotesDetailViewModel::class.java) -> {
+                NotesDetailViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SpecialOffersViewModel::class.java) -> {
+                SpecialOffersViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(FaceConfirmViewModel::class.java) -> {
+                FaceConfirmViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

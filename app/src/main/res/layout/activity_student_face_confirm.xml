@@ -7,11 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".view.main.student.face.FaceConfirmActivity">
 
+    <TextView
+        android:id="@+id/tv_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm_order"
+        android:textSize="32sp"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/inter28_bold"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        android:layout_marginHorizontal="16dp" />
+
     <FrameLayout
-        android:id="@+id/camera"
+        android:id="@+id/fm_camera"
         android:layout_width="350dp"
         android:layout_height="350dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/circle_shape"
         android:elevation="4dp"
         android:clipToOutline="true"
@@ -24,4 +41,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </FrameLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
