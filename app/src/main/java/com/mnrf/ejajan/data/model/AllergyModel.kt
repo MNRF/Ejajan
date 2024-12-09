@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class AllergyModel (
     val name: String = "",
-    val parentUid: String = ""
+    val student_uid: String = ""
 ) : Parcelable

@@ -1,5 +1,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,8 +9,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:text="@string/tipe_constraint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_nama_anak" />
+
+    <TextView
+        android:id="@+id/tv_nama_anak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/nama_anak"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,12 +37,12 @@
     <Spinner
         android:id="@+id/sp_constraint"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_constraint" />
 
     <TextView
@@ -39,22 +50,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:visibility="gone"
+        android:layout_marginTop="15dp"
         android:text="@string/alergi"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sp_constraint" />
 
     <Spinner
         android:id="@+id/sp_alergi"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_alergi" />
 
     <TextView
@@ -62,22 +73,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:visibility="gone"
+        android:layout_marginTop="15dp"
         android:text="@string/nominal_limit"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sp_alergi" />
 
     <Spinner
         android:id="@+id/sp_limit"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_limit" />
 
     <TextView
@@ -85,22 +96,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:visibility="gone"
+        android:layout_marginTop="15dp"
         android:text="@string/time_period"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sp_limit" />
 
     <Spinner
         android:id="@+id/sp_period"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
+        android:clickable="false"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_period" />
 
     <TextView
@@ -108,22 +120,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:visibility="gone"
+        android:layout_marginTop="15dp"
         android:text="@string/nutrition"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sp_period" />
 
     <Spinner
         android:id="@+id/sp_nutrition"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_nutrition" />
 
     <TextView
@@ -131,36 +143,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:visibility="gone"
+        android:layout_marginTop="15dp"
         android:text="@string/mineral"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sp_nutrition" />
 
     <Spinner
         android:id="@+id/sp_mineral"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_mineral" />
 
     <Button
         android:id="@+id/btn_create"
+        style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="@string/tambah"
-        style="@style/Button"
+        android:layout_marginBottom="60dp"
         android:backgroundTint="@color/blue1"
-        android:textColor="@color/white"
         android:drawableLeft="@drawable/ic_baseline_add_24"
         android:drawableTint="@android:color/white"
+        android:text="@string/tambah"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/sp_nama_anak"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nama_anak" />
 </androidx.constraintlayout.widget.ConstraintLayout>

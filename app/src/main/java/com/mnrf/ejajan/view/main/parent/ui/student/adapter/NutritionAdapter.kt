@@ -1,18 +1,15 @@
 package com.mnrf.ejajan.view.main.parent.ui.student.adapter
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mnrf.ejajan.data.model.NutritionModel
-import com.mnrf.ejajan.data.model.SpendingModel
 import com.mnrf.ejajan.databinding.ItemParentNutritionBinding
-import com.mnrf.ejajan.databinding.ItemParentSpendingBinding
-import com.mnrf.ejajan.view.main.parent.ui.student.adapter.SpendingAdapter.SpendingViewHolder
 
-class NutritionAdapter (private val items: MutableList<NutritionModel>) :
-    RecyclerView.Adapter<NutritionAdapter.NutritionViewHolder>(){
+class NutritionAdapter(
+    private val items: MutableList<Pair<NutritionModel, String>> // Pair of NutritionModel and Child Name
+) : RecyclerView.Adapter<NutritionAdapter.NutritionViewHolder>() {
 
     class NutritionViewHolder(val binding: ItemParentNutritionBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -27,18 +24,17 @@ class NutritionAdapter (private val items: MutableList<NutritionModel>) :
     }
 
     override fun onBindViewHolder(holder: NutritionViewHolder, position: Int) {
-        val item = items[position]
-        val combinedText = "${item.name} & ${item.mineral}"
-        holder.binding.tvNutrition.text = combinedText
-        holder.binding.tvNutrition.setTextColor(Color.WHITE)
+        val (nutrition, childName) = items[position]
+        holder.binding.tvNutrition.text = "$childName: ${nutrition.name}"
+        holder.binding.tvNutrition.setTextColor(Color.DKGRAY)
     }
 
     override fun getItemCount() = items.size
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateItems(newItems: List<NutritionModel>) {
+    fun updateItems(newItems: List<Pair<NutritionModel, String>>) {
         items.clear()
         items.addAll(newItems)
-        notifyDataSetChanged()
+        notifyDataSetChanged() // Refresh the entire list
     }
+
 }

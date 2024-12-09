@@ -11,11 +11,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.LocaleListCompat
+import com.google.firebase.Timestamp
 import com.midtrans.sdk.uikit.api.model.CustomColorTheme
 import com.midtrans.sdk.uikit.api.model.TransactionResult
 import com.midtrans.sdk.uikit.external.UiKitApi
 import com.midtrans.sdk.uikit.internal.util.UiKitConstants
 import com.mnrf.ejajan.databinding.ActivityParentTransactionBinding
+import java.time.Instant
 
 class TransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityParentTransactionBinding
@@ -65,7 +67,7 @@ class TransactionActivity : AppCompatActivity() {
         // Button click listener to trigger the transaction process
         binding.btnConfirm.setOnClickListener {
             val amountText = binding.etAmount.text.toString()
-            /*if (amountText.isNotEmpty()) {
+            if (amountText.isNotEmpty()) {
                 val amount = amountText.toDoubleOrNull()
                 if (amount != null && amount > 10000) {
                     Toast.makeText(this, "Top Up Amount: Rp $amount", Toast.LENGTH_SHORT).show()
@@ -75,18 +77,21 @@ class TransactionActivity : AppCompatActivity() {
                 }
             } else {
                 Toast.makeText(this, "Amount cannot be empty", Toast.LENGTH_SHORT).show()
-            }*/
-            intent = Intent(this, ConfirmationActivity::class.java)
+            }
+            /*intent = Intent(this, ConfirmationActivity::class.java)
             intent.putExtra(ConfirmationActivity.TRANSACTION_SUCCESS, amountText)
             startActivity(intent)
-            finish()
+            finish()*/
         }
     }
 
     private fun startTransaction() {
         // Fetch the Snap Token from your backend (this should be done via an API call)
         // For now, we use a mock token. In your production app, make sure to fetch the token from the backend.
+        /*val testToken = "PT${Instant.now().toEpochMilli()}"*/
         val snapToken = "25e3659b-f00c-4d98-bfff-9f72978c8df5"
+        /*val snapToken = testToken
+        println(snapToken)*/
 
         // Initialize UiKitApi with your credentials and configuration
         UiKitApi.Builder()

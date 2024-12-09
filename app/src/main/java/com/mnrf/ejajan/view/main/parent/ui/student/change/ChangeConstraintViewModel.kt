@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import com.mnrf.ejajan.data.model.AllergyModel
+import com.mnrf.ejajan.data.model.NutritionModel
+import com.mnrf.ejajan.data.model.SpendingModel
 import com.mnrf.ejajan.data.model.UserModel
 import com.mnrf.ejajan.data.repository.ConstraintRepository
 import kotlinx.coroutines.flow.Flow
@@ -40,58 +43,83 @@ class ChangeConstraintViewModel(
         return repository.getSession()
     }
 
+    fun fetchAllergiesForStudent(studentUid: String, onSuccess: (List<AllergyModel>) -> Unit) {
+        repository.getAllergies(
+            studentUid = studentUid,
+            onSuccess = { allergies -> onSuccess(allergies) },
+            onFailure = { e -> _errorMessage.postValue("Error fetching allergies: ${e.message}") }
+        )
+    }
+
+    fun fetchSpendingForStudent(studentUid: String, onSuccess: (List<SpendingModel>) -> Unit) {
+        repository.getSpending(
+            studentUid = studentUid,
+            onSuccess = { spendings -> onSuccess(spendings) },
+            onFailure = { e -> _errorMessage.postValue("Error fetching spending: ${e.message}") }
+        )
+    }
+
+    fun fetchNutritionForStudent(studentUid: String, onSuccess: (List<NutritionModel>) -> Unit) {
+        repository.getNutrition(
+            studentUid = studentUid,
+            onSuccess = { nutrition -> onSuccess(nutrition) },
+            onFailure = { e -> _errorMessage.postValue("Error fetching nutrition: ${e.message}") }
+        )
+    }
+
     // Fetch allergies from repository
-    fun fetchAllergies() {
-        repository.getAllergiesWithIds(
+    fun fetchAllergies(studentUid: String) {
+        repository.getAllergiesWithIds( studentUid,
             onSuccess = { data -> _allergiesMap.postValue(data) },
             onFailure = { e -> _errorMessage.postValue("Error fetching allergies: ${e.message}") }
         )
     }
 
     // Fetch spending constraints from repository
-    fun fetchSpending() {
-        repository.getSpendingWithIds(
+    fun fetchSpending(studentUid: String) {
+        repository.getSpendingWithIds(studentUid,
             onSuccess = { data -> _spendingMap.postValue(data) },
             onFailure = { e -> _errorMessage.postValue("Error fetching spending data: ${e.message}") }
         )
     }
 
-    fun fetchNutrition() {
-        repository.getNutritionWithIds(
+    fun fetchNutrition(studentUid: String) {
+        repository.getNutritionWithIds(studentUid,
             onSuccess = { data -> _nutritionMap.postValue(data) },
-            onFailure = { e -> _errorMessage.postValue("Error fetching spending data: ${e.message}") }
+            onFailure = { e -> _errorMessage.postValue("Error fetching nutrition data: ${e.message}") }
         )
     }
 
-    // Update allergy constraint
-    fun updateAllergy(allergyId: String, newName: String) {
-        repository.updateAllergy(allergyId, newName)
+    // Update allergy constraint associated with the selected child's UID
+    fun updateAllergy(studentUid: String, name: String, newName: String) {
+        repository.updateAllergy(studentUid, name, newName)
             .addOnSuccessListener {
                 _updateAllergyStatus.postValue("Allergy updated successfully")
             }
             .addOnFailureListener { exception ->
-                _updateAllergyStatus.postValue("Error updating allergy: ${exception.message}")
+                _errorMessage.postValue("Error updating allergy: ${exception.message}")
             }
     }
 
-    // Update spending constraint
-    fun updateSpending(spendingId: String, newAmount: String, newPeriod: String) {
-        repository.updateSpending(spendingId, newAmount, newPeriod)
+    // Update spending constraint associated with the selected child's UID
+    fun updateSpending(studentUid: String, spendingId: String, newAmount: String, newPeriod: String) {
+        repository.updateSpending(studentUid, spendingId, newAmount, newPeriod)
             .addOnSuccessListener {
                 _updateSpendingStatus.postValue("Spending updated successfully")
             }
             .addOnFailureListener { exception ->
-                _updateSpendingStatus.postValue("Error updating spending: ${exception.message}")
+                _errorMessage.postValue("Error updating spending: ${exception.message}")
             }
     }
 
-    fun updateNutrition(nutritionId: String, newName: String, newMineral: String) {
-        repository.updateNutrition(nutritionId, newName, newMineral)
+    // Update nutrition constraint associated with the selected child's UID
+    fun updateNutrition(studentUid: String, nutritionId: String, newName: String) {
+        repository.updateNutrition(studentUid, nutritionId, newName)
             .addOnSuccessListener {
-                _updateNutritionStatus.postValue("Spending updated successfully")
+                _updateNutritionStatus.postValue("Nutrition updated successfully")
             }
             .addOnFailureListener { exception ->
-                _updateNutritionStatus.postValue("Error updating spending: ${exception.message}")
+                _errorMessage.postValue("Error updating nutrition: ${exception.message}")
             }
     }
 }

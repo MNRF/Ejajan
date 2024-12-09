@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 data class SpendingModel(
     val amount: String = "",
     val period: String = "",
-    val parentUid: String = ""
+    val student_uid: String = ""
 ) : Parcelable

@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mnrf.ejajan.data.model.AllergyModel
 import com.mnrf.ejajan.databinding.ItemParentAlergiBinding
 
-class AllergyAdapter(private val items: MutableList<AllergyModel>) :
-    RecyclerView.Adapter<AllergyAdapter.AllergyViewHolder>() {
+class AllergyAdapter(
+    private val items: MutableList<Pair<AllergyModel, String>> // Pair of AllergyModel and Child Name
+) : RecyclerView.Adapter<AllergyAdapter.AllergyViewHolder>() {
 
     class AllergyViewHolder(val binding: ItemParentAlergiBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -23,16 +24,16 @@ class AllergyAdapter(private val items: MutableList<AllergyModel>) :
     }
 
     override fun onBindViewHolder(holder: AllergyViewHolder, position: Int) {
-        val item = items[position]
-        holder.binding.tvAllergyName.text = item.name
-        holder.binding.tvAllergyName.setTextColor(Color.WHITE)
+        val (allergy, childName) = items[position]
+        holder.binding.tvAllergyName.text = "$childName: ${allergy.name}"
+        holder.binding.tvAllergyName.setTextColor(Color.DKGRAY)
     }
 
     override fun getItemCount() = items.size
 
-    fun updateItems(newItems: List<AllergyModel>) {
+    fun updateItems(newItems: List<Pair<AllergyModel, String>>) {
         items.clear()
         items.addAll(newItems)
-        notifyItemRangeChanged(0, items.size)
+        notifyDataSetChanged() // Refresh the entire list
     }
 }

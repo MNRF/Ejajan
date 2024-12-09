@@ -4,9 +4,11 @@ import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.toObject
 import com.mnrf.ejajan.data.model.AllergyModel
 import com.mnrf.ejajan.data.model.NutritionModel
 import com.mnrf.ejajan.data.model.SpendingModel
+import com.mnrf.ejajan.data.model.StudentProfileModel
 import com.mnrf.ejajan.data.model.UserModel
 import com.mnrf.ejajan.data.pref.UserPreference
 import kotlinx.coroutines.flow.Flow
@@ -22,7 +24,7 @@ class ConstraintRepository (
 
     fun addAllergy(allergy: AllergyModel, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
         val allergyData = hashMapOf(
-            "parent_uid" to allergy.parentUid,
+            "student_uid" to allergy.student_uid,
             "name" to allergy.name
         )
 
@@ -44,7 +46,7 @@ class ConstraintRepository (
         onFailure: (Exception) -> Unit
     ) {
         val spendingData = hashMapOf(
-            "parent_uid" to spending.parentUid,
+            "student_uid" to spending.student_uid,
             "amount" to spending.amount,
             "period" to spending.period
         )
@@ -62,14 +64,13 @@ class ConstraintRepository (
     }
 
     fun addNutrition(nutrition: NutritionModel, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
-        val allergyData = hashMapOf(
-            "parent_uid" to nutrition.parentUid,
-            "name" to nutrition.name,
-            "mineral" to nutrition.mineral
+        val nutritionData = hashMapOf(
+            "student_uid" to nutrition.student_uid,
+            "name" to nutrition.name
         )
 
         db.collection("nutrition")
-            .add(allergyData)
+            .add(nutritionData)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
                 onSuccess()
@@ -80,13 +81,120 @@ class ConstraintRepository (
             }
     }
 
-    fun getAllergies(
+    fun updateAllergy(studentUid: String, name: String, newName: String): Task<Void> {
+        val query = db.collection("allergies")
+            .whereEqualTo("student_uid", studentUid)
+            .whereEqualTo("name", name)
+
+        return query.get().continueWithTask { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+                if (snapshot != null && !snapshot.isEmpty) {
+                    val documentId = snapshot.documents.first().id
+                    return@continueWithTask db.collection("allergies")
+                        .document(documentId)
+                        .update(
+                            "name", newName
+                        )
+                } else {
+                    throw Exception("No allergy found for studentUid: $studentUid and name: $name")
+                }
+            } else {
+                throw task.exception ?: Exception("Error fetching allergy documents")
+            }
+        }
+    }
+
+
+    fun updateSpending(
+        studentUid: String,
+        amount: String,
+        newAmount: String,
+        newPeriod: String
+    ): Task<Void> {
+        val query = db.collection("spending")
+            .whereEqualTo("student_uid", studentUid)
+            .whereEqualTo("amount", amount)
+
+        return query.get().continueWithTask { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+                if (snapshot != null && !snapshot.isEmpty) {
+                    val documentId = snapshot.documents.first().id
+                    return@continueWithTask db.collection("spending")
+                        .document(documentId)
+                        .update(
+                            "amount", newAmount,
+                            "period", newPeriod
+                        )
+                } else {
+                    throw Exception("No spending found for studentUid: $studentUid and amount: $amount")
+                }
+            } else {
+                throw task.exception ?: Exception("Error fetching spending documents")
+            }
+        }
+        /*return db.collection("spending")
+            .document(spendingId)
+            .update(
+                "amount", newAmount,
+                "period", newPeriod,
+                "student_uid", studentUid
+            )*/
+    }
+
+    fun updateNutrition(studentUid: String, name: String, newName: String): Task<Void> {
+        val query = db.collection("nutrition")
+            .whereEqualTo("student_uid", studentUid)
+            .whereEqualTo("name", name)
+
+        return query.get().continueWithTask { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+                if (snapshot != null && !snapshot.isEmpty) {
+                    val documentId = snapshot.documents.first().id
+                    return@continueWithTask db.collection("nutrition")
+                        .document(documentId)
+                        .update(
+                            "name", newName,
+                        )
+                } else {
+                    throw Exception("No nutrition found for studentUid: $studentUid and name: $name")
+                }
+            } else {
+                throw task.exception ?: Exception("Error fetching nutrition documents")
+            }
+        }
+        /*return db.collection("nutrition")
+            .document(nutritionId)
+            .update(
+                "name", newName,
+                "student_uid", studentUid
+            )*/
+    }
+
+    fun getParentsChilds(
         parentUid: String,
+        onSuccess: (List<StudentProfileModel>) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        db.collection("studentprofiles")
+            .whereEqualTo("parent_uid", parentUid)
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val parentsChilds = snapshot.documents.mapNotNull { it.toObject(StudentProfileModel::class.java) }
+                onSuccess(parentsChilds)
+            }
+            .addOnFailureListener { e -> onFailure(e) }
+    }
+
+    fun getAllergies(
+        studentUid: String,
         onSuccess: (List<AllergyModel>) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
         db.collection("allergies")
-            .whereEqualTo("parent_uid", parentUid)
+            .whereEqualTo("student_uid", studentUid)
             .get()
             .addOnSuccessListener { snapshot ->
                 val allergies = snapshot.documents.mapNotNull { it.toObject(AllergyModel::class.java) }
@@ -96,12 +204,12 @@ class ConstraintRepository (
     }
 
     fun getSpending(
-        parentUid: String,
+        studentUid: String,
         onSuccess: (List<SpendingModel>) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
         db.collection("spending")
-            .whereEqualTo("parent_uid", parentUid)
+            .whereEqualTo("student_uid", studentUid)
             .get()
             .addOnSuccessListener { snapshot ->
                 val spending = snapshot.documents.mapNotNull { it.toObject(SpendingModel::class.java) }
@@ -111,12 +219,12 @@ class ConstraintRepository (
     }
 
     fun getNutrition(
-        parentUid: String,
+        studentUid: String,
         onSuccess: (List<NutritionModel>) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
         db.collection("nutrition")
-            .whereEqualTo("parent_uid", parentUid)
+            .whereEqualTo("student_uid", studentUid)
             .get()
             .addOnSuccessListener { snapshot ->
                 val nutrition = snapshot.documents.mapNotNull { it.toObject(NutritionModel::class.java) }
@@ -125,8 +233,8 @@ class ConstraintRepository (
             .addOnFailureListener { e -> onFailure(e) }
     }
 
-    fun getAllergiesWithIds(onSuccess: (Map<String, String>) -> Unit, onFailure: (Exception) -> Unit) {
-        db.collection("allergies")
+    fun getAllergiesWithIds(studentUid: String, onSuccess: (Map<String, String>) -> Unit, onFailure: (Exception) -> Unit) {
+        db.collection("allergies").whereEqualTo("student_uid", studentUid)
             .get()
             .addOnSuccessListener { snapshot ->
                 val allergies = snapshot.documents.associate {
@@ -137,8 +245,8 @@ class ConstraintRepository (
             .addOnFailureListener { e -> onFailure(e) }
     }
 
-    fun getSpendingWithIds(onSuccess: (Map<String, Pair<String, String>>) -> Unit, onFailure: (Exception) -> Unit) {
-        db.collection("spending")
+    fun getSpendingWithIds(studentUid: String, onSuccess: (Map<String, Pair<String, String>>) -> Unit, onFailure: (Exception) -> Unit) {
+        db.collection("spending").whereEqualTo("student_uid", studentUid)
             .get()
             .addOnSuccessListener { snapshot ->
                 val spendings = snapshot.documents.associate {
@@ -152,14 +260,14 @@ class ConstraintRepository (
             .addOnFailureListener { e -> onFailure(e) }
     }
 
-    fun getNutritionWithIds(onSuccess: (Map<String, Pair<String, String>>) -> Unit, onFailure: (Exception) -> Unit) {
-        db.collection("nutrition")
+    fun getNutritionWithIds(studentUid: String, onSuccess: (Map<String, Pair<String, String>>) -> Unit, onFailure: (Exception) -> Unit) {
+        db.collection("nutrition").whereEqualTo("student_uid", studentUid)
             .get()
             .addOnSuccessListener { snapshot ->
                 val nutrition = snapshot.documents.associate {
                     it.id to Pair(
                         it.getString("name") ?: "",
-                        it.getString("mineral") ?: ""
+                        /*it.getString("mineral") ?: */""
                     )
                 }
                 onSuccess(nutrition)
@@ -201,10 +309,10 @@ class ConstraintRepository (
         )
     }
 
-    fun updateNutrition(allergiesId: String, newName: String, newMineral: String): Task<Void> {
+    fun updateNutrition(allergiesId: String, newName: String/*, newMineral: String*/): Task<Void> {
         return db.collection("nutrition").document(allergiesId).update(
-            "name", newName,
-            "mineral", newMineral
+            "name", newName/*,
+            *//*"mineral", newMineral*/
         )
     }
 

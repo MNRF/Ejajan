@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
+import com.mnrf.ejajan.data.model.AllergyModel
+import com.mnrf.ejajan.data.model.NutritionModel
+import com.mnrf.ejajan.data.model.SpendingModel
 import com.mnrf.ejajan.data.pref.UserPreference
 import com.mnrf.ejajan.data.pref.dataStore
 import com.mnrf.ejajan.data.repository.ConstraintRepository
@@ -35,57 +38,73 @@ class StudentParentFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentParentStudentBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupRecyclerView()
 
         val userPreference = UserPreference.getInstance(requireContext().dataStore)
         val repository = ConstraintRepository(userPreference)
         viewModel = ViewModelProvider(this, ConstraintViewModelFactory(repository))[StudentViewModel::class.java]
 
+        // Observe data changes for UI updates
         viewModel.allergyList.observe(viewLifecycleOwner) { allergies ->
-            allergyAdapter.updateItems(allergies)
+            val uniqueItems = allergies.distinctBy { it.student_uid }
+            val displayItems = uniqueItems.map { allergy ->
+                val childName = viewModel.parentsChildsList.value?.find { it.uid == allergy.student_uid }?.name ?: "Unknown"
+                allergy to childName
+            }
+            allergyAdapter.updateItems(displayItems)
         }
 
         viewModel.spendingList.observe(viewLifecycleOwner) { spending ->
-            spendingAdapter.updateItems(spending)
+            val uniqueItems = spending.distinctBy { it.student_uid }
+            val displayItems = uniqueItems.map { spendingItem ->
+                val childName = viewModel.parentsChildsList.value?.find { it.uid == spendingItem.student_uid }?.name ?: "Unknown"
+                spendingItem to childName
+            }
+            spendingAdapter.updateItems(displayItems)
         }
 
         viewModel.nutritionList.observe(viewLifecycleOwner) { nutrition ->
-            nutritionAdapter.updateItems(nutrition)
+            val uniqueItems = nutrition.distinctBy { it.student_uid }
+            val displayItems = uniqueItems.map { nutritionItem ->
+                val childName = viewModel.parentsChildsList.value?.find { it.uid == nutritionItem.student_uid }?.name ?: "Unknown"
+                nutritionItem to childName
+            }
+            nutritionAdapter.updateItems(displayItems)
         }
 
-        // Dapatkan UID pengguna
+        // Get parent UID and fetch child UIDs
         val user = FirebaseAuth.getInstance().currentUser
         val parentUid = user?.uid ?: ""
 
-        // Muat data alergi dan pengeluaran berdasarkan parentUid
         if (parentUid.isNotEmpty()) {
-            viewModel.loadAllergies(parentUid)
-            viewModel.loadSpending(parentUid)
-            viewModel.loadNutrition(parentUid)
+            viewModel.loadParentsChilds(parentUid)
+            viewModel.parentsChildsList.observe(viewLifecycleOwner) { children ->
+                val childUids = children.map { it.uid }
+                if (childUids.isNotEmpty()) {
+                    viewModel.loadAllergiesForChildren(childUids)
+                    viewModel.loadSpendingForChildren(childUids)
+                    viewModel.loadNutritionForChildren(childUids)
+                }
+            }
         }
+
         binding.btnParentCreate.setOnClickListener {
-            // Handle 'Tambah' button click
             val intent = Intent(requireContext(), AddConstraintActivity::class.java)
             startActivity(intent)
         }
 
         binding.btnParentUpdate.setOnClickListener {
-            // Handle 'Ubah' button click
             val intent = Intent(requireContext(), ChangeConstraintActivity::class.java)
             startActivity(intent)
         }
 
         binding.btnParentDelete.setOnClickListener {
-            // Handle 'Hapus' button click
             val intent = Intent(requireContext(), DeleteConstraintActivity::class.java)
             startActivity(intent)
         }
@@ -109,9 +128,7 @@ class StudentParentFragment : Fragment() {
             adapter = nutritionAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -21,7 +21,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="15dp"
-                android:backgroundTint="@color/blue1"
+                android:backgroundTint="@color/utama"
                 app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,14 +38,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter28_black"
                         android:text="@string/alergi"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_alergi">
@@ -68,7 +68,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
-                android:backgroundTint="@color/blue1"
+                android:backgroundTint="@color/utama"
                 app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,14 +85,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter28_black"
                         android:text="@string/spending"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_spending">
@@ -115,7 +115,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
-                android:backgroundTint="@color/blue1"
+                android:backgroundTint="@color/utama"
                 app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,14 +132,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter28_black"
                         android:text="@string/nutrition"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_nutrition">
@@ -156,51 +156,47 @@
 
             <Button
                 android:id="@+id/btn_parent_create"
-                style="@style/Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="60dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/blue1"
+                android:backgroundTint="@color/blue2"
                 android:drawableLeft="@drawable/ic_baseline_add_24"
                 android:drawableTint="@android:color/white"
                 android:text="@string/tambah"
                 android:textColor="@color/white"
                 android:textSize="12sp"
+                app:cornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_parent_delete"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btn_parent_update"
                 app:layout_constraintTop_toBottomOf="@+id/cv_nutrition" />
 
             <Button
                 android:id="@+id/btn_parent_update"
-                style="@style/Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="60dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/blue1"
+                android:backgroundTint="@color/blue2"
                 android:drawableLeft="@drawable/ic_baseline_edit_note_24"
                 android:drawableTint="@android:color/white"
                 android:text="@string/ubah"
                 android:textColor="@color/white"
+                android:textSize="12sp"
+                app:cornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_parent_create"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cv_nutrition" />
 
             <Button
                 android:id="@+id/btn_parent_delete"
-                style="@style/Button_noBackground"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="60dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/red"
@@ -208,35 +204,13 @@
                 android:drawableTint="@android:color/white"
                 android:text="@string/hapus"
                 android:textColor="@color/white"
+                android:textSize="12sp"
                 app:cornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btn_parent_create"
                 app:layout_constraintTop_toBottomOf="@+id/cv_nutrition" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="60dp"
-                android:backgroundTint="@color/blue1"
-                app:cardCornerRadius="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cv_nutrition">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

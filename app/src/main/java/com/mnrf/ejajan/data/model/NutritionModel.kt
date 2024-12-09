@@ -6,6 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class NutritionModel (
     val name: String = "",
-    val mineral: String = "",
-    val parentUid: String = ""
+/*    val mineral: String = "",*/
+    val student_uid: String = ""
 ) : Parcelable

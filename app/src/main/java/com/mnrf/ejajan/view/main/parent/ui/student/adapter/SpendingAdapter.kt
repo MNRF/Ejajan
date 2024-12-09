@@ -1,6 +1,5 @@
 package com.mnrf.ejajan.view.main.parent.ui.student.adapter
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mnrf.ejajan.data.model.SpendingModel
 import com.mnrf.ejajan.databinding.ItemParentSpendingBinding
 
-class SpendingAdapter(private val items: MutableList<SpendingModel>) :
-    RecyclerView.Adapter<SpendingAdapter.SpendingViewHolder>() {
+class SpendingAdapter(
+    private val items: MutableList<Pair<SpendingModel, String>> // Pair of SpendingModel and Child Name
+) : RecyclerView.Adapter<SpendingAdapter.SpendingViewHolder>() {
 
     class SpendingViewHolder(val binding: ItemParentSpendingBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -24,18 +24,18 @@ class SpendingAdapter(private val items: MutableList<SpendingModel>) :
     }
 
     override fun onBindViewHolder(holder: SpendingViewHolder, position: Int) {
-        val item = items[position]
-        val combinedText = "${item.amount} ${item.period}"
+        val (spending, childName) = items[position]
+        val combinedText = "$childName: ${spending.amount} (${spending.period})"
         holder.binding.tvSpending.text = combinedText
-        holder.binding.tvSpending.setTextColor(Color.WHITE)
+        holder.binding.tvSpending.setTextColor(Color.DKGRAY)
     }
 
     override fun getItemCount() = items.size
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateItems(newItems: List<SpendingModel>) {
+    fun updateItems(newItems: List<Pair<SpendingModel, String>>) {
         items.clear()
         items.addAll(newItems)
-        notifyDataSetChanged()
+        notifyDataSetChanged() // Refresh the entire list
     }
+
 }

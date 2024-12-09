@@ -38,10 +38,10 @@ class DeleteConstraintActivity : AppCompatActivity() {
         setupListeners()
 
         // Fetch data
-        viewModel.fetchAllergies()
+        /*viewModel.fetchAllergies()
         viewModel.fetchSpending()
         viewModel.fetchNutrition()
-
+*/
         setupSpinner(binding.spConstraint, R.array.Constraint)
     }
 

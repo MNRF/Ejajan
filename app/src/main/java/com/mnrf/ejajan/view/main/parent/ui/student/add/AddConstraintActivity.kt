@@ -15,12 +15,14 @@ import com.mnrf.ejajan.R
 import com.mnrf.ejajan.data.model.AllergyModel
 import com.mnrf.ejajan.data.model.NutritionModel
 import com.mnrf.ejajan.data.model.SpendingModel
+import com.mnrf.ejajan.data.model.StudentProfileModel
 import com.mnrf.ejajan.data.pref.UserPreference
 import com.mnrf.ejajan.data.pref.dataStore
 import com.mnrf.ejajan.data.repository.ConstraintRepository
 import com.mnrf.ejajan.databinding.ActivityParentAddBinding
 import com.mnrf.ejajan.view.main.merchant.ui.menu.add.MerchantAddMenuViewModel
 import com.mnrf.ejajan.view.main.parent.ui.student.ConstraintViewModelFactory
+import com.mnrf.ejajan.view.main.parent.ui.student.StudentViewModel
 import com.mnrf.ejajan.view.utils.ViewModelFactory
 
 class AddConstraintActivity : AppCompatActivity() {
@@ -31,7 +33,14 @@ class AddConstraintActivity : AppCompatActivity() {
         )
     }
 
+    private val studentviewModel: StudentViewModel by viewModels {
+        ConstraintViewModelFactory(
+            repository = ConstraintRepository(UserPreference.getInstance(this.dataStore)),
+        )
+    }
+
     private var isSpendingAdded = false
+    private lateinit var selectedChild: StudentProfileModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,37 +53,41 @@ class AddConstraintActivity : AppCompatActivity() {
         }
 
         setupSpinner(binding.spConstraint, R.array.Constraint)
-        setupSpinner(binding.spAlergi, R.array.Allergy)
-        setupSpinner(binding.spLimit, R.array.Spending)
-        setupSpinner(binding.spPeriod, R.array.Time)
-        setupSpinner(binding.spNutrition, R.array.Nutrition)
-        setupSpinner(binding.spMineral, R.array.Mineral)
+        setupSpinner(binding.spAlergi, R.array.Alergi)
+        setupSpinner(binding.spLimit, R.array.Pengeluaran)
+        setupSpinner(binding.spPeriod, R.array.Waktu)
+        setupSpinner(binding.spNutrition, R.array.Nutrisi)
+        /*setupSpinner(binding.spMineral, R.array.Mineral)*/
 
         checkIfSpendingAdded()
 
+        loadParentsChilds()
+
         binding.btnCreate.setOnClickListener {
+            if (!::selectedChild.isInitialized) {
+                Toast.makeText(this, "Pilih nama anak terlebih dahulu", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             when (binding.spConstraint.selectedItem.toString()) {
-                "Allergy" -> {
+                "Alergi" -> {
                     val allergyName = binding.spAlergi.selectedItem.toString()
                     if (allergyName.isNotEmpty()) {
-                        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
-                        val allergy = AllergyModel(name = allergyName, parentUid = uid)
+                        val allergy = AllergyModel(name = allergyName, student_uid = selectedChild.uid)
                         viewModel.addAllergy(
                             allergy,
                             onSuccess = { showSuccessDialog("Allergy added successfully") },
                             onFailure = { e -> Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show() }
                         )
-                    }
-                    else {
+                    } else {
                         Toast.makeText(this, "Pilih alergi terlebih dahulu", Toast.LENGTH_SHORT).show()
                     }
                 }
-                "Spending" -> {
+                "Pengeluaran" -> {
                     val spendingCategory = binding.spLimit.selectedItem.toString()
                     val period = binding.spPeriod.selectedItem.toString()
                     if (spendingCategory.isNotEmpty() && period.isNotEmpty() && !isSpendingAdded) {
-                        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
-                        val spending = SpendingModel(amount = spendingCategory, period = period, parentUid = uid)
+                        val spending = SpendingModel(amount = spendingCategory, period = period, student_uid = selectedChild.uid)
                         viewModel.addSpending(
                             spending,
                             onSuccess = {
@@ -92,15 +105,13 @@ class AddConstraintActivity : AppCompatActivity() {
                         }
                     }
                 }
-                "Nutrition" -> {
+                "Nutrisi" -> {
                     val nutritionName = binding.spNutrition.selectedItem.toString()
-                    val mineral = binding.spMineral.selectedItem.toString()
-                    if (nutritionName.isNotEmpty() && mineral.isNotEmpty()) {
-                        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
-                        val nutrition = NutritionModel(name = nutritionName, mineral = mineral, parentUid = uid)
+                    if (nutritionName.isNotEmpty()) {
+                        val nutrition = NutritionModel(name = nutritionName, student_uid = selectedChild.uid)
                         viewModel.addNutrition(
                             nutrition,
-                            onSuccess = { showSuccessDialog("Nutrition added successfully") },
+                            onSuccess = { showSuccessDialog("Nutrisi berhasil ditambahkan") },
                             onFailure = { e -> Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show() }
                         )
                     } else {
@@ -111,8 +122,37 @@ class AddConstraintActivity : AppCompatActivity() {
             }
         }
 
+
         binding.infoIcon.setOnClickListener {
             showInfoDialog()
+        }
+    }
+
+    private fun loadParentsChilds() {
+        val parentUid = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        studentviewModel.loadParentsChilds(parentUid)
+
+        studentviewModel.parentsChildsList.observe(this) { childs ->
+            val childNames = childs.map { it.name }
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, childNames)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spNamaAnak.adapter = adapter
+
+            binding.spNamaAnak.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>,
+                        view: View,
+                        position: Int,
+                        id: Long
+                    ) {
+                        selectedChild = childs[position]
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>) {
+                        // No action
+                    }
+                }
         }
     }
 
@@ -135,7 +175,7 @@ class AddConstraintActivity : AppCompatActivity() {
 
     private fun handleSpinnerSelection() {
         when (binding.spConstraint.selectedItem.toString()) {
-            "Allergy" -> {
+            "Alergi" -> {
                 binding.tvAlergi.visibility = View.VISIBLE
                 binding.spAlergi.visibility = View.VISIBLE
                 binding.spLimit.visibility = View.GONE
@@ -143,7 +183,7 @@ class AddConstraintActivity : AppCompatActivity() {
                 binding.tvLimit.visibility = View.GONE
                 binding.tvPeriod.visibility = View.GONE
             }
-            "Spending" -> {
+            "Pengeluaran" -> {
                 if (!isSpendingAdded) {
                     binding.spLimit.visibility = View.VISIBLE
                     binding.spPeriod.visibility = View.VISIBLE
@@ -153,11 +193,11 @@ class AddConstraintActivity : AppCompatActivity() {
                 binding.spAlergi.visibility = View.GONE
                 binding.tvAlergi.visibility = View.GONE
             }
-            "Nutrition" -> {
+            "Nutrisi" -> {
                 binding.spNutrition.visibility = View.VISIBLE
                 binding.tvNutrition.visibility = View.VISIBLE
-                binding.tvMineral.visibility = View.VISIBLE
-                binding.spMineral.visibility = View.VISIBLE
+                /*binding.tvMineral.visibility = View.VISIBLE
+                binding.spMineral.visibility = View.VISIBLE*/
 
                 binding.spAlergi.visibility = View.GONE
                 binding.spLimit.visibility = View.GONE
@@ -193,7 +233,7 @@ class AddConstraintActivity : AppCompatActivity() {
 
     private fun showSuccessDialog(message: String) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Success")
+        builder.setTitle("Berhasil")
             .setMessage(message)
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
@@ -203,7 +243,7 @@ class AddConstraintActivity : AppCompatActivity() {
 
     private fun showInfoDialog() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Constraint Information")
+        builder.setTitle("Informasi Batasan")
             .setMessage("The parent chooses the constraint between these two. If the parent chooses allergy, then the parent only sees the allergy section, while if the parent chooses spending, then the nominal limit and the time period for spending are displayed.")
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()

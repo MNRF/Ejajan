@@ -1,57 +1,58 @@
 <resources>
     <string-array name="Constraint">
-        <item>Allergy</item>
-        <item>Spending</item>
-        <item>Nutrition</item>
+        <item>Alergi</item>
+        <item>Pengeluaran</item>
+        <item>Nutrisi</item>
     </string-array>
-    <string-array name="Allergy">
-        <item>Peanut</item>
-        <item>Tree Nut</item>
-        <item>Milk</item>
-        <item>Egg</item>
-        <item>Wheat</item>
-        <item>Soy</item>
-        <item>Fish</item>
-        <item>Shellfish</item>
-        <item>Sesame</item>
-        <item>Mustard</item>
-        <item>Corn</item>
+    <string-array name="Alergi">
+        <item>Kacang tanah</item>
+        <item>Susu</item>
+        <item>Telur</item>
+        <item>Makanan laut (kerang, udang, lobster)</item>
+        <item>Ikan</item>
+        <item>Kacang pohon (misalnya, almond, kenari)</item>
+        <item>Gandum</item>
+        <item>Kedelai</item>
         <item>Gluten</item>
-        <item>Sulfites</item>
-        <item>Celery</item>
-        <item>Meat</item>
-        <item>Poultry</item>
-        <item>Fruits</item>
-        <item>Vegetables</item>
-        <item>Alcohol</item>
-        <item>Caffeine</item>
-        <item>Legumes</item>
-        <item>Poppy Seeds</item>
-        <item>Lupin</item>
+        <item>wijen</item>
     </string-array>
-    <string-array name="Spending">
-        <item>Rp. 5.000</item>
-        <item>Rp. 10.000</item>
-        <item>Rp. 15.000</item>
-        <item>Rp. 20.000</item>
-        <item>Rp. 25.000</item>
+    <string-array name="Pengeluaran">
+        <item>Rp5.000</item>
+        <item>Rp10.000</item>
+        <item>Rp15.000</item>
+        <item>Rp20.000</item>
+        <item>Rp25.000</item>
+        <item>Rp30.000</item>
+        <item>Rp50.000</item>
+        <item>Rp100.000</item>
     </string-array>
-    <string-array name="Time">
+    <string-array name="Waktu">
         <item>per hari</item>
-        <item>per minggu</item>
-        <item>per bulan</item>
+        <!--        <item>per minggu</item>-->
+        <!--        <item>per bulan</item>-->
     </string-array>
-    <string-array name="Nutrition">
+
+    <string-array name="Nutrisi">
         <item>Karbohidrat</item>
         <item>Protein</item>
         <item>Lemak</item>
         <item>Serat</item>
         <item>Vitamin A</item>
-        <item>Vitamin B</item>
         <item>Vitamin C</item>
         <item>Vitamin D</item>
         <item>Vitamin E</item>
         <item>Vitamin K</item>
+        <item>Folat (Vitamin B9)</item>
+        <item>Vitamin B12</item>
+        <item>Vitamin B6</item>
+        <item>Kalium</item>
+        <item>Kalsium</item>
+        <item>Magnesium</item>
+        <item>Fosfor</item>
+        <item>Zat besi</item>
+        <item>Yodium</item>
+        <item>Omega-3</item>
+        <item>Antioksidan</item>
     </string-array>
 
     <string-array name="Mineral">
@@ -224,7 +225,7 @@
     <string name="empty_name">Username cannot be empty</string>
     <string name="name_too_short">Username must be at least 3 characters long</string>
     <string name="password_not_matching">Passwords do not match</string>
-    <string name="change_to_update">Change To Update</string>
+    <string name="change_to_update">Change To</string>
     <string name="nutrition">Nutrition</string>
     <string name="mineral">Mineral</string>
     <string name="buka">Buka</string>
@@ -250,4 +251,254 @@
     <string name="discounted_price_format">Rp.%1$d</string>
     <string name="quantity_format">Qty: %s</string>
     <string name="price">%d</string>
+    <string name="nama_anak">Nama anak</string>
+    <string name="berhasil_mengubah_data">Berhasil mengubah data</string>
+    <string name="gagal_mengubah_data">Gagal mengubah data</string>
 </resources>
+<!--
+<resources>
+    <string-array name="Constraint">
+        <item>Alergi</item>
+        <item>Pengeluaran</item>
+        <item>Nutrisi</item>
+    </string-array>
+    <string-array name="Alergi">
+        <item>Kacang tanah</item>
+        <item>Susu</item>
+        <item>Telur</item>
+        <item>Makanan laut (kerang, udang, lobster)</item>
+        <item>Ikan</item>
+        <item>Kacang pohon (misalnya, almond, kenari)</item>
+        <item>Gandum</item>
+        <item>Kedelai</item>
+        <item>Gluten</item>
+        <item>wijen</item>
+    </string-array>
+    <string-array name="Pengeluaran">
+        <item>Rp5.000</item>
+        <item>Rp10.000</item>
+        <item>Rp15.000</item>
+        <item>Rp20.000</item>
+        <item>Rp25.000</item>
+        <item>Rp30.000</item>
+        <item>Rp50.000</item>
+        <item>Rp100.000</item>
+    </string-array>
+    <string-array name="Waktu">
+        <item>per hari</item>
+&lt;!&ndash;        <item>per minggu</item>&ndash;&gt;
+&lt;!&ndash;        <item>per bulan</item>&ndash;&gt;
+    </string-array>
+
+    <string-array name="Nutrisi">
+        <item>Karbohidrat</item>
+        <item>Protein</item>
+        <item>Lemak</item>
+        <item>Serat</item>
+        <item>Vitamin A</item>
+        <item>Vitamin C</item>
+        <item>Vitamin D</item>
+        <item>Vitamin E</item>
+        <item>Vitamin K</item>
+        <item>Folat (Vitamin B9)</item>
+        <item>Vitamin B12</item>
+        <item>Vitamin B6</item>
+        <item>Kalium</item>
+        <item>Kalsium</item>
+        <item>Magnesium</item>
+        <item>Fosfor</item>
+        <item>Zat besi</item>
+        <item>Yodium</item>
+        <item>Omega-3</item>
+        <item>Antioksidan</item>
+    </string-array>
+
+    <string-array name="Mineral">
+        <item>Kalsium</item>
+        <item>Besi</item>
+        <item>Seng</item>
+        <item>Magnesium</item>
+        <item>Kalium</item>
+        <item>Fosfor</item>
+        <item>Natrium</item>
+        <item>Klorida</item>
+        <item>Mangan</item>
+        <item>Fluor</item>
+    </string-array>
+
+    <string name="app_name">Ejajan</string>
+    <string name="Deskripsi_logo">Logo E-Jajan</string>
+    <string name="Apps">E - Jajan</string>
+    <string name="welcome">EJajan</string>
+    <string name="btnlogin_student">Login Student</string>
+    <string name="btnlogin_parent_merchant">Login Parent or Merchant</string>
+    <string name="description_login">Enter the provided login credential</string>
+    <string name="invalid_email">Masukkan email dengan benar</string>
+    <string name="minimum_characters">Kata sandi harus minimal 8 karakter</string>
+    <string name="input_your_email">Masukkan email Anda</string>
+    <string name="input_your_password">Masukkan kata sandi Anda</string>
+    <string name="btnLogin">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="welcome_role">Select your role to start managing your account and enjoying our app features.</string>
+    <string name="student">Student</string>
+    <string name="parent">Parent</string>
+    <string name="merchant">Merchant</string>
+    <string name="image_chosee_role">Image Choose Role</string>
+    <string name="parent_desc1">As a Parent, you can set allergies, spending limits, and nutritional requirements for your student</string>
+    <string name="parent_desc2">As a Parent, you can monitor your student\'s account balance and purchase history</string>
+    <string name="parent_desc3">As a Parent, you can view your student\'s spending and nutrition data in easy-to-understand graphical form</string>
+    <string name="next">Next</string>
+    <string name="ready_to_start">Start</string>
+    <string name="start_desc">You are ready to go! Find ease in every role and start a new experience with this application</string>
+    <string name="merchant_desc1">As a Merchant, you can add new menus with details such as name, price, and description of the food</string>
+    <string name="merchant_desc2">As a Merchant, you can take and confirm orders to ensure the process runs smoothly</string>
+    <string name="merchant_desc3">As a Merchant, you can receive payments from student balances directly when orders are taken</string>
+    <string name="student_desc1">As a Student, you can log in using the facial recognition feature to ensure security</string>
+    <string name="student_desc2">As a Student, you can confirm food orders easily using facial recognition technology</string>
+    <string name="student_desc3">As a Student, you can view menus and food recommendations that have been adjusted to the restrictions set by your parents</string>
+    <string name="start_camera">Start Camera</string>
+    <string name="title_activity_merchant">MerchantActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_menu">Menu</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_activity_parent">ParentActivity</string>
+    <string name="title_report">Report</string>
+    <string name="title_student">Student</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_merchant">Welcome Merchant</string>
+    <string name="deskripsi_homeMerchant">Have a nice Day</string>
+    <string name="saldo_rp_10_000">Saldo : Rp. 10.000</string>
+    <string name="status_pesanan_aktif">Status Pesanan Aktif</string>
+    <string name="see_all">See All</string>
+    <string name="welcome_parent">Welcome Parent</string>
+    <string name="deskripsi_homeWelcome">You can set limits, view purchase history, and monitor Student spending and nutrition</string>
+    <string name="top_up">Top Up</string>
+    <string name="saldo_rp_0">Saldo : Rp0</string>
+    <string name="recommendation">Recomendation</string>
+    <string name="fill_all_fields">Please fill in all fields</string>
+    <string name="invalid_role">Invalid role, please try again</string>
+    <string name="text_judul">Secure Login</string>
+    <string name="text_judul2">Order with Ease</string>
+    <string name="text_judul3">Personalized Menus</string>
+    <string name="parent_judul1">Stay in Control</string>
+    <string name="parent_judul2">Monitor with Ease</string>
+    <string name="parent_judul3">Visualize Insights</string>
+    <string name="merchant_judul1">Create Menus Easily</string>
+    <string name="merchant_judul2">Process Orders</string>
+    <string name="merchant_judul3">Get Paid Quickly</string>
+    <string name="start_login">Ready to Start!</string>
+    <string name="welcome_text">Choose your role</string>
+    <string name="skip">Skip</string>
+    <string name="back">Back</string>
+    <string name="orderconfirmation"><![CDATA[Please verify student identity using facial recognition to confirm order pickup.]]></string>
+    <string name="deskripsi_homeStudent">Come on, choose healthy and delicious food for you!</string>
+    <string name="welcome_student">Welcome Student</string>
+    <string name="personal_picks">Personalized Picks</string>
+    <string name="healty_choices">Healthy Choices</string>
+    <string name="special_offers">Special Offers</string>
+    <string name="order_desc">Fried rice is rice fried in a pan with various spices and ingredients, such as garlic, shallots, sweet soy sauce, salt, and pepper.</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="notification">Notification</string>
+    <string name="select_language">Select Language</string>
+    <string name="logout">Logout</string>
+    <string name="alergi">Alergi</string>
+    <string name="spending">Spending</string>
+    <string name="rp50_000">Rp50.000</string>
+    <string name="tambah">Tambah</string>
+    <string name="ubah">Ubah</string>
+    <string name="hapus">Hapus</string>
+    <string name="laporan">Laporan Penjualan</string>
+    <string name="cair_saldo">Cairkan Saldo</string>
+    <string name="jam_buka">Jam Buka</string>
+    <string name="togglebutton">ToggleButton</string>
+    <string name="Deskripsi_arrow">Arrow</string>
+    <string name="kurang">kurang</string>
+    <string name="batal">Batal</string>
+    <string name="simpan">Simpan</string>
+    <string name="food_name">Food Name</string>
+    <string name="input_food_name">Input Food Name</string>
+    <string name="price_food">Price Food</string>
+    <string name="input_price_food">Input Price Food</string>
+    <string name="description">Description</string>
+    <string name="input_description">Input Description</string>
+    <string name="basic_ingredients">Basic Ingredients</string>
+    <string name="input_basic_ingredients">Input Basic Ingredients</string>
+    <string name="preparation_time">Preparation Time</string>
+    <string name="input_preparation_time">Input Preparation Time</string>
+    <string name="pengambilan_dana_berhasil">Pengambilan Dana berhasil!</string>
+    <string name="balance_confirm">Your balance has been successfully added to your child accounts.</string>
+    <string name="back_to_home">Back to home</string>
+    <string name="name_food">Name Food</string>
+    <string name="average_preparation_time">Average Preparation Time</string>
+    <string name="in_progress">In Progress</string>
+    <string name="order_notes">Order Notes</string>
+    <string name="notes">don\'t make it too spicy, the egg is half cooked, and it just has to be delicious.</string>
+    <string name="pickup_time">Pickup Time</string>
+    <string name="time">12:30</string>
+    <string name="quantity">Quantity</string>
+    <string name="quantitiy">10</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="konfirmasi_berhasil">Konfirmasi Berhasil!</string>
+    <string name="username">Username</string>
+    <string name="enter_your_username">Enter your username</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="re_enter_your_password">Re-enter your password</string>
+    <string name="info">Info</string>
+    <string name="tipe_constraint">Tipe Batasan</string>
+    <string name="nominal_limit">Nominal Batasan</string>
+    <string name="time_period">Periode waktu</string>
+    <string name="transaksi_berhasil">Transaksi Berhasil!</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="nasi_goreng_nprice_rp_15_000">Nasi Goreng\nPrice: Rp. 15.000</string>
+    <string name="aqua_nprice_rp_15_000">Aqua\nPrice: Rp. 15.000</string>
+    <string name="pickup_time_estimate_00_00">Pickup Time Estimate: 00:00</string>
+    <string name="total_payment">Total payment</string>
+    <string name="sub_total_rp_30_000">Sub Total: Rp. 30.000</string>
+    <string name="total_rp_30_000">Total: Rp. 30.000</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="order_note">Order Note</string>
+    <string name="all_product">All Product</string>
+    <string name="low_calories">Low Calories</string>
+    <string name="high_protein">High Protein</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="pesanan_berhasil">Pesanan Berhasil</string>
+    <string name="please_wait_for_the_order_according_to_the_pickup_time">Please wait for the order according to the pickup time.</string>
+    <string name="tanggal_pemesanan_22_november_2024">Tanggal Pemesanan: 22 November 2024</string>
+    <string name="makanan">Makanan:</string>
+    <string name="catatan_pemesanan">Catatan Pemesanan:</string>
+    <string name="waktu_pengambilan_18_00_wib">Waktu Pengambilan: 18:00 WIB</string>
+    <string name="total_pembayaran_rp60_000">Total Pembayaran: Rp60.000</string>
+    <string name="image_slider">Image Slider</string>
+    <string name="nutritional">Nutritional</string>
+    <string name="expenditure">Expenditure</string>
+    <string name="order_history">Order History</string>
+    <string name="allergy_name">Allergy Name</string>
+    <string name="spending_details">Amount: %d, Period: %s</string>
+    <string name="empty_name">Username cannot be empty</string>
+    <string name="name_too_short">Username must be at least 3 characters long</string>
+    <string name="password_not_matching">Passwords do not match</string>
+    <string name="change_to_update">Change To Update</string>
+    <string name="nutrition">Nutrisi</string>
+    <string name="mineral">Mineral</string>
+    <string name="buka">Buka</string>
+    <string name="tutup">Tutup</string>
+    <string name="toko_anda_sedang_buka">Toko anda sedang buka</string>
+    <string name="toko_anda_sedang_tutup">Toko anda sedang tutup</string>
+    <string name="scheduled_open_is_active">Scheduled open is active</string>
+    <string name="scheduled_open_is_inactive">Scheduled open is inactive</string>
+    <string name="jadwal">Jadwal</string>
+    <string name="food">Top Food</string>
+    <string name="drink">Top Drink</string>
+    <string name="cart">Cart</string>
+    <string name="logout_confirmation">Apakah Anda yakin ingin keluar?</string>
+    <string name="exit">Keluar dari aplikasi</string>
+    <string name="ya">Ya</string>
+    <string name="tidak">Tidak</string>
+    <string name="nama_anak">Nama anak</string>
+
+</resources>-->

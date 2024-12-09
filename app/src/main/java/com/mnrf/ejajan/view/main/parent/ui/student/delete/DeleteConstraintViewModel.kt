@@ -23,22 +23,22 @@ class DeleteConstraintViewModel(private val repository: ConstraintRepository) : 
     private val _nutritionMap = MutableLiveData<Map<String, Pair<String, String>>>() // ID -> (Amount, Period)
     val nutritionMap: LiveData<Map<String, Pair<String, String>>> get() = _nutritionMap
 
-    fun fetchAllergies() {
-        repository.getAllergiesWithIds(
+    fun fetchAllergies(studetId: String) {
+        repository.getAllergiesWithIds(studentUid = studetId ,
             onSuccess = { data -> _allergiesMap.postValue(data) },
             onFailure = { e -> _errorMessage.postValue("Error fetching allergies: ${e.message}") }
         )
     }
 
-    fun fetchSpending() {
-        repository.getSpendingWithIds(
+    fun fetchSpending(studetId: String) {
+        repository.getSpendingWithIds(studentUid = studetId,
             onSuccess = { data -> _spendingMap.postValue(data) },
             onFailure = { e -> _errorMessage.postValue("Error fetching spendings: ${e.message}") }
         )
     }
 
-    fun fetchNutrition() {
-        repository.getNutritionWithIds(
+    fun fetchNutrition(studetId: String) {
+        repository.getNutritionWithIds(studentUid = studetId,
             onSuccess = { data -> _nutritionMap.postValue(data) },
             onFailure = { e -> _errorMessage.postValue("Error fetching spending data: ${e.message}") }
         )
