@@ -8,6 +8,7 @@ import com.mnrf.ejajan.data.repository.UserRepository
 import com.mnrf.ejajan.di.Injection
 import com.mnrf.ejajan.view.login.LoginParentMerchantViewModel
 import com.mnrf.ejajan.view.login.LoginStudentViewModel
+import com.mnrf.ejajan.view.main.merchant.ui.home.MerchantHomeViewModel
 import com.mnrf.ejajan.view.main.merchant.ui.menu.add.MerchantAddMenuViewModel
 import com.mnrf.ejajan.view.main.merchant.ui.menu.detail.DetailMenuViewModel
 import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel
@@ -94,6 +95,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(FaceConfirmViewModel::class.java) -> {
                 FaceConfirmViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(MerchantHomeViewModel::class.java) -> {
+                MerchantHomeViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

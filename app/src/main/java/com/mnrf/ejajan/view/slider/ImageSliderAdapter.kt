@@ -23,21 +23,24 @@ class ImageSliderAdapter(private val imageList: List<ImageSliderData>) :
         val imageData = imageList[position]
         holder.imageView.setImageResource(imageData.image)
 
+        // Ensure the image scales within bounds.
         holder.imageView.adjustViewBounds = true
         holder.imageView.scaleType = ImageView.ScaleType.CENTER_CROP
 
         holder.imageView.post {
-            val aspectRatio = holder.imageView.drawable.intrinsicWidth.toFloat() /
-                    holder.imageView.drawable.intrinsicHeight
-            val width = holder.itemView.width
-            val height = (width / aspectRatio).toInt()
-            val layoutParams = holder.imageView.layoutParams
-            layoutParams.height = height
-            holder.imageView.layoutParams = layoutParams
+            val drawable = holder.imageView.drawable
+            if (drawable != null) {
+                val aspectRatio = drawable.intrinsicWidth.toFloat() / drawable.intrinsicHeight
+                val width = holder.itemView.width
+                val height = (width / aspectRatio).toInt()
+
+                val layoutParams = holder.imageView.layoutParams
+                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+                layoutParams.height = height
+                holder.imageView.layoutParams = layoutParams
+            }
         }
     }
 
-
     override fun getItemCount(): Int = imageList.size
 }
-

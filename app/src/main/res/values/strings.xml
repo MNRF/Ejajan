@@ -112,7 +112,7 @@
     <string name="welcome_merchant">Welcome Merchant</string>
     <string name="deskripsi_homeMerchant">Have a nice Day</string>
     <string name="saldo_rp_10_000">Saldo : Rp. 10.000</string>
-    <string name="status_pesanan_aktif">Status Pesanan Aktif</string>
+    <string name="pesanan_masuk">Pesanan masuk</string>
     <string name="see_all">See All</string>
     <string name="welcome_parent">Welcome Parent</string>
     <string name="deskripsi_homeWelcome">You can set limits, view purchase history, and monitor Student spending and nutrition</string>
@@ -254,6 +254,7 @@
     <string name="nama_anak">Nama anak</string>
     <string name="berhasil_mengubah_data">Berhasil mengubah data</string>
     <string name="gagal_mengubah_data">Gagal mengubah data</string>
+    <string name="konfirmasi_pengambilan">Konfirmasi Pengambilan</string>
 </resources>
 <!--
 <resources>
