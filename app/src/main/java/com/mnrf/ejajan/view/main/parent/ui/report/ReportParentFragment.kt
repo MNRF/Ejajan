@@ -20,7 +20,7 @@ class ReportParentFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val reportViewModel = ViewModelProvider(this)[ReportViewModel::class.java]
+        ViewModelProvider(this)[ReportViewModel::class.java]
         _binding = FragmentParentReportBinding.inflate(inflater, container, false)
 
 
@@ -37,7 +37,6 @@ class ReportParentFragment : Fragment() {
     }
 
     private fun setupPieChart(pieChart: PieChart) {
-        // Contoh pengaturan PieChart
         pieChart.description.isEnabled = false
         pieChart.isDrawHoleEnabled = true
         pieChart.setUsePercentValues(true)
@@ -54,9 +53,6 @@ class ReportParentFragment : Fragment() {
     private fun setupRecyclerView() {
         // Contoh konfigurasi RecyclerView
         binding.rvHistory.apply {
-            // Set adapter, layout manager, dll.
-            // adapter = YourAdapter()
-            // layoutManager = LinearLayoutManager(context)
         }
     }
 

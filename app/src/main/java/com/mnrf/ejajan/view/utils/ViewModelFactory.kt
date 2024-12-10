@@ -5,6 +5,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mnrf.ejajan.data.pref.CartPreferences
+import com.mnrf.ejajan.data.pref.ThemePreferences
+import com.mnrf.ejajan.data.pref.themeDataStore
 import com.mnrf.ejajan.data.repository.UserRepository
 import com.mnrf.ejajan.di.Injection
 import com.mnrf.ejajan.view.login.LoginParentMerchantViewModel
@@ -17,6 +19,7 @@ import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel
 import com.mnrf.ejajan.view.main.parent.ParentViewModel
 import com.mnrf.ejajan.view.main.parent.ui.home.HomeViewModel
 import com.mnrf.ejajan.view.main.parent.ui.setting.Setting2ViewModel
+import com.mnrf.ejajan.view.main.parent.ui.setting.profile.ProfileParentViewModel
 import com.mnrf.ejajan.view.main.parent.ui.topup.TopUpViewModel
 import com.mnrf.ejajan.view.main.student.StudentViewModel
 import com.mnrf.ejajan.view.main.student.cart.CartViewModel
@@ -33,7 +36,8 @@ import com.mnrf.ejajan.view.splash.SplashViewModel
 class ViewModelFactory(
     private val repository: UserRepository,
     private val appContext: Context,
-    private val cartPreferences: CartPreferences
+    private val cartPreferences: CartPreferences,
+    private val pref: ThemePreferences
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -49,7 +53,7 @@ class ViewModelFactory(
                 ParentViewModel(repository) as T
             }
             modelClass.isAssignableFrom(Setting2ViewModel::class.java) -> {
-                Setting2ViewModel(repository) as T
+                Setting2ViewModel(repository, pref) as T
             }
             modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
                 // Pass appContext to SettingViewModel
@@ -109,6 +113,9 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(OrderConfirmationViewModel::class.java) -> {
                 OrderConfirmationViewModel(repository) as T
             }
+            modelClass.isAssignableFrom(ProfileParentViewModel::class.java) -> {
+                ProfileParentViewModel(repository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -122,7 +129,8 @@ class ViewModelFactory(
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
                     val cartPreferences = CartPreferences(context)
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context), context, cartPreferences)
+                    val themePreferences = ThemePreferences.getInstance(context.themeDataStore)
+                    INSTANCE = ViewModelFactory(Injection.provideRepository(context), context, cartPreferences, themePreferences)
                 }
             }
             return INSTANCE as ViewModelFactory

@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.mnrf.ejajan.data.pref.ThemePreferences
 import com.mnrf.ejajan.databinding.FragmentParentSettingBinding
 import com.mnrf.ejajan.view.login.LoginParentMerchant
 import com.mnrf.ejajan.view.main.parent.ui.setting.notification.NotificationParentActivity
@@ -39,6 +42,8 @@ class SettingParentFragment : Fragment() {
 
         auth = Firebase.auth
 
+
+
         // Set up logout button functionality
         binding.btnSettingLogout.setOnClickListener {
             auth.signOut() // Now auth is properly initialized
@@ -57,8 +62,17 @@ class SettingParentFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.cvSettingDarkmode.setOnClickListener {
-            // Tambahkan logika untuk pengaturan Dark Mode
+        setting2ViewModel.getThemeSetting().observe(viewLifecycleOwner) { isDarkMode ->
+            binding.tbSettingDarkmode.isChecked = isDarkMode
+            if (isDarkMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+
+        binding.tbSettingDarkmode.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            setting2ViewModel.saveThemeSetting(isChecked)
         }
 
 //        binding.cvSettingNotification.setOnClickListener {

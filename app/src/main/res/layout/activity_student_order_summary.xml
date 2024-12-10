@@ -62,7 +62,7 @@
                 android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="@string/please_wait_for_the_order_according_to_the_pickup_time"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 android:textColor="@android:color/darker_gray" />
 
             <!-- Order Summary Card -->
@@ -90,6 +90,7 @@
                         android:textColor="@android:color/black" />
 
                     <TextView
+                        android:id="@+id/tv_tgl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -97,72 +98,36 @@
                         android:textSize="14sp"
                         android:textColor="@android:color/black" />
 
-                    <!-- Items Section -->
                     <TextView
+                        android:id="@+id/tv_pesanan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="@string/makanan"
-                        android:textStyle="bold"
+                        android:text="Nasi Goreng Spesial Rp20.000"
                         android:textSize="14sp"
+                        android:layout_marginTop="16dp"
                         android:textColor="@android:color/black" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1. Nasi Goreng Spesial - Rp20.000"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_price"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Rp20.000"-->
+<!--                        android:textSize="14sp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:textColor="@android:color/black" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2. Ayam Bakar Madu - Rp25.000"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="Minuman:"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1. Jus Jeruk Segar - Rp10.000"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2. Air Mineral - Rp5.000"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black" />
-
-                    <!-- Notes Section -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="@string/catatan_pemesanan"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="• Tidak terlalu pedas\n• Tambahkan sendok dan garpu"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_qty"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="2"-->
+<!--                        android:textSize="14sp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:textColor="@android:color/black" />-->
 
                     <!-- Total Section -->
                     <TextView
+                        android:id="@+id/tv_totalpembayaran"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -180,7 +145,7 @@
                 android:layout_marginTop="32dp"
                 android:backgroundTint="@color/blue1"
                 android:paddingVertical="12dp"
-                android:text="@string/selesai"
+                android:text="@string/finish"
                 style="@style/Button"
                 android:textColor="@android:color/white" />
         </LinearLayout>

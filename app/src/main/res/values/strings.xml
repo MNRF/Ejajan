@@ -258,6 +258,10 @@
     <string name="confirm_top_up">Confirm Top Up</string>
     <string name="discount_price">Discount</string>
     <string name="selesai">See All</string>
+    <string name="finish">Selesai</string>
+    <string name="total_payment_format">Total Pembayaran : %1$d</string>
+    <string name="quantity_label">Quantity: %1$s</string>
+    <string name="waktu_pemesanan_label">Waktu Pemesanan: %1$s</string>
 </resources>
 <!--
 <resources>

@@ -240,7 +240,7 @@ class FaceConfirmViewModel(private val repository: UserRepository, private val c
         try {
             val order = hashMapOf(
                 "orders_id" to ordersUid,
-                "menu_uid" to menuUid,
+                "menu_id" to menuUid,
                 "merchant_uid" to merchantUid,
                 "student_uid" to studentUid,
                 "order_status" to orderStatus,

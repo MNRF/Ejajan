@@ -4,25 +4,27 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.mnrf.ejajan.R
 import com.mnrf.ejajan.data.pref.UserPreference
 import com.mnrf.ejajan.data.pref.dataStore
-import com.mnrf.ejajan.databinding.ActivityParentAddBinding
 import com.mnrf.ejajan.databinding.ActivityParentProfileBinding
+import com.mnrf.ejajan.view.utils.ViewModelFactory
+import kotlinx.coroutines.launch
+import java.io.File
 
 class ProfileParentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityParentProfileBinding
     private var currentImageUri: Uri? = null
     private lateinit var userPreference: UserPreference
+
+    private val profileParentViewModel: ProfileParentViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,10 @@ class ProfileParentActivity : AppCompatActivity() {
 
         userPreference = UserPreference.getInstance(dataStore)
         observeUserSession()
+
+        profileParentViewModel.getParentProfile("tJTJGtfYyLfHerBBI0tpeqWdFg72")
+        observeParentProfile()
+        saveProfile()
 
         binding.cvSettingImage.setOnClickListener {
             startGallery()
@@ -69,6 +75,14 @@ class ProfileParentActivity : AppCompatActivity() {
         }
     }
 
+    private fun observeParentProfile() {
+        profileParentViewModel.parentProfileData.observe(this) { profile ->
+            binding.edUsernameProfile.setText(profile?.name ?: "")
+            binding.edEmailProfile.setText(profile?.email ?: "")
+        }
+
+    }
+
     private fun observeUserSession() {
         lifecycleScope.launchWhenStarted {
             userPreference.getSession().collect { user ->
@@ -82,9 +96,43 @@ class ProfileParentActivity : AppCompatActivity() {
         }
     }
 
+    private fun saveProfile() {
+        val name = binding.edUsernameProfile.text.toString()
+        val email = binding.edEmailProfile.text.toString()
+
+        if (currentImageUri != null) {
+            val file = File(currentImageUri!!.path ?: "")
+            lifecycleScope.launch {
+                try {
+                    // Upload image first
+                    val imageUrl = profileParentViewModel.uploadImage(file)
+                    profileParentViewModel.updateProfile(
+                        "tJTJGtfYyLfHerBBI0tpeqWdFg72",
+                        name,
+                        email,
+                        imageUrl
+                    )
+                    Log.d("SaveProfile", "Profile updated successfully")
+                } catch (e: Exception) {
+                    Log.e("SaveProfile", "Failed to save profile", e)
+                }
+            }
+        } else {
+            lifecycleScope.launch {
+                profileParentViewModel.updateProfile(
+                    "tJTJGtfYyLfHerBBI0tpeqWdFg72",
+                    name,
+                    email,
+                    "" // No new image uploaded
+                )
+                Log.d("SaveProfile", "Profile updated without new image")
+            }
+        }
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
+
 }

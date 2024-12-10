@@ -99,6 +99,9 @@ dependencies {
     implementation (libs.glide)
 
     implementation (libs.gson)
+    implementation(libs.androidx.datastore.preferences.v100)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.tensorflow.lite)
 

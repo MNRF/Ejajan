@@ -3,17 +3,24 @@ package com.mnrf.ejajan.view.main.parent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.mnrf.ejajan.R
+import com.mnrf.ejajan.data.pref.ThemePreferences
+import com.mnrf.ejajan.data.pref.themeDataStore
 import com.mnrf.ejajan.databinding.ActivityParentBinding
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class ParentActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityParentBinding
+    private lateinit var pref: ThemePreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +43,21 @@ class ParentActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        pref = ThemePreferences.getInstance(this.themeDataStore)
+        applyThemeSettings()
+    }
+
+    private fun applyThemeSettings() {
+        // Use lifecycleScope to fetch theme setting
+        lifecycleScope.launch {
+            val isDarkModeActive = pref.getThemeSetting().first()
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

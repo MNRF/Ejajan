@@ -86,9 +86,9 @@
                 <ToggleButton
                     android:id="@+id/tb_setting_darkmode"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:text="ToggleButton"
+                    android:layout_height="wrap_content"
+                    android:textOff="Off"
+                    android:textOn="On"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
