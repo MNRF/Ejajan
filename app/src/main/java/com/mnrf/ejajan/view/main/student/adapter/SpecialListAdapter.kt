@@ -12,6 +12,7 @@ import com.mnrf.ejajan.data.model.MenuModel
 import com.mnrf.ejajan.databinding.ItemHomeMenuBinding
 import com.mnrf.ejajan.databinding.ItemSeeSpecialBinding
 import com.mnrf.ejajan.databinding.ItemSpecialBinding
+import com.mnrf.ejajan.view.main.student.detail.DetailMenuSpecialActivity
 import com.mnrf.ejajan.view.main.student.detail.DetailMenuStudentActivity
 
 class SpecialListAdapter : ListAdapter<MenuModel, SpecialListAdapter.MenuViewHolder>(DIFF_CALLBACK) {
@@ -48,34 +49,34 @@ class SpecialListAdapter : ListAdapter<MenuModel, SpecialListAdapter.MenuViewHol
 
                 cvItemMerchantMenu.setOnClickListener{ view ->
                     val intent = Intent(view.context, DetailMenuStudentActivity::class.java)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_ID, menu.id)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_NAME, menu.name)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_DESCRIPTION, menu.description)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_PREPARATIONTIME, menu.preparationtime)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_PRICE, menu.price)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_IMAGE, menu.imageurl)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_ID, menu.id)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_NAME, menu.name)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_DESCRIPTION, menu.description)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_PREPARATIONTIME, menu.preparationtime)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_PRICE, menu.price)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_IMAGE, menu.imageurl)
                     this.cvItemMerchantMenu.context.startActivity(intent)
                 }
 
                 cvMenuImage.setOnClickListener{ view ->
                     val intent = Intent(view.context, DetailMenuStudentActivity::class.java)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_ID, menu.id)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_NAME, menu.name)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_DESCRIPTION, menu.description)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_PREPARATIONTIME, menu.preparationtime)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_PRICE, menu.price)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_IMAGE, menu.imageurl)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_ID, menu.id)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_NAME, menu.name)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_DESCRIPTION, menu.description)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_PREPARATIONTIME, menu.preparationtime)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_PRICE, menu.price)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_IMAGE, menu.imageurl)
                     this.cvMenuImage.context.startActivity(intent)
                 }
 
                 cvTambah.setOnClickListener{ view ->
                     val intent = Intent(view.context, DetailMenuStudentActivity::class.java)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_ID, menu.id)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_NAME, menu.name)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_DESCRIPTION, menu.description)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_PREPARATIONTIME, menu.preparationtime)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_PRICE, menu.price)
-                    intent.putExtra(DetailMenuStudentActivity.MENU_IMAGE, menu.imageurl)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_ID, menu.id)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_NAME, menu.name)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_DESCRIPTION, menu.description)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_PREPARATIONTIME, menu.preparationtime)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_PRICE, menu.price)
+                    intent.putExtra(DetailMenuSpecialActivity.MENU_IMAGE, menu.imageurl)
                     this.cvTambah.context.startActivity(intent)
                 }
             }

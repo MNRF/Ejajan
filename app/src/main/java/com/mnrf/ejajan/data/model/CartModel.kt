@@ -6,5 +6,4 @@ data class CartModel(
     val price: String,
     val quantity: String,
     val imageurl: String,
-
 )

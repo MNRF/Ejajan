@@ -4,6 +4,7 @@ import com.mnrf.ejajan.view.main.merchant.ui.menu.MenuMerchantViewModel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.mnrf.ejajan.data.pref.CartPreferences
 import com.mnrf.ejajan.data.repository.UserRepository
 import com.mnrf.ejajan.di.Injection
 import com.mnrf.ejajan.view.login.LoginParentMerchantViewModel
@@ -17,6 +18,7 @@ import com.mnrf.ejajan.view.main.parent.ui.home.HomeViewModel
 import com.mnrf.ejajan.view.main.parent.ui.setting.Setting2ViewModel
 import com.mnrf.ejajan.view.main.parent.ui.topup.TopUpViewModel
 import com.mnrf.ejajan.view.main.student.StudentViewModel
+import com.mnrf.ejajan.view.main.student.cart.CartViewModel
 import com.mnrf.ejajan.view.main.student.detail.DetailMenuStudentViewModel
 import com.mnrf.ejajan.view.main.student.detail.NotesDetailViewModel
 import com.mnrf.ejajan.view.main.student.drink.DrinkViewModel
@@ -29,7 +31,8 @@ import com.mnrf.ejajan.view.splash.SplashViewModel
 
 class ViewModelFactory(
     private val repository: UserRepository,
-    private val appContext: Context // Add appContext parameter
+    private val appContext: Context,
+    private val cartPreferences: CartPreferences
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -94,7 +97,10 @@ class ViewModelFactory(
                 SpecialOffersViewModel(repository) as T
             }
             modelClass.isAssignableFrom(FaceConfirmViewModel::class.java) -> {
-                FaceConfirmViewModel(repository) as T
+                FaceConfirmViewModel(repository, cartPreferences) as T
+            }
+            modelClass.isAssignableFrom(CartViewModel::class.java) -> {
+                CartViewModel(repository) as T
             }
             modelClass.isAssignableFrom(MerchantHomeViewModel::class.java) -> {
                 MerchantHomeViewModel(repository) as T
@@ -111,7 +117,8 @@ class ViewModelFactory(
         fun getInstance(context: Context): ViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context), context)
+                    val cartPreferences = CartPreferences(context)
+                    INSTANCE = ViewModelFactory(Injection.provideRepository(context), context, cartPreferences)
                 }
             }
             return INSTANCE as ViewModelFactory

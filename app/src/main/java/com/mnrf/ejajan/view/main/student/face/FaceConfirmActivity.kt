@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.OptIn
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -24,8 +25,10 @@ import com.google.mlkit.vision.face.FaceContour
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
 import com.google.mlkit.vision.face.FaceLandmark
+import com.mnrf.ejajan.data.pref.CartPreferences
 import com.mnrf.ejajan.databinding.ActivityStudentFaceConfirmBinding
 import com.mnrf.ejajan.view.main.student.summary.OrderSummaryActivity
+import com.mnrf.ejajan.view.utils.ViewModelFactory
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -33,6 +36,12 @@ class FaceConfirmActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStudentFaceConfirmBinding
     private lateinit var cameraExecutor: ExecutorService
     private var imageCapture: ImageCapture? = null
+
+    private lateinit var cartPreferences: CartPreferences
+
+    private val faceConfirmViewModel: FaceConfirmViewModel by viewModels {
+        ViewModelFactory.getInstance(this@FaceConfirmActivity)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +58,7 @@ class FaceConfirmActivity : AppCompatActivity() {
         cameraExecutor = Executors.newSingleThreadExecutor()
         binding.progressBar.visibility = View.GONE
 
+        cartPreferences = CartPreferences(this)
     }
 
     override fun onResume() {
@@ -136,11 +146,13 @@ class FaceConfirmActivity : AppCompatActivity() {
             detector.process(image)
                 .addOnSuccessListener { faces ->
                     runOnUiThread {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progressBar.visibility = View.VISIBLE
                     }
 
                     if (faces.isNotEmpty()) {
                         for (face in faces) {
+                            createOrder()
+                            orderAdd()
                             Log.d(TAG, "Face detected with bounds: ${face.boundingBox}")
 
                             val leftEar = face.getLandmark(FaceLandmark.LEFT_EAR)
@@ -191,7 +203,6 @@ class FaceConfirmActivity : AppCompatActivity() {
         }
     }
 
-
     private fun hideSystemUI() {
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -205,24 +216,63 @@ class FaceConfirmActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
+    private fun createOrder() {
+        // Ambil cartItems dari CartPreferences
+        val cartItems = cartPreferences.getCartItems()
+
+        // Hitung total orders (jumlah qty dari semua item)
+        val totalOrders = cartItems.sumOf {
+            it.quantity.toIntOrNull() ?: 0 // Jika qty tidak valid, anggap 0
+        }
+
+        // Convert totalOrders to String
+        val totalOrdersStr = totalOrders.toString()
+
+        // Panggil ViewModel untuk fetch UID dan membuat order
+        faceConfirmViewModel.fetchUidsAndCreateOrders(totalOrdersStr,
+            onSuccess = {
+                // Jika berhasil
+                Toast.makeText(this, "Order berhasil dibuat", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, OrderSummaryActivity::class.java)
+                startActivity(intent)
+                finish()
+            },
+            onFailure = { errorMessage ->
+                // Jika gagal
+                Toast.makeText(this, "Gagal membuat order: $errorMessage", Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
+
+    private fun orderAdd() {
+        val cartItems = cartPreferences.getCartItems()
+
+
+        if (cartItems.isNotEmpty()) {
+            // Panggil fungsi orderCreate di ViewModel
+            faceConfirmViewModel.orderCreate { errorMessage ->
+                // Tangani kegagalan jika terjadi
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            }
+
+            faceConfirmViewModel.orderResponse.observe(this) { isSuccess ->
+                if (isSuccess) {
+                    Toast.makeText(this, "Pesanan berhasil ditambahkan.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Gagal menambahkan pesanan.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else {
+            Toast.makeText(this, "Keranjang kosong.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
     }
 
-//    private fun showAlert(message: String, onDismiss: (() -> Unit)? = null) {
-//        Log.d(TAG, "showAlert dipanggil dengan pesan: $message")
-//        AlertDialog.Builder(this).apply {
-//            setTitle("Informasi")
-//            setMessage(message)
-//            setPositiveButton("Lanjut") { _, _ ->
-//                Log.d(TAG, "Dialog ditutup, memanggil onDismiss.")
-//                onDismiss?.invoke()
-//            }
-//            create()
-//            show()
-//        }
-//    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -230,7 +280,7 @@ class FaceConfirmActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TAG = "LoginStudent"
+        private const val TAG = "FaceConfirm"
         private const val CAMERA_PERMISSION_REQUEST_CODE = 1001
     }
 }

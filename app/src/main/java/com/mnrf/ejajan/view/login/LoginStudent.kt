@@ -169,7 +169,7 @@ class LoginStudent : AppCompatActivity() {
             detector.process(image)
                 .addOnSuccessListener { faces ->
                     runOnUiThread {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progressBar.visibility = View.VISIBLE
                     }
 
                     if (faces.isNotEmpty()) {

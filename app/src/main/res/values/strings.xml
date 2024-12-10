@@ -255,6 +255,9 @@
     <string name="berhasil_mengubah_data">Berhasil mengubah data</string>
     <string name="gagal_mengubah_data">Gagal mengubah data</string>
     <string name="konfirmasi_pengambilan">Konfirmasi Pengambilan</string>
+    <string name="confirm_top_up">Confirm Top Up</string>
+    <string name="discount_price">Discount</string>
+    <string name="selesai">See All</string>
 </resources>
 <!--
 <resources>

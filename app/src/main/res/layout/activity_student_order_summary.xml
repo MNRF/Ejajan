@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.main.student.summary.OrderSummaryActivity">
@@ -11,11 +11,11 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:fillViewport="true">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,11 +25,12 @@
 
             <!-- Image Card -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_setting_image"
+                android:id="@+id/card_image"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
+                android:backgroundTint="#4CAF50"
                 app:cardCornerRadius="100dp"
                 app:cardElevation="4dp">
 
@@ -39,11 +40,12 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/Deskripsi_logo"
                     android:scaleType="centerCrop"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:src= "@drawable/baseline_check_24" />
             </androidx.cardview.widget.CardView>
 
+            <!-- Success Message -->
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_success_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -54,17 +56,18 @@
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/sum_desc"
+                android:id="@+id/tv_summary_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:gravity="center"
                 android:text="@string/please_wait_for_the_order_according_to_the_pickup_time"
                 android:textSize="15sp"
-                android:gravity="center"
                 android:textColor="@android:color/darker_gray" />
 
+            <!-- Order Summary Card -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_cart_summary"
+                android:id="@+id/card_order_summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -78,6 +81,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/tv_order_summary_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/order_summary"
@@ -93,6 +97,7 @@
                         android:textSize="14sp"
                         android:textColor="@android:color/black" />
 
+                    <!-- Items Section -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -139,6 +144,7 @@
                         android:textSize="14sp"
                         android:textColor="@android:color/black" />
 
+                    <!-- Notes Section -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -155,14 +161,7 @@
                         android:textSize="14sp"
                         android:textColor="@android:color/black" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="@string/waktu_pengambilan_18_00_wib"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black" />
-
+                    <!-- Total Section -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -171,9 +170,19 @@
                         android:textStyle="bold"
                         android:textSize="14sp"
                         android:textColor="@android:color/black" />
-
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btn_finish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/blue1"
+                android:paddingVertical="12dp"
+                android:text="@string/selesai"
+                style="@style/Button"
+                android:textColor="@android:color/white" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

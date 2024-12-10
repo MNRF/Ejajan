@@ -61,11 +61,11 @@ class SettingParentFragment : Fragment() {
             // Tambahkan logika untuk pengaturan Dark Mode
         }
 
-        binding.cvSettingNotification.setOnClickListener {
-            // Tambahkan logika untuk pengaturan Notifikasi
-            val intent = Intent(requireContext(), NotificationParentActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.cvSettingNotification.setOnClickListener {
+//            // Tambahkan logika untuk pengaturan Notifikasi
+//            val intent = Intent(requireContext(), NotificationParentActivity::class.java)
+//            startActivity(intent)
+//        }
 
         binding.cvSettingLanguage.setOnClickListener {
             // Tambahkan logika untuk pengaturan Bahasa
