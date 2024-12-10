@@ -101,4 +101,10 @@ dependencies {
     implementation (libs.gson)
 
     implementation(libs.tensorflow.lite)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+
 }

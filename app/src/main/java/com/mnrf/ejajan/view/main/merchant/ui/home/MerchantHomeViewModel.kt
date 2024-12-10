@@ -19,6 +19,9 @@ class MerchantHomeViewModel(private val repository: UserRepository) : ViewModel(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _orderDetail = MutableLiveData<MerchantOrderModel>()
+    val orderDetail: LiveData<MerchantOrderModel> get() = _orderDetail
+
     val db = Firebase.firestore
 
     fun getSession(): LiveData<UserModel> {
@@ -57,6 +60,41 @@ class MerchantHomeViewModel(private val repository: UserRepository) : ViewModel(
             }
         }
     }
+
+    fun acceptOrder(orderId: String) {
+        db.collection("order").document(orderId).update(
+            "order_status", "Accepted"
+        ).addOnSuccessListener {
+            // Update the local list after changing the status
+            _orderList.value = _orderList.value?.map { order ->
+                if (order.id == orderId) {
+                    order.copy(orderStatus = "Accepted")
+                } else {
+                    order
+                }
+            }
+        }.addOnFailureListener { exception ->
+            Log.e(TAG, "Error updating order status to Accepted", exception)
+        }
+    }
+
+    fun declineOrder(orderId: String) {
+        db.collection("order").document(orderId).update(
+            "order_status", "Declined"
+        ).addOnSuccessListener {
+            // Update the local list after changing the status
+            _orderList.value = _orderList.value?.map { order ->
+                if (order.id == orderId) {
+                    order.copy(orderStatus = "Declined")
+                } else {
+                    order
+                }
+            }
+        }.addOnFailureListener { exception ->
+            Log.e(TAG, "Error updating order status to Declined", exception)
+        }
+    }
+
 
     init {
         fetchMenuList()

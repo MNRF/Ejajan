@@ -52,13 +52,12 @@ class HomeMerchantFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = MerchantHomeAdapter()
+        adapter = MerchantHomeAdapter(this)
         binding.rvPersonal.layoutManager = LinearLayoutManager(requireContext())
         binding.rvPersonal.adapter = adapter
         merchantHomeViewModel.orderList.observe(viewLifecycleOwner) { orderList ->
             adapter.submitList(orderList)
         }
-
 
         setupImageSlider()
 
