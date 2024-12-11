@@ -56,7 +56,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="15dp"
         android:fontFamily="@font/inter24_regular"
         android:text="@string/description_login"
@@ -69,6 +69,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         style="@style/Card"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionLogin">
@@ -82,7 +83,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
+                android:layout_marginStart="10dp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/inter18_regular"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -105,6 +108,7 @@
                     android:hint="@string/input_your_email"
                     android:inputType="textEmailAddress"
                     android:minHeight="48dp"
+                    android:fontFamily="@font/inter18_regular"
                     android:paddingHorizontal="16dp"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -115,7 +119,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/password"
+                android:layout_marginStart="10dp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/inter18_regular"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout" />
@@ -138,6 +144,7 @@
                     android:hint="@string/input_your_password"
                     android:inputType="textPassword"
                     android:minHeight="48dp"
+                    android:fontFamily="@font/inter18_regular"
                     android:paddingHorizontal="16dp"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -150,7 +157,12 @@
     <Button
         android:id="@+id/buttonLoginParentMerchant"
         style="@style/Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/btnLogin"
+        android:fontFamily="@font/inter18_regular"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

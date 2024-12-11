@@ -33,6 +33,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="70dp"
         android:textAlignment="center"
+        android:fontFamily="@font/inter28_regular"
         android:text="@string/orderconfirmation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -35,6 +35,7 @@
 
     <androidx.cardview.widget.CardView
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/parent_onboarding3"
         style="@style/Card">

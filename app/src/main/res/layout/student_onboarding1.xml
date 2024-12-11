@@ -24,55 +24,67 @@
         android:layout_height="350dp"
         android:contentDescription="@string/image_chosee_role"
         android:src="@drawable/student1"
-        app:layout_constraintBottom_toTopOf="@id/student_text1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/skip"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/student_judul1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/text_judul"
-        android:gravity="center"
-        android:fontFamily="@font/inter28_black"
-        android:textSize="24sp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/student_onboarding1"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.cardview.widget.CardView
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="32dp"/>
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/student_onboarding1"
+        style="@style/Card">
 
-    <TextView
-        android:id="@+id/student_text1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/student_desc1"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:fontFamily="@font/inter24_regular"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/student_judul1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="32dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/student_judul1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/inter28_black"
+                android:gravity="center"
+                android:text="@string/text_judul"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/student_text1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/student_desc1"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:fontFamily="@font/inter24_regular"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/student_judul1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/student_text1"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -97,16 +109,9 @@
 
     <Button
         android:id="@+id/next"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="52dp"
-        android:backgroundTint="@color/blue2"
         android:text="@string/next"
-        style="@style/Button"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+        style="@style/Button"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
+        android:backgroundTint="#4CAF50"
         app:cardCornerRadius="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +35,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:src="@drawable/baseline_check_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -43,13 +44,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_setting_image"
         android:text="@string/pengambilan_dana_berhasil"
         android:textSize="20sp"
-        android:fontFamily="@font/inter28_black"/>
+        android:fontFamily="@font/inter28_bold"/>
 
     <TextView
         android:id="@+id/tv_transaction_description"
@@ -59,8 +60,9 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="40dp"
         android:text="@string/balance_confirm"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:textAlignment="center"
+        android:fontFamily="@font/inter28_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_transaction_status" />
@@ -73,7 +75,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="60dp"
         android:text="@string/back_to_home"
-        android:backgroundTint="@color/blue1"
+        style="@style/Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -35,7 +35,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:src="@drawable/ic_place_holder" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -49,19 +49,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_setting_image" />
 
-    <EditText
-        android:id="@+id/et_food_name"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_food_name"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/input_food_name"
+        android:layout_marginEnd="15dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_food_name"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_food_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_food_name"
+            android:backgroundTint="@color/white"
+            android:inputType="text"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tv_price_food"
@@ -71,21 +82,33 @@
         android:layout_marginTop="15dp"
         android:text="@string/price_food"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_food_name" />
+        app:layout_constraintTop_toBottomOf="@id/til_food_name" />
 
-    <EditText
-        android:id="@+id/et_price_food"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_price_food"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="@string/input_price_food"
+        android:layout_marginEnd="15dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_price_food"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_price_food"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/input_price_food"
+            android:inputType="numberDecimal"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tv_description"
@@ -95,21 +118,32 @@
         android:layout_marginTop="15dp"
         android:text="@string/description"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_price_food" />
+        app:layout_constraintTop_toBottomOf="@id/til_price_food" />
 
-    <EditText
-        android:id="@+id/et_description"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_description"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/input_description"
+        android:layout_marginEnd="15dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_description"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/input_description"
+            android:inputType="text"
+            android:paddingTop="25dp"
+            android:paddingBottom="25dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tv_basic_ingredients"
@@ -119,21 +153,32 @@
         android:layout_marginTop="15dp"
         android:text="@string/basic_ingredients"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_description" />
+        app:layout_constraintTop_toBottomOf="@id/til_description" />
 
-    <EditText
-        android:id="@+id/et_basic_ingredients"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_basic_ingredients"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/input_basic_ingredients"
+        android:layout_marginEnd="15dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_basic_ingredients"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_basic_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/input_basic_ingredients"
+            android:inputType="text"
+            android:paddingTop="25dp"
+            android:paddingBottom="25dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tv_add_preparetime"
@@ -143,30 +188,43 @@
         android:layout_marginTop="15dp"
         android:text="@string/preparation_time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_basic_ingredients" />
+        app:layout_constraintTop_toBottomOf="@id/til_basic_ingredients" />
 
-    <EditText
-        android:id="@+id/et_add_preparetime"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_add_preparetime"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="@string/input_preparation_time"
+        android:layout_marginEnd="15dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_add_preparetime"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_add_preparetime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/input_preparation_time"
+            android:inputType="numberDecimal"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_tambah"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/blue2"
         style="@style/Button"
         android:text="@string/tambah"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
