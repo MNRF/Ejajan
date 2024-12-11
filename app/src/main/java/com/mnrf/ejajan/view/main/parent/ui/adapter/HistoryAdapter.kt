@@ -6,22 +6,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.mnrf.ejajan.data.model.CartModel
+import com.mnrf.ejajan.data.model.MerchantOrderModel
 import com.mnrf.ejajan.databinding.ItemParentHistoryBinding
 
-class HistoryAdapter : ListAdapter<CartModel, HistoryAdapter.MenuViewHolder>(DIFF_CALLBACK) {
+class HistoryAdapter : ListAdapter<MerchantOrderModel, HistoryAdapter.MenuViewHolder>(DIFF_CALLBACK) {
 
     inner class MenuViewHolder(private val binding: ItemParentHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(cart: CartModel) {
+        fun bind(cart: MerchantOrderModel) {
             binding.apply {
-                Glide.with(binding.placeholderImage.context)
-                    .load(cart.imageurl)
-                    .into(binding.placeholderImage)
-                tvPlaceholderName.text = cart.name
-                val cartPrice = "Rp.${cart.price}"
-                val quantity = cart.quantity
+                Glide.with(binding.tvPlaceholderImage.context)
+                    .load(cart.menuImage)
+                    .into(binding.tvPlaceholderImage)
+                tvPlaceholderName.text = cart.menuName
+                val cartPrice = "Rp.${cart.menuPrice}"
+                val quantity = cart.menuQty
                 tvPlaceholderPrice.text = cartPrice
                 tvPlaceholderQuantity.text = quantity
             }
@@ -42,12 +42,12 @@ class HistoryAdapter : ListAdapter<CartModel, HistoryAdapter.MenuViewHolder>(DIF
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CartModel>() {
-            override fun areItemsTheSame(oldItem: CartModel, newItem: CartModel): Boolean {
-                return oldItem.name == newItem.name
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MerchantOrderModel>() {
+            override fun areItemsTheSame(oldItem: MerchantOrderModel, newItem: MerchantOrderModel): Boolean {
+                return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: CartModel, newItem: CartModel): Boolean {
+            override fun areContentsTheSame(oldItem: MerchantOrderModel, newItem: MerchantOrderModel): Boolean {
                 return oldItem == newItem
             }
         }

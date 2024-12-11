@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
 import com.mnrf.ejajan.databinding.FragmentParentReportBinding
@@ -30,7 +31,6 @@ class ReportParentFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        ViewModelProvider(this)[ReportViewModel::class.java]
         _binding = FragmentParentReportBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,10 +40,9 @@ class ReportParentFragment : Fragment() {
 
         setupPieChart(binding.pieChart)
         setupBarChart(binding.barChart)
-        setupRecyclerView()
 
         historyAdapter = HistoryAdapter()
-
+        setupRecyclerView()
         reportViewModel.orderList.observe(viewLifecycleOwner) { orderList ->
             historyAdapter.submitList(orderList)
         }
@@ -66,7 +65,7 @@ class ReportParentFragment : Fragment() {
 
     private fun setupRecyclerView() {
         binding.rvHistory.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = LinearLayoutManager(requireContext())
             adapter = historyAdapter
         }
     }

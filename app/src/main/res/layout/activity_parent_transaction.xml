@@ -41,7 +41,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/confirm_top_up"
-        android:backgroundTint="@color/blue1"
+        style="@style/Button"
         android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/etAmount"
         app:layout_constraintStart_toStartOf="parent"

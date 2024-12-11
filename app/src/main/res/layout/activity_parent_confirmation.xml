@@ -12,6 +12,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="30dp"
+        android:backgroundTint="#4CAF50"
         app:cardCornerRadius="120dp"
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/Deskripsi_logo"
                 android:scaleType="centerCrop"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:src="@drawable/baseline_check_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

@@ -267,6 +267,8 @@
     <string name="total_payment_format">Total Pembayaran : %1$d</string>
     <string name="quantity_label">Quantity: %1$s</string>
     <string name="waktu_pemesanan_label">Waktu Pemesanan: %1$s</string>
+    <string name="skip">Melewati</string>
+    <string name="please_wait_for_the_order_according_to_the_pickup_time">Mohon menunggu pesanan sesuai dengan waktu pengambilan</string>
 </resources>
 <!--
 <resources>

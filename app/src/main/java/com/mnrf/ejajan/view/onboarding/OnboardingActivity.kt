@@ -17,10 +17,10 @@ class OnboardingActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        playAnimation()
-
         binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        playAnimation()
 
         binding.btnRoleStudent.setOnClickListener {
             navigateToViewPager("student")
