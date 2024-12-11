@@ -67,24 +67,31 @@ class TransactionActivity : AppCompatActivity() {
         // Button click listener to trigger the transaction process
         binding.btnConfirm.setOnClickListener {
             val amountText = binding.etAmount.text.toString()
-            if (amountText.isNotEmpty()) {
+            /*if (amountText.isNotEmpty()) {
                 val amount = amountText.toDoubleOrNull()
                 if (amount != null && amount > 10000) {
                     Toast.makeText(this, "Top Up Amount: Rp $amount", Toast.LENGTH_SHORT).show()
-                    fetchSnapToken(amount) // Fetch Snap Token dynamically
+                    startTransaction()  // Proceed with the transaction
                 } else {
                     Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this, "Amount cannot be empty", Toast.LENGTH_SHORT).show()
-            }
+            }*/
+            intent = Intent(this, ConfirmationActivity::class.java)
+            intent.putExtra(ConfirmationActivity.TRANSACTION_SUCCESS, amountText)
+            startActivity(intent)
+            finish()
         }
     }
 
-    private fun fetchSnapToken(amount: Double) {
-        // Assume we have a backend API endpoint to fetch the Snap Token
-        // Here, use a placeholder token for demonstration purposes
-        val mockSnapToken = "25e3659b-f00c-4d98-bfff-9f72978c8df5"
+    private fun startTransaction() {
+        // Fetch the Snap Token from your backend (this should be done via an API call)
+        // For now, we use a mock token. In your production app, make sure to fetch the token from the backend.
+        /*val testToken = "PT${Instant.now().toEpochMilli()}"*/
+        val snapToken = "25e3659b-f00c-4d98-bfff-9f72978c8df5"
+        /*val snapToken = testToken
+        println(snapToken)*/
 
         // Initialize UiKitApi with your credentials and configuration
         UiKitApi.Builder()
@@ -95,8 +102,11 @@ class TransactionActivity : AppCompatActivity() {
             .withColorTheme(CustomColorTheme("#FFE51255", "#B61548", "#FFE51255"))
             .build()
 
-        // Start the payment flow with the fetched Snap Token
-        UiKitApi.getDefaultInstance().startPaymentUiFlow(this, transactionLauncher, mockSnapToken)
+        // Now start the payment flow with the provided snapToken
+        UiKitApi.getDefaultInstance().startPaymentUiFlow(this, transactionLauncher, snapToken)
+
+        // Set locale (optional)
+        setLocaleNew("en")
     }
 
     private fun setLocaleNew(languageCode: String?) {
@@ -109,4 +119,3 @@ class TransactionActivity : AppCompatActivity() {
         const val BASE_URL = "https://midtrans-api-934253159531.asia-southeast2.run.app/"
     }
 }
-

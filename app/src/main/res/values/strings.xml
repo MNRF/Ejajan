@@ -262,8 +262,7 @@
     <string name="total_payment_format">Total Pembayaran : %1$d</string>
     <string name="quantity_label">Quantity: %1$s</string>
     <string name="waktu_pemesanan_label">Waktu Pemesanan: %1$s</string>
-</resources>
-<!--
+</resources><!--
 <resources>
     <string-array name="Constraint">
         <item>Alergi</item>

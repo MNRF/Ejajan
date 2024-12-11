@@ -25,7 +25,7 @@ class MenuMerchantViewModel(private val repository: UserRepository) : ViewModel(
         return repository.getSession().asLiveData()
     }
 
-    private fun fetchMenuList() {
+    fun fetchMenuList() {
         getSession().observeForever { user ->
             if (user != null) {
                 db.collection("menus")

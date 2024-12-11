@@ -40,7 +40,7 @@ class MerchantHomeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner) 
                 val formattedTime = timeFormatter.format(Date(pickupTimeInMillis.toLong()))
                 val time = "Diambil jam $formattedTime"
                 tvOrderPickupTime.text = time
-                val menuPrice = "Rp${order.menuPrice}"
+                val menuPrice = "Rp${order.menuPrice.toLong() * order.menuPrice.toLong()}"
                 placeholderPrice.text = menuPrice
                 tvOrderStatus.text = order.orderStatus
 

@@ -27,6 +27,7 @@ import com.mnrf.ejajan.databinding.ActivityParentBinding
 import com.mnrf.ejajan.view.login.LoginParentMerchantViewModel
 import com.mnrf.ejajan.view.main.merchant.MerchantActivity
 import com.mnrf.ejajan.view.main.merchant.ui.menu.MenuMerchantFragment
+import com.mnrf.ejajan.view.main.merchant.ui.menu.MenuMerchantViewModel
 import com.mnrf.ejajan.view.utils.ViewModelFactory
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
@@ -39,6 +40,11 @@ class AddMenuActivity : AppCompatActivity() {
     private val merchantAddMenuViewModel: MerchantAddMenuViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
+
+    private val menuMerchantViewModel: MenuMerchantViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
+
 
     private var isMenuSubmitted = false
     private var currentImageUri: Uri? = null
@@ -74,6 +80,8 @@ class AddMenuActivity : AppCompatActivity() {
                     }
                 }
             }
+            menuMerchantViewModel.fetchMenuList()
+            finish()
         }
 
         binding.cvSettingImage.setOnClickListener {
