@@ -36,6 +36,7 @@ class FaceConfirmActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStudentFaceConfirmBinding
     private lateinit var cameraExecutor: ExecutorService
     private var imageCapture: ImageCapture? = null
+    private var isOrderProcessed = false
 
     private lateinit var cartPreferences: CartPreferences
 
@@ -150,33 +151,12 @@ class FaceConfirmActivity : AppCompatActivity() {
                     }
 
                     if (faces.isNotEmpty()) {
-                        for (face in faces) {
+                        // Call createOrder and orderAdd only once
+                        if (!isOrderProcessed) {
+                            isOrderProcessed = true // Prevent further calls
+                            Toast.makeText(this, "Konfirmasi Pesanan Berhasil.", Toast.LENGTH_SHORT).show()
                             createOrder()
                             orderAdd()
-                            Log.d(TAG, "Face detected with bounds: ${face.boundingBox}")
-
-                            val leftEar = face.getLandmark(FaceLandmark.LEFT_EAR)
-                            leftEar?.let {
-                                val leftEarPos = it.position
-                                Log.d(TAG, "Left Ear Position: $leftEarPos")
-                            }
-
-                            val leftEyeContour = face.getContour(FaceContour.LEFT_EYE)?.points
-                            leftEyeContour?.forEach { point ->
-                                Log.d(TAG, "Left Eye Contour Point: $point")
-                            }
-
-                            face.trackingId?.let { id ->
-                                Log.d(TAG, "Tracking ID: $id")
-                            }
-
-                            runOnUiThread {
-                                Toast.makeText(this, "Konfirmasi Pesanan Berhasil.", Toast.LENGTH_SHORT).show()
-//                                email = "student.1234@student.ejajan.com"
-//                                password = "student.1234"
-//                                handleLogin(email, password)
-                            }
-
                             val intent = Intent(this@FaceConfirmActivity, OrderSummaryActivity::class.java)
                             startActivity(intent)
                             finish()
@@ -197,11 +177,11 @@ class FaceConfirmActivity : AppCompatActivity() {
                 .addOnCompleteListener {
                     imageProxy.close()
                 }
-
         } else {
             imageProxy.close()
         }
     }
+
 
     private fun hideSystemUI() {
         @Suppress("DEPRECATION")

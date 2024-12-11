@@ -34,32 +34,34 @@ class MerchantHomeViewModel(private val repository: UserRepository) : ViewModel(
             if (user != null) {
                 db.collection("order")
                     .whereEqualTo("merchant_uid", user.token)
-                    .get()
-                    .addOnSuccessListener { result ->
-                        val orders = result.map { document ->
-                            MerchantOrderModel(
-                                id = document.id,
-                                merchantUid = document.getString("merchant_uid") ?: "",
-                                studentUid = document.getString("student_uid") ?: "",
-                                menuId = document.getString("menu_uid") ?: "", //TODO: change to "menu_id"
-                                menuName = document.getString("menu_name") ?: "",
-                                menuImage = document.getString("menu_imageurl") ?: "",
-                                menuQty = document.getString("menu_qty") ?: "",
-                                menuPrice = document.getString("menu_price") ?: "",
-                                orderPickupTime = document.getString("order_pickuptime") ?: "", //TODO add order pickup time in firestore
-                                orderStatus = document.getString("order_status") ?: ""
-                            )
+                    .addSnapshotListener { snapshots, exception ->
+                        if (exception != null) {
+                            Log.e(TAG, "Error listening to changes", exception)
+                            return@addSnapshotListener
                         }
-                        _orderList.value = orders
-                        _isLoading.value = false
-                    }
-                    .addOnFailureListener { exception ->
-                        Log.e(TAG, "Error fetching menu list", exception)
-                        _isLoading.value = false
+
+                        if (snapshots != null) {
+                            val orders = snapshots.map { document ->
+                                MerchantOrderModel(
+                                    id = document.id,
+                                    merchantUid = document.getString("merchant_uid") ?: "",
+                                    studentUid = document.getString("student_uid") ?: "",
+                                    menuId = document.getString("menu_uid") ?: "",
+                                    menuName = document.getString("menu_name") ?: "",
+                                    menuImage = document.getString("menu_imageurl") ?: "",
+                                    menuQty = document.getString("menu_qty") ?: "",
+                                    menuPrice = document.getString("menu_price") ?: "",
+                                    orderPickupTime = document.getString("order_pickuptime") ?: "",
+                                    orderStatus = document.getString("order_status") ?: ""
+                                )
+                            }
+                            _orderList.value = orders
+                        }
                     }
             }
         }
     }
+
 
     fun acceptOrder(orderId: String) {
         db.collection("order").document(orderId).update(

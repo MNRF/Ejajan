@@ -73,7 +73,7 @@ class CartViewModel (private val repository: UserRepository) : ViewModel() {
                 "student_uid" to studentUid,
                 "parent_uid" to parentUid,
                 "total_transaction" to totalTransaction,
-                "date_created" to Timestamp.now()
+                "date_created" to Instant.now().toEpochMilli()
             )
             db.collection("transaction")
                 .add(transaction)

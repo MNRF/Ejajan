@@ -17,16 +17,16 @@ class PaymentMidtrans : AppCompatActivity() {
         setContentView(R.layout.activity_parent_transaction)
 
         try {
-            Log.d("TransactionActivity", "Menginisialisasi Midtrans SDK...")
+            Log.d("PaymentMidtrans", "Initializing Midtrans SDK...")
             UiKitApi.Builder()
                 .withMerchantClientKey(clientKey)
                 .withContext(this)
                 .enableLog(true)
                 .withColorTheme(CustomColorTheme("#FFE51255", "#B61548", "#FFE51255"))
                 .build()
-            Log.d("TransactionActivity", "Midtrans SDK berhasil diinisialisasi")
+            Log.d("PaymentMidtrans", "Midtrans SDK successfully initialized")
         } catch (e: Exception) {
-            Log.e("TransactionActivity", "Gagal menginisialisasi Midtrans SDK: ${e.message}", e)
+            Log.e("PaymentMidtrans", "Failed to initialize Midtrans SDK: ${e.message}", e)
         }
 
         setLocaleNew("en")
@@ -35,11 +35,12 @@ class PaymentMidtrans : AppCompatActivity() {
     @Suppress("SameParameterValue")
     private fun setLocaleNew(languageCode: String?) {
         try {
-            Log.d("TransactionActivity", "Mengatur locale ke: $languageCode")
+            Log.d("PaymentMidtrans", "Setting locale to: $languageCode")
             val locales = LocaleListCompat.forLanguageTags(languageCode)
             AppCompatDelegate.setApplicationLocales(locales)
         } catch (e: Exception) {
-            Log.e("TransactionActivity", "Gagal mengatur locale: ${e.message}", e)
+            Log.e("PaymentMidtrans", "Failed to set locale: ${e.message}", e)
         }
     }
 }
+

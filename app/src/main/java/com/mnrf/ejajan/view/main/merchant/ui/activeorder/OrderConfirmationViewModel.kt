@@ -45,6 +45,10 @@ class OrderConfirmationViewModel(private val repository: UserRepository) : ViewM
         }
     }
 
+    fun transferBalancetoMerchant() {
+
+    }
+
     fun getStudentUidbyFaceContour(
         faceContour: String,
         callback: (String?) -> Unit

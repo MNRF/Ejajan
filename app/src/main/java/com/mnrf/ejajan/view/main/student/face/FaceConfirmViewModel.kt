@@ -23,6 +23,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileInputStream
+import java.time.Instant
 import java.util.UUID
 
 class FaceConfirmViewModel(private val repository: UserRepository, private val cartPreferences: CartPreferences) : ViewModel() {
@@ -127,7 +128,7 @@ class FaceConfirmViewModel(private val repository: UserRepository, private val c
                 "parent_uid" to parentUid,
                 "total_orders" to totalOrders,
                 "transaction_id" to transactionId,
-                "date_created" to Timestamp.now()
+                "date_created" to Instant.now().toEpochMilli().toString()
             )
             db.collection("orders").add(orders).await()
             true
@@ -166,7 +167,7 @@ class FaceConfirmViewModel(private val repository: UserRepository, private val c
                         val orderId = newOrderRef.id
 
                         // Set the status of the order
-                        val orderStatus = "success"
+                        val orderStatus = "Pending"
 
                         // Prepare each menu item for the order
                         for (cartItem in cartItems) {
@@ -247,9 +248,9 @@ class FaceConfirmViewModel(private val repository: UserRepository, private val c
                 "menu_name" to menuName,
                 "menu_price" to menuPrice,
                 "menu_qty" to menuQty,
-                "order_pickuptime" to Timestamp.now(),
+                "order_pickuptime" to Instant.now().toEpochMilli().toString(),
                 "menu_imageurl" to imageUrl,
-                "date_created" to Timestamp.now()
+                "date_created" to Instant.now().toEpochMilli().toString()
             )
 
             FirebaseFirestore.getInstance()
