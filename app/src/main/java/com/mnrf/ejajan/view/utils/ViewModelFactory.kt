@@ -18,6 +18,7 @@ import com.mnrf.ejajan.view.main.merchant.ui.menu.detail.DetailMenuViewModel
 import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel
 import com.mnrf.ejajan.view.main.parent.ParentViewModel
 import com.mnrf.ejajan.view.main.parent.ui.home.HomeViewModel
+import com.mnrf.ejajan.view.main.parent.ui.report.ReportViewModel
 import com.mnrf.ejajan.view.main.parent.ui.setting.Setting2ViewModel
 import com.mnrf.ejajan.view.main.parent.ui.setting.profile.ProfileParentViewModel
 import com.mnrf.ejajan.view.main.parent.ui.topup.TopUpViewModel
@@ -115,6 +116,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(ProfileParentViewModel::class.java) -> {
                 ProfileParentViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ReportViewModel::class.java) -> {
+                ReportViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
