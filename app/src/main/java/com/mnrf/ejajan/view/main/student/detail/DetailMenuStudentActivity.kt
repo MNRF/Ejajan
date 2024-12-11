@@ -45,10 +45,8 @@ class DetailMenuStudentActivity : AppCompatActivity() {
             .into(binding.imgAbout)
 
         binding.tvName.text = intent.getStringExtra(MENU_NAME)?.uppercase()
-        val originalPrice = intent.getStringExtra(MENU_PRICE)?.toDoubleOrNull() ?: 0.0
-        val discount = 10
-        val discountedPrice = originalPrice - (originalPrice * discount / 100)
-        val formattedPrice = NumberFormat.getNumberInstance(Locale("id", "ID")).format(discountedPrice)
+        val price = intent.getStringExtra(MENU_PRICE)?.toDoubleOrNull() ?: 0.0
+        val formattedPrice = NumberFormat.getNumberInstance(Locale("id", "ID")).format(price)
         binding.tvPrice.text = getString(R.string.price_format, formattedPrice)
 
         val pickupTime = intent.getStringExtra(MENU_PREPARATIONTIME)?.toIntOrNull() ?: 0

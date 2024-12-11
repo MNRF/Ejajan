@@ -41,6 +41,16 @@ class DetailMenuSpecialActivity : AppCompatActivity() {
             title = "Detail Menu"
         }
 
+        menu = MenuModel(
+            id = intent.getStringExtra(MENU_ID).orEmpty(),
+            name = intent.getStringExtra(MENU_NAME).orEmpty(),
+            description = intent.getStringExtra(MENU_DESCRIPTION).orEmpty(),
+            ingredients = intent.getStringExtra(MENU_INGREDIENTS).orEmpty(), // Ambil dari Intent
+            preparationtime = intent.getStringExtra(MENU_PREPARATIONTIME).orEmpty(), // Ambil dari Intent
+            price = intent.getStringExtra(MENU_PRICE).orEmpty(),
+            imageurl = intent.getStringExtra(MENU_IMAGE).orEmpty()
+        )
+
         currentImageUrl = intent.getStringExtra(MENU_IMAGE)
         Glide.with(binding.imgAbout.context)
             .load(currentImageUrl)
@@ -63,13 +73,13 @@ class DetailMenuSpecialActivity : AppCompatActivity() {
             setTextColor(0xFFFF0000.toInt())
         }
 
-        val price = intent.getStringExtra(MENU_PRICE)?.toDoubleOrNull() ?: 0.0
-        val formattedPrice = NumberFormat.getNumberInstance(Locale("id", "ID")).format(price)
-        binding.tvOriginalPrice.text = getString(R.string.price_format, formattedPrice)
-
-        val priceDiscount = intent.getStringExtra(MENU_PRICE)?.toDoubleOrNull() ?: 0.0
-        val formattedPriceDiscount = NumberFormat.getNumberInstance(Locale("id", "ID")).format(priceDiscount)
-        binding.tvDiscountPrice.text = getString(R.string.price_format, formattedPriceDiscount)
+//        val price = intent.getStringExtra(MENU_PRICE)?.toDoubleOrNull() ?: 0.0
+//        val formattedPrice = NumberFormat.getNumberInstance(Locale("id", "ID")).format(price)
+//        binding.tvOriginalPrice.text = getString(R.string.price_format, formattedPrice)
+//
+//        val priceDiscount = intent.getStringExtra(MENU_PRICE)?.toDoubleOrNull() ?: 0.0
+//        val formattedPriceDiscount = NumberFormat.getNumberInstance(Locale("id", "ID")).format(priceDiscount)
+//        binding.tvDiscountPrice.text = getString(R.string.price_format, formattedPriceDiscount)
 
         val pickupTime = intent.getStringExtra(MENU_PREPARATIONTIME)?.toIntOrNull() ?: 0
         binding.tvPickupTime.text = getString(R.string.pickup, pickupTime)
@@ -141,6 +151,7 @@ class DetailMenuSpecialActivity : AppCompatActivity() {
         const val MENU_ID = "menu_id"
         const val MENU_NAME = "menu_name"
         const val MENU_DESCRIPTION = "menu_description"
+        const val MENU_INGREDIENTS = "menu_ingredients"
         const val MENU_PREPARATIONTIME = "menu_preparationtime"
         const val MENU_PRICE = "menu_price"
         const val MENU_IMAGE = "menu_image"

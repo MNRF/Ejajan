@@ -47,7 +47,7 @@ class SpecialAdapter : ListAdapter<MenuModel, SpecialAdapter.MenuViewHolder>(DIF
                 tvPlaceholderTime.text = prepTime
 
                 cvHomeMenu.setOnClickListener{ view ->
-                    val intent = Intent(view.context, DetailMenuStudentActivity::class.java)
+                    val intent = Intent(view.context, DetailMenuSpecialActivity::class.java)
                     intent.putExtra(DetailMenuSpecialActivity.MENU_ID, menu.id)
                     intent.putExtra(DetailMenuSpecialActivity.MENU_NAME, menu.name)
                     intent.putExtra(DetailMenuSpecialActivity.MENU_DESCRIPTION, menu.description)
