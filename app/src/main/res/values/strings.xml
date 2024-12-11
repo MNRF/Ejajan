@@ -1,9 +1,12 @@
 <resources>
+    //string array constraint
     <string-array name="Constraint">
         <item>Alergi</item>
         <item>Pengeluaran</item>
         <item>Nutrisi</item>
     </string-array>
+
+    //string array alergi
     <string-array name="Alergi">
         <item>Kacang tanah</item>
         <item>Susu</item>
@@ -16,6 +19,8 @@
         <item>Gluten</item>
         <item>wijen</item>
     </string-array>
+
+    //string array pengeluaran
     <string-array name="Pengeluaran">
         <item>Rp5.000</item>
         <item>Rp10.000</item>
@@ -26,12 +31,13 @@
         <item>Rp50.000</item>
         <item>Rp100.000</item>
     </string-array>
+
+    //string array waktu
     <string-array name="Waktu">
         <item>per hari</item>
-        <!--        <item>per minggu</item>-->
-        <!--        <item>per bulan</item>-->
     </string-array>
 
+    //string array nutrisi
     <string-array name="Nutrisi">
         <item>Karbohidrat</item>
         <item>Protein</item>
@@ -55,6 +61,7 @@
         <item>Antioksidan</item>
     </string-array>
 
+    //string array mineral
     <string-array name="Mineral">
         <item>Kalsium</item>
         <item>Besi</item>
@@ -72,9 +79,9 @@
     <string name="Deskripsi_logo">Logo E-Jajan</string>
     <string name="Apps">E - Jajan</string>
     <string name="welcome">EJajan</string>
-    <string name="btnlogin_student">Login Student</string>
-    <string name="btnlogin_parent_merchant">Login Parent or Merchant</string>
-    <string name="description_login">Enter the provided login credential</string>
+    <string name="btnlogin_student">Login Pelajar</string>
+    <string name="btnlogin_parent_merchant">Login Orang Tua atau Pedagang</string>
+    <string name="description_login">Masukkan kredensial login yang diberikan</string>
     <string name="invalid_email">Masukkan email dengan benar</string>
     <string name="minimum_characters">Kata sandi harus minimal 8 karakter</string>
     <string name="input_your_email">Masukkan email Anda</string>
@@ -82,24 +89,24 @@
     <string name="btnLogin">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="welcome_role">Select your role to start managing your account and enjoying our app features.</string>
-    <string name="student">Student</string>
-    <string name="parent">Parent</string>
-    <string name="merchant">Merchant</string>
-    <string name="image_chosee_role">Image Choose Role</string>
-    <string name="parent_desc1">As a Parent, you can set allergies, spending limits, and nutritional requirements for your student</string>
-    <string name="parent_desc2">As a Parent, you can monitor your student\'s account balance and purchase history</string>
-    <string name="parent_desc3">As a Parent, you can view your student\'s spending and nutrition data in easy-to-understand graphical form</string>
-    <string name="next">Next</string>
-    <string name="ready_to_start">Start</string>
-    <string name="start_desc">You are ready to go! Find ease in every role and start a new experience with this application</string>
-    <string name="merchant_desc1">As a Merchant, you can add new menus with details such as name, price, and description of the food</string>
-    <string name="merchant_desc2">As a Merchant, you can take and confirm orders to ensure the process runs smoothly</string>
-    <string name="merchant_desc3">As a Merchant, you can receive payments from student balances directly when orders are taken</string>
-    <string name="student_desc1">As a Student, you can log in using the facial recognition feature to ensure security</string>
-    <string name="student_desc2">As a Student, you can confirm food orders easily using facial recognition technology</string>
-    <string name="student_desc3">As a Student, you can view menus and food recommendations that have been adjusted to the restrictions set by your parents</string>
-    <string name="start_camera">Start Camera</string>
+    <string name="welcome_role">Pilih peran Anda untuk mulai mengelola akun Anda dan menikmati fitur aplikasi kami</string>
+    <string name="student">Pelajar</string>
+    <string name="parent">Orang Tua</string>
+    <string name="merchant">Pedagang</string>
+    <string name="image_chosee_role">Gambar Pilih Peran</string>
+    <string name="parent_desc1">Sebagai Orang Tua, Anda dapat menetapkan alergi, batasan pengeluaran, dan kebutuhan nutrisi untuk siswa Anda</string>
+    <string name="parent_desc2">Sebagai Orang Tua, Anda dapat memantau saldo akun dan riwayat pembelian siswa Anda</string>
+    <string name="parent_desc3">Sebagai Orang Tua, Anda dapat melihat data pengeluaran dan nutrisi siswa Anda dalam bentuk grafis yang mudah dipahami</string>
+    <string name="next">Selanjutnya</string>
+    <string name="ready_to_start">Mulai</string>
+    <string name="start_desc">Anda siap menggunakan aplikasi! Temukan kemudahan dalam setiap peran dan mulailah pengalaman baru dengan aplikasi ini</string>
+    <string name="merchant_desc1">Sebagai Pedagang, Anda dapat menambahkan menu baru dengan rincian seperti nama, harga, dan deskripsi makanan</string>
+    <string name="merchant_desc2">Sebagai Pedagang, Anda dapat menerima dan mengkonfirmasi pesanan untuk memastikan proses berjalan lancar</string>
+    <string name="merchant_desc3">Sebagai Pedagang, Anda dapat menerima pembayaran dari saldo siswa secara langsung saat pesanan diambil</string>
+    <string name="student_desc1">Sebagai Siswa, Anda dapat masuk menggunakan fitur pengenalan wajah untuk memastikan keamanan</string>
+    <string name="student_desc2">Sebagai seorang Siswa, Anda dapat mengonfirmasi pesanan makanan dengan mudah menggunakan teknologi pengenalan wajah</string>
+    <string name="student_desc3">Sebagai Siswa, Anda dapat melihat menu dan rekomendasi makanan yang telah disesuaikan dengan batasan yang ditetapkan oleh orang tua Anda</string>
+    <string name="start_camera">Mulai kamera</string>
     <string name="title_activity_merchant">MerchantActivity</string>
     <string name="title_home">Home</string>
     <string name="title_menu">Menu</string>
@@ -107,47 +114,45 @@
     <string name="title_activity_parent">ParentActivity</string>
     <string name="title_report">Report</string>
     <string name="title_student">Student</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="welcome_merchant">Welcome Merchant</string>
-    <string name="deskripsi_homeMerchant">Have a nice Day</string>
+    <string name="welcome_merchant">Selamat Datang Pedagang</string>
+    <string name="deskripsi_homeMerchant">Semoga harimu menyenangkan!</string>
     <string name="saldo_rp_10_000">Saldo : Rp. 10.000</string>
     <string name="pesanan_masuk">Pesanan masuk</string>
-    <string name="see_all">See All</string>
-    <string name="welcome_parent">Welcome Parent</string>
-    <string name="deskripsi_homeWelcome">You can set limits, view purchase history, and monitor Student spending and nutrition</string>
+    <string name="see_all">Lihat Semua</string>
+    <string name="welcome_parent">Welcome Orang Tua</string>
+    <string name="deskripsi_homeWelcome">Anda dapat menetapkan batasan, melihat riwayat pembelian, dan memantau pengeluaran dan nutrisi Siswa</string>
     <string name="top_up">Top Up</string>
     <string name="saldo_rp_0">Saldo : Rp0</string>
-    <string name="recommendation">Recomendation</string>
-    <string name="fill_all_fields">Please fill in all fields</string>
-    <string name="invalid_role">Invalid role, please try again</string>
-    <string name="text_judul">Secure Login</string>
-    <string name="text_judul2">Order with Ease</string>
-    <string name="text_judul3">Personalized Menus</string>
-    <string name="parent_judul1">Stay in Control</string>
-    <string name="parent_judul2">Monitor with Ease</string>
-    <string name="parent_judul3">Visualize Insights</string>
-    <string name="merchant_judul1">Create Menus Easily</string>
-    <string name="merchant_judul2">Process Orders</string>
-    <string name="merchant_judul3">Get Paid Quickly</string>
-    <string name="start_login">Ready to Start!</string>
-    <string name="welcome_text">Choose your role</string>
-    <string name="skip">Skip</string>
-    <string name="back">Back</string>
+    <string name="recommendation">Rekomendasi</string>
+    <string name="fill_all_fields">Harap isi semua kolom</string>
+    <string name="invalid_role">Peran tidak valid, silakan coba lagi</string>
+    <string name="text_judul">Login Aman</string>
+    <string name="text_judul2">Pesan dengan Mudah</string>
+    <string name="text_judul3">Menu yang Dipersonalisasi</string>
+    <string name="parent_judul1">Tetap Kendali</string>
+    <string name="parent_judul2">Pantau dengan Mudah</string>
+    <string name="parent_judul3">Visualisasikan Wawasan</string>
+    <string name="merchant_judul1">Buat Menu dengan Mudah</string>
+    <string name="merchant_judul2">Proses Pesanan</string>
+    <string name="merchant_judul3">Dapatkan Bayaran dengan Cepat</string>
+    <string name="start_login">Siap untuk memulai!</string>
+    <string name="welcome_text">Pilih peran Anda</string>
+    <string name="lewati">Lewati</string>
+    <string name="kembali">Kembali</string>
     <string name="orderconfirmation"><![CDATA[Please verify student identity using facial recognition to confirm order pickup.]]></string>
-    <string name="deskripsi_homeStudent">Come on, choose healthy and delicious food for you!</string>
-    <string name="welcome_student">Welcome Student</string>
-    <string name="personal_picks">Personalized Picks</string>
-    <string name="healty_choices">Healthy Choices</string>
-    <string name="special_offers">Special Offers</string>
-    <string name="order_desc">Fried rice is rice fried in a pan with various spices and ingredients, such as garlic, shallots, sweet soy sauce, salt, and pepper.</string>
-    <string name="dark_mode">Dark Mode</string>
-    <string name="edit_profile">Edit Profile</string>
-    <string name="notification">Notification</string>
-    <string name="select_language">Select Language</string>
-    <string name="logout">Logout</string>
+    <string name="deskripsi_homeStudent">Ayo, pilih makanan sehat dan lezat untukmu!</string>
+    <string name="welcome_student">Selamat Datang Mahasiswa</string>
+    <string name="personal_picks">Pilihan Pribadi</string>
+    <string name="healty_choices">Pilihan Sehat</string>
+    <string name="special_offers">Penawaran Khusus</string>
+    <string name="order_desc">Nasi goreng adalah nasi yang digoreng dalam wajan dengan berbagai bumbu dan bahan, seperti bawang putih, bawang merah, kecap manis, garam, dan merica.</string>
+    <string name="dark_mode">Mode Gelap</string>
+    <string name="edit_profile">Ubah Profil</string>
+    <string name="notification">Pemberitahuan</string>
+    <string name="select_language">Pilih Bahasa</string>
+    <string name="logout">Keluar</string>
     <string name="alergi">Alergi</string>
-    <string name="spending">Spending</string>
+    <string name="spending">Pengeluaran</string>
     <string name="rp50_000">Rp50.000</string>
     <string name="tambah">Tambah</string>
     <string name="ubah">Ubah</string>
@@ -160,89 +165,89 @@
     <string name="kurang">kurang</string>
     <string name="batal">Batal</string>
     <string name="simpan">Simpan</string>
-    <string name="food_name">Food Name</string>
-    <string name="input_food_name">Input Food Name</string>
-    <string name="price_food">Price Food</string>
-    <string name="input_price_food">Input Price Food</string>
-    <string name="description">Description</string>
-    <string name="input_description">Input Description</string>
-    <string name="basic_ingredients">Basic Ingredients</string>
-    <string name="input_basic_ingredients">Input Basic Ingredients</string>
-    <string name="preparation_time">Preparation Time</string>
-    <string name="input_preparation_time">Input Preparation Time</string>
+    <string name="food_name">Nama Makanan</string>
+    <string name="input_food_name">Input Nama Makanan</string>
+    <string name="price_food">Harga Makanan</string>
+    <string name="input_price_food">Input Harga Makanan</string>
+    <string name="description">Deskripsi</string>
+    <string name="input_description">Input Deskripsi</string>
+    <string name="basic_ingredients">Bahan Dasar</string>
+    <string name="input_basic_ingredients">Masukkan Bahan Dasar</string>
+    <string name="preparation_time">Waktu Persiapan</string>
+    <string name="input_preparation_time">Waktu Persiapan Input</string>
     <string name="pengambilan_dana_berhasil">Pengambilan Dana berhasil!</string>
-    <string name="balance_confirm">Your balance has been successfully added to your child accounts.</string>
-    <string name="back_to_home">Back to home</string>
-    <string name="name_food">Name Food</string>
-    <string name="average_preparation_time">Average Preparation Time</string>
-    <string name="in_progress">In Progress</string>
-    <string name="order_notes">Order Notes</string>
-    <string name="notes">don\'t make it too spicy, the egg is half cooked, and it just has to be delicious.</string>
-    <string name="pickup_time">Pickup Time</string>
+    <string name="balance_confirm">Saldo Anda telah berhasil ditambahkan ke akun anak Anda.</string>
+    <string name="back_to_home">Kembali ke beranda</string>
+    <string name="name_food">Nama Makanan</string>
+    <string name="average_preparation_time">Waktu Persiapan Rata-rata</string>
+    <string name="in_progress">Sedang Diproses</string>
+    <string name="order_notes">Catatan Pesanan</string>
+    <string name="notes">Jangan membuatnya terlalu pedas, telurnya setengah matang, dan rasanya harus lezat.</string>
+    <string name="pickup_time">Waktu Pengambilan</string>
     <string name="time">12:30</string>
-    <string name="quantity">Quantity</string>
+    <string name="quantity">Kuantitas</string>
     <string name="quantitiy">10</string>
-    <string name="confirm_order">Confirm Order</string>
+    <string name="confirm_order">Konfirmasi Pesanan</string>
     <string name="konfirmasi_berhasil">Konfirmasi Berhasil!</string>
-    <string name="username">Username</string>
-    <string name="enter_your_username">Enter your username</string>
-    <string name="enter_your_email">Enter your email</string>
-    <string name="enter_your_password">Enter your password</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="re_enter_your_password">Re-enter your password</string>
+    <string name="username">Nama Pengguna</string>
+    <string name="enter_your_username">Masukkan nama pengguna Anda</string>
+    <string name="enter_your_email">Masukkan email Anda</string>
+    <string name="enter_your_password">Masukkan kata sandi Anda</string>
+    <string name="confirm_password">Konfirmasi Kata Sandi</string>
+    <string name="re_enter_your_password">Masukkan kembali kata sandi Anda</string>
     <string name="info">Info</string>
-    <string name="tipe_constraint">Tipe Constraint</string>
-    <string name="nominal_limit">Nominal Limit</string>
-    <string name="time_period">Time Period</string>
+    <string name="tipe_constraint">Jenis Kendala</string>
+    <string name="nominal_limit">Batas Nominal</string>
+    <string name="time_period">Periode Waktu</string>
     <string name="transaksi_berhasil">Transaksi Berhasil!</string>
-    <string name="order_summary">Order Summary</string>
+    <string name="order_summary">Ringkasan Pesanan</string>
     <string name="nasi_goreng_nprice_rp_15_000">Nasi Goreng\nPrice: Rp. 15.000</string>
     <string name="aqua_nprice_rp_15_000">Aqua\nPrice: Rp. 15.000</string>
     <string name="pickup_time_estimate_00_00">Pickup Time Estimate: 00:00</string>
-    <string name="total_payment">Total payment</string>
+    <string name="total_payment">Total Pembayaran</string>
     <string name="sub_total_rp_30_000">Sub Total: Rp. 30.000</string>
     <string name="total_rp_30_000">Total: Rp. 30.000</string>
-    <string name="cancel_order">Cancel Order</string>
-    <string name="add_to_cart">Add to Cart</string>
-    <string name="order_note">Order Note</string>
-    <string name="all_product">All Product</string>
-    <string name="low_calories">Low Calories</string>
-    <string name="high_protein">High Protein</string>
+    <string name="cancel_order">Batalkan Pesanan</string>
+    <string name="add_to_cart">Tambahkan ke Keranjang</string>
+    <string name="order_note">Catatan Pesanan</string>
+    <string name="all_product">Semua Produk</string>
+    <string name="low_calories">Rendah Kalori</string>
+    <string name="high_protein">Protein Tinggi</string>
     <string name="vegetarian">Vegetarian</string>
     <string name="pesanan_berhasil">Pesanan Berhasil</string>
-    <string name="please_wait_for_the_order_according_to_the_pickup_time">Please wait for the order according to the pickup time.</string>
-    <string name="tanggal_pemesanan_22_november_2024">Tanggal Pemesanan: 22 November 2024</string>
+    <string name="please_wait_for_the_order_sesuai_to_the_pickup_time">Harap menunggu pesanan sesuai waktu penjemputan.</string>
+    <string name="tanggal_pemesanan_22_november_2024">Pemesanan Tanggal: 22 November 2024</string>
     <string name="makanan">Makanan:</string>
     <string name="catatan_pemesanan">Catatan Pemesanan:</string>
     <string name="waktu_pengambilan_18_00_wib">Waktu Pengambilan: 18:00 WIB</string>
     <string name="total_pembayaran_rp60_000">Total Pembayaran: Rp60.000</string>
-    <string name="image_slider">Image Slider</string>
-    <string name="nutritional">Nutritional</string>
-    <string name="expenditure">Expenditure</string>
-    <string name="order_history">Order History</string>
-    <string name="allergy_name">Allergy Name</string>
-    <string name="spending_details">Amount: %d, Period: %s</string>
-    <string name="empty_name">Username cannot be empty</string>
-    <string name="name_too_short">Username must be at least 3 characters long</string>
-    <string name="password_not_matching">Passwords do not match</string>
-    <string name="change_to_update">Change To</string>
-    <string name="nutrition">Nutrition</string>
+    <string name="image_slider">Penggeser Gambar</string>
+    <string name="nutritional">Nutrisi</string>
+    <string name="expenditure">Pengeluaran</string>
+    <string name="order_history">Pesanan Sejarah</string>
+    <string name="allergy_name">Nama Alergi</string>
+    <string name="spending_details">Jumlah: %d, Periode: %s</string>
+    <string name="empty_name">Nama pengguna tidak boleh kosong</string>
+    <string name="name_too_short">Nama pengguna harus terdiri dari minimal 3 karakter</string>
+    <string name="password_not_matching">Kata sandi tidak cocok</string>
+    <string name="change_to_update">Di Ubah</string>
+    <string name="nutrition">Nutrisi</string>
     <string name="mineral">Mineral</string>
     <string name="buka">Buka</string>
     <string name="tutup">Tutup</string>
-    <string name="toko_anda_sedang_buka">Toko anda sedang buka</string>
-    <string name="toko_anda_sedang_tutup">Toko anda sedang tutup</string>
-    <string name="scheduled_open_is_active">Scheduled open is active</string>
-    <string name="scheduled_open_is_inactive">Scheduled open is inactive</string>
+    <string name="toko_anda_sedang_buka">Toko Anda sedang buka</string>
+    <string name="toko_anda_sedang_tutup">Toko Anda sedang tutup</string>
+    <string name="scheduled_open_is_active">Bukaan terjadwal aktif</string>
+    <string name="scheduled_open_is_inactive">Bukaan terjadwal tidak aktif</string>
     <string name="jadwal">Jadwal</string>
-    <string name="food">Top Food</string>
-    <string name="drink">Top Drink</string>
-    <string name="cart">Cart</string>
+    <string name="food">Makanan Pilihan</string>
+    <string name="drink">Minuman Pilihan</string>
+    <string name="cart">Keranjang Belanja</string>
     <string name="logout_confirmation">Apakah Anda yakin ingin keluar?</string>
     <string name="exit">Keluar dari aplikasi</string>
     <string name="ya">Ya</string>
     <string name="tidak">Tidak</string>
-    <string name="pickup">Pick up time = %1$d minute</string>
+    <string name="pickup">Pick up time = %1$d menit</string>
     <string name="price_format">Rp %s</string>
     <string name="notess">Notes</string>
     <string name="quantity_text">%d</string>
@@ -255,9 +260,9 @@
     <string name="berhasil_mengubah_data">Berhasil mengubah data</string>
     <string name="gagal_mengubah_data">Gagal mengubah data</string>
     <string name="konfirmasi_pengambilan">Konfirmasi Pengambilan</string>
-    <string name="confirm_top_up">Confirm Top Up</string>
-    <string name="discount_price">Discount</string>
-    <string name="selesai">See All</string>
+    <string name="confirm_top_up">Konfirmasi Top Up</string>
+    <string name="discount_price">Diskon</string>
+    <string name="seeall">Lihat Semua</string>
     <string name="finish">Selesai</string>
     <string name="total_payment_format">Total Pembayaran : %1$d</string>
     <string name="quantity_label">Quantity: %1$s</string>
