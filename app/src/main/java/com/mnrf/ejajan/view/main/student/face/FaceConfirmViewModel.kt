@@ -171,6 +171,8 @@ class FaceConfirmViewModel(private val repository: UserRepository, private val c
 
                         // Prepare each menu item for the order
                         for (cartItem in cartItems) {
+                            val discountedPrice = cartItem.discountedPrice // Ambil harga diskon dari `cartItem`
+
                             orderAdd(
                                 menuUid = cartItem.id,
                                 merchantUid = merchantUid,
@@ -180,7 +182,8 @@ class FaceConfirmViewModel(private val repository: UserRepository, private val c
                                 menuName = cartItem.name,
                                 menuPrice = cartItem.price,
                                 menuQty = cartItem.quantity,
-                                menuImageFile = File(cartItem.imageurl)
+                                menuImageUrl = cartItem.imageurl,
+                                menuDiscountedPrice = discountedPrice
                             )
                         }
                     }
@@ -202,7 +205,8 @@ class FaceConfirmViewModel(private val repository: UserRepository, private val c
         menuName: String,
         menuPrice: String,
         menuQty: String,
-        menuImageFile: File
+        menuImageUrl: String,
+        menuDiscountedPrice: String?
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -215,7 +219,8 @@ class FaceConfirmViewModel(private val repository: UserRepository, private val c
                     menuName,
                     menuPrice,
                     menuQty,
-                    menuImageFile
+                    menuImageUrl,
+                    menuDiscountedPrice // Pass harga diskon
                 )
                 _orderResponse.postValue(isSuccess)
             } catch (e: Exception) {
@@ -233,12 +238,10 @@ class FaceConfirmViewModel(private val repository: UserRepository, private val c
         menuName: String,
         menuPrice: String,
         menuQty: String,
-        menuImageFile: File
+        menuImageUrl: String,
+        menuDiscountedPrice: String?
     ): Boolean {
-        val imageUrl = image(menuImageFile)
-        var isSuccess = false
-
-        try {
+        return try {
             val order = hashMapOf(
                 "orders_id" to ordersUid,
                 "menu_id" to menuUid,
@@ -247,45 +250,42 @@ class FaceConfirmViewModel(private val repository: UserRepository, private val c
                 "order_status" to orderStatus,
                 "menu_name" to menuName,
                 "menu_price" to menuPrice,
+                "menu_discounted_price" to menuDiscountedPrice, // Simpan harga diskon jika tersedia
                 "menu_qty" to menuQty,
                 "order_pickuptime" to Instant.now().toEpochMilli().toString(),
-                "menu_imageurl" to imageUrl,
+                "menu_imageurl" to menuImageUrl, // Simpan URL gambar
                 "date_created" to Instant.now().toEpochMilli().toString()
             )
 
-            FirebaseFirestore.getInstance()
-                .collection("order")
+            db.collection("order")
                 .add(order)
-                .addOnSuccessListener { documentReference ->
-                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                }
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error adding document", e)
-                }
-            isSuccess = true
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+                .await()
 
-        return isSuccess
+            Log.d("OrderCreate", "Order created successfully: $ordersUid")
+            true
+        } catch (e: Exception) {
+            Log.e("OrderCreate", "Failed to create order: ${e.message}", e)
+            false
+        }
     }
 
-    private suspend fun image(image: File): String {
-        var downloadUrl = ""
-        try {
-            val storageRef: StorageReference = FirebaseStorage.getInstance().reference
-            val fileRef = storageRef.child("order/${image.name}")
-            val stream = withContext(Dispatchers.IO) {
-                FileInputStream(image)
-            }
-            val uploadTask = fileRef.putStream(stream)
-            uploadTask.await()
-            downloadUrl = fileRef.downloadUrl.await().toString()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return downloadUrl
-    }
+
+//    private suspend fun image(image: File): String {
+//        var downloadUrl = ""
+//        try {
+//            val storageRef: StorageReference = FirebaseStorage.getInstance().reference
+//            val fileRef = storageRef.child("order/${image.name}")
+//            val stream = withContext(Dispatchers.IO) {
+//                FileInputStream(image)
+//            }
+//            val uploadTask = fileRef.putStream(stream)
+//            uploadTask.await()
+//            downloadUrl = fileRef.downloadUrl.await().toString()
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
+//        return downloadUrl
+//    }
 
     companion object {
         const val TAG = "order"

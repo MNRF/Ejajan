@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mnrf.ejajan.R
+import com.mnrf.ejajan.data.model.CartModel
 import com.mnrf.ejajan.data.pref.CartPreferences
 import com.mnrf.ejajan.databinding.ActivityStudentCartBinding
 import com.mnrf.ejajan.view.main.student.adapter.CartAdapter
@@ -51,15 +52,22 @@ class CartActivity : AppCompatActivity() {
         }
 
         binding.tvTotalPayment.text = getString(R.string.price, totalPayment)
+        updateTotalPayment(cartItems)
 
         binding.btnConfirm.setOnClickListener {
-            val totalTransaction = binding.tvTotalPayment.text.toString()
-                .replace("[^0-9]".toRegex(), "")
+            val discountPercentage = 10
+            cartPreferences.saveCartItemsWithDiscount(cartItems, discountPercentage)
+            val discountedItems = cartPreferences.getCartItemsWithDiscount()
 
-            cartViewModel.fetchUidsAndCreateTransaction(totalTransaction) {
+            val totalTransaction = discountedItems.sumOf {
+                (it.discountedPrice?.toIntOrNull() ?: 0) * (it.quantity.toIntOrNull() ?: 0)
+            }
+
+            cartViewModel.fetchUidsAndCreateTransaction(totalTransaction.toString()) {
                 startActivity(Intent(this, FaceConfirmActivity::class.java))
             }
         }
+
 
         binding.btnCancel.setOnClickListener {
             cartPreferences.clearCartItems()
@@ -69,6 +77,13 @@ class CartActivity : AppCompatActivity() {
             startActivity(Intent(this, CartActivity::class.java))
             finish()
         }
+    }
+
+    private fun updateTotalPayment(cartItems: List<CartModel>) {
+        val totalPayment = cartItems.sumOf {
+            (it.discountedPrice?.toIntOrNull() ?: it.price.toIntOrNull() ?: 0) * (it.quantity.toIntOrNull() ?: 0)
+        }
+        binding.tvTotalPayment.text = getString(R.string.price, totalPayment)
     }
 
     override fun onSupportNavigateUp(): Boolean {

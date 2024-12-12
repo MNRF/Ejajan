@@ -52,6 +52,7 @@
             android:exported="false" />
         <activity
             android:name=".view.main.student.summary.OrderSummaryActivity"
+            android:label="@string/order_summary"
             android:exported="false" />
         <activity
             android:name=".view.main.student.cart.CartActivity"

@@ -42,6 +42,7 @@
             android:layout_marginStart="8dp"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:layout_marginTop="10dp"
             android:maxLines="1"
             android:ellipsize="end"
             tools:text="Menu Item Name"
@@ -49,22 +50,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Original Price with Strike-through -->
-        <TextView
-            android:id="@+id/tv_item_original_price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:textSize="12sp"
-            android:textColor="@android:color/darker_gray"
-            android:visibility="gone"
-            tools:text="Rp 70,000"
-            app:layout_constraintStart_toEndOf="@id/cv_menu_image"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_name"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Discounted Price -->
+        <!-- Compact Price -->
         <TextView
             android:id="@+id/tv_item_price"
             android:layout_width="0dp"
@@ -72,13 +58,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:textSize="12sp"
-            android:textColor="@android:color/holo_red_dark"
             tools:text="Rp 50,000"
             app:layout_constraintStart_toEndOf="@id/cv_menu_image"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_original_price"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_name"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Item Quantity -->
         <TextView
             android:id="@+id/tv_item_quantity"
             android:layout_width="0dp"
@@ -86,7 +70,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:textSize="12sp"
-            tools:text="Quantity: 2"
+            tools:text="Quantity"
             app:layout_constraintStart_toEndOf="@id/cv_menu_image"
             app:layout_constraintTop_toBottomOf="@id/tv_item_price"
             app:layout_constraintEnd_toEndOf="parent" />

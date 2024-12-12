@@ -38,9 +38,6 @@ class ReportParentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupPieChart(binding.pieChart)
-        setupBarChart(binding.barChart)
-
         historyAdapter = HistoryAdapter()
         setupRecyclerView()
         reportViewModel.orderList.observe(viewLifecycleOwner) { orderList ->
@@ -49,19 +46,19 @@ class ReportParentFragment : Fragment() {
 
     }
 
-    private fun setupPieChart(pieChart: PieChart) {
-        pieChart.description.isEnabled = false
-        pieChart.isDrawHoleEnabled = true
-        pieChart.setUsePercentValues(true)
-        pieChart.setEntryLabelTextSize(12f)
-        pieChart.setEntryLabelColor(android.graphics.Color.BLACK)
-    }
-
-    private fun setupBarChart(barChart: BarChart) {
-        // Contoh pengaturan BarChart
-        barChart.description.isEnabled = false
-        barChart.setFitBars(true)
-    }
+//    private fun setupPieChart(pieChart: PieChart) {
+//        pieChart.description.isEnabled = false
+//        pieChart.isDrawHoleEnabled = true
+//        pieChart.setUsePercentValues(true)
+//        pieChart.setEntryLabelTextSize(12f)
+//        pieChart.setEntryLabelColor(android.graphics.Color.BLACK)
+//    }
+//
+//    private fun setupBarChart(barChart: BarChart) {
+//        // Contoh pengaturan BarChart
+//        barChart.description.isEnabled = false
+//        barChart.setFitBars(true)
+//    }
 
     private fun setupRecyclerView() {
         binding.rvHistory.apply {

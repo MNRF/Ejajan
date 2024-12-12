@@ -100,13 +100,13 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/ic_circle_24" />
+            android:background="@drawable/ic_circle_full_24" />
 
         <View
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/ic_circle_full_24" />
+            android:background="@drawable/ic_circle_24" />
 
         <View
             android:layout_width="16dp"

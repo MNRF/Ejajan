@@ -82,12 +82,14 @@ class DetailMenuStudentActivity : AppCompatActivity() {
 
         binding.btnCart.setOnClickListener {
             val quantity = binding.quantity.text.toString().toInt()
+            val discountedPrice = intent.getStringExtra(MENU_DISCOUNTED_PRICE) // Ambil harga diskon dari intent, jika ada
             val cartItem = CartModel(
                 id = intent.getStringExtra(MENU_ID).orEmpty(),
                 name = intent.getStringExtra(MENU_NAME).orEmpty(),
                 price = intent.getStringExtra(MENU_PRICE).orEmpty(),
                 quantity = quantity.toString(),
                 imageurl = intent.getStringExtra(MENU_IMAGE).orEmpty(),
+                discountedPrice = discountedPrice, // Tambahkan nilai untuk `discountedPrice`
             )
 
             val itemSummary = OrderSummaryModel(
@@ -120,6 +122,7 @@ class DetailMenuStudentActivity : AppCompatActivity() {
         const val MENU_ID = "menu_id"
         const val MENU_NAME = "menu_name"
         const val MENU_DESCRIPTION = "menu_description"
+        const val MENU_DISCOUNTED_PRICE = "menu_discounted_price" // Tambahkan ini
         const val MENU_PREPARATIONTIME = "menu_preparationtime"
         const val MENU_PRICE = "menu_price"
         const val MENU_IMAGE = "menu_image"

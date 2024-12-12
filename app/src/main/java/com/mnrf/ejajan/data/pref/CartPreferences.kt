@@ -49,4 +49,29 @@ class CartPreferences(context: Context) {
         editor.remove("item_summaries")
         editor.apply()
     }
+
+    fun saveCartItemsWithDiscount(cartItems: List<CartModel>, discountPercentage: Int) {
+        val discountedItems = cartItems.map { item ->
+            if (item.discountedPrice.isNullOrEmpty()) { // Hanya tambahkan diskon jika tidak ada
+                val originalPrice = item.price.toDoubleOrNull() ?: 0.0
+                val discountedPrice = originalPrice - (originalPrice * discountPercentage / 100)
+                item.copy(discountedPrice = discountedPrice.toInt().toString()) // Tambahkan harga diskon
+            } else {
+                item // Biarkan tetap sama jika sudah ada harga diskon
+            }
+        }
+        saveCartItems(discountedItems)
+    }
+
+    fun getCartItemsWithDiscount(): List<CartModel> {
+        val cartItems = getCartItems()
+        return cartItems.map { item ->
+            if (item.discountedPrice.isNullOrEmpty()) { // Hanya hitung diskon jika kosong
+                item // Biarkan harga normal jika tidak ada diskon
+            } else {
+                item // Kembalikan item dengan harga diskon
+            }
+        }
+    }
+
 }

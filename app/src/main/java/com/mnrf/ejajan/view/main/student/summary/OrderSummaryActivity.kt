@@ -37,21 +37,33 @@ class OrderSummaryActivity : AppCompatActivity() {
         val currentTime = getCurrentTime()
         binding.tvTgl.text = getString(R.string.waktu_pemesanan_label, currentTime)
 
-        val totalPayment = cartItems.sumOf {
-            (it.price.toIntOrNull() ?: 0) * (it.quantity.toIntOrNull() ?: 0)
+        // Hitung total pembayaran
+        val totalPayment = cartItems.sumOf { cartItem ->
+            val discountedPrice = cartItem.discountedPrice?.toIntOrNull() // Harga diskon
+            val normalPrice = cartItem.price.toIntOrNull() ?: 0 // Harga normal
+            val priceToUse = if (discountedPrice != null && discountedPrice > 0) discountedPrice else normalPrice
+            priceToUse * (cartItem.quantity.toIntOrNull() ?: 0)
         }
-
         binding.tvTotalpembayaran.text = getString(R.string.total_payment_format, totalPayment)
 
-        val itemDetails = cartItems.joinToString("\n") {
-            "${it.name} - ${getString(R.string.price_format, it.price)}\nQuantity: ${getString(R.string.quantity_format, it.quantity)}"
+        // Buat string detail pesanan
+        val itemDetails = cartItems.joinToString("\n") { cartItem ->
+            val discountedPrice = cartItem.discountedPrice?.toIntOrNull()
+            val normalPrice = cartItem.price.toIntOrNull() ?: 0
+
+            if (discountedPrice != null && discountedPrice > 0) {
+                // Tampilkan harga diskon dan harga normal dicoret
+                "${cartItem.name}\n" +
+                        "${getString(R.string.price_format_normal, normalPrice)} -> ${getString(R.string.price_format_special, discountedPrice)}\n" +
+                        "Quantity: ${cartItem.quantity}"
+            } else {
+                // Tampilkan hanya harga normal
+                "${cartItem.name} - ${getString(R.string.price_format_special, normalPrice)}\n" +
+                        "Quantity: ${cartItem.quantity}"
+            }
         }
         binding.tvPesanan.text = itemDetails
 
-//        if (cartItems.isNotEmpty()) {
-//            binding.tvQty.text = getString(R.string.quantity_label, cartItems[0].quantity)
-//            binding.tvPrice.text = getString(R.string.price_format, cartItems[0].price)
-//        }
     }
 
     private fun getCurrentTime(): String {

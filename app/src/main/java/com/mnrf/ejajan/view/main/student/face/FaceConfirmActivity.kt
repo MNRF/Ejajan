@@ -227,7 +227,6 @@ class FaceConfirmActivity : AppCompatActivity() {
     private fun orderAdd() {
         val cartItems = cartPreferences.getCartItems()
 
-
         if (cartItems.isNotEmpty()) {
             // Panggil fungsi orderCreate di ViewModel
             faceConfirmViewModel.orderCreate { errorMessage ->

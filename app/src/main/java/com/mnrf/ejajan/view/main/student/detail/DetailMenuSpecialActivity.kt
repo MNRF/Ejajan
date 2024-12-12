@@ -15,7 +15,6 @@ import com.mnrf.ejajan.data.pref.CartPreferences
 import com.mnrf.ejajan.databinding.ActivityStudentDetailMenuSpecialBinding
 import com.mnrf.ejajan.view.main.student.adapter.NotesAdapter
 import com.mnrf.ejajan.view.main.student.cart.CartActivity
-import com.mnrf.ejajan.view.main.student.detail.DetailMenuStudentActivity.Companion
 import com.mnrf.ejajan.view.utils.ViewModelFactory
 import java.text.NumberFormat
 import java.util.Locale
@@ -59,11 +58,7 @@ class DetailMenuSpecialActivity : AppCompatActivity() {
 
         binding.tvName.text = intent.getStringExtra(MENU_NAME)?.uppercase()
 
-        /*val originalPrice = menu.price.toDoubleOrNull() ?: 0.0
-        val discount = 10
-        val discountedPrice = originalPrice - (originalPrice * discount / 100)*/
-
-        val originalPrice = intent.getStringExtra(DetailMenuStudentActivity.MENU_PRICE)?.toDoubleOrNull() ?: 0.0
+        val originalPrice = menu.price.toDoubleOrNull() ?: 0.0
         val discount = 10
         val discountedPrice = originalPrice - (originalPrice * discount / 100)
 

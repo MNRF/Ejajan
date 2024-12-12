@@ -141,7 +141,7 @@
     <string name="kembali">Kembali</string>
     <string name="orderconfirmation"><![CDATA[Please verify student identity using facial recognition to confirm order pickup.]]></string>
     <string name="deskripsi_homeStudent">Ayo, pilih makanan sehat dan lezat untukmu!</string>
-    <string name="welcome_student">Selamat Datang Mahasiswa</string>
+    <string name="welcome_student">Selamat Datang Pelajar</string>
     <string name="personal_picks">Pilihan Pribadi</string>
     <string name="healty_choices">Pilihan Sehat</string>
     <string name="special_offers">Penawaran Khusus</string>
@@ -253,6 +253,8 @@
     <string name="quantity_text">%d</string>
     <string name="cart_items">Cart Item</string>
     <string name="original_price_format">Rp.%1$d</string>
+    <string name="price_format_special">Rp %d</string>
+    <string name="quantity_format_special">Quantity: %d</string>
     <string name="discounted_price_format">Rp.%1$d</string>
     <string name="quantity_format">Qty: %s</string>
     <string name="price">%d</string>
@@ -269,6 +271,7 @@
     <string name="waktu_pemesanan_label">Waktu Pemesanan: %1$s</string>
     <string name="skip">Melewati</string>
     <string name="please_wait_for_the_order_according_to_the_pickup_time">Mohon menunggu pesanan sesuai dengan waktu pengambilan</string>
+    <string name="price_format_normal">Rp %1$d</string>
 </resources>
 <!--
 <resources>
