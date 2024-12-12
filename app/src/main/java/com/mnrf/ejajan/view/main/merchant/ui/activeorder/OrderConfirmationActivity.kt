@@ -29,6 +29,7 @@ import com.google.mlkit.vision.face.FaceLandmark
 import com.mnrf.ejajan.R
 import com.mnrf.ejajan.data.model.MerchantOrderModel
 import com.mnrf.ejajan.databinding.ActivityLoginStudentBinding
+import com.mnrf.ejajan.databinding.ActivityMerchantOrderConfirmationBinding
 import com.mnrf.ejajan.view.main.merchant.MerchantActivity
 import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel
 import com.mnrf.ejajan.view.main.student.StudentActivity
@@ -39,7 +40,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class OrderConfirmationActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginStudentBinding
+    private lateinit var binding: ActivityMerchantOrderConfirmationBinding
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var order: MerchantOrderModel
     private var imageCapture: ImageCapture? = null
@@ -52,7 +53,7 @@ class OrderConfirmationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityLoginStudentBinding.inflate(layoutInflater)
+        binding = ActivityMerchantOrderConfirmationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -71,9 +72,10 @@ class OrderConfirmationActivity : AppCompatActivity() {
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-        binding.buttonStartCamera.setOnClickListener {
+        requestCameraPermission()
+        /*binding.buttonStartCamera.setOnClickListener {
             requestCameraPermission()
-        }
+        }*/
     }
 
     private fun requestCameraPermission() {
@@ -143,7 +145,7 @@ class OrderConfirmationActivity : AppCompatActivity() {
             detector.process(image)
                 .addOnSuccessListener { faces ->
                     runOnUiThread {
-                        binding.progressBar.visibility = View.VISIBLE
+                        /*binding.progressBar.visibility = View.VISIBLE*/
                     }
 
                     if (faces.isNotEmpty() && !isExecuted) {
@@ -161,7 +163,7 @@ class OrderConfirmationActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener { e ->
                     runOnUiThread {
-                        binding.progressBar.visibility = View.GONE
+                        /*binding.progressBar.visibility = View.GONE*/
                         Toast.makeText(this, "Deteksi wajah gagal: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
                     Log.e(TAG, "Face detection failed: ${e.message}", e)
