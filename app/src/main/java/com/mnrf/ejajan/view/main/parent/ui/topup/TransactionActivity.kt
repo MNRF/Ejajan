@@ -1,52 +1,37 @@
 package com.mnrf.ejajan.view.main.parent.ui.topup
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.os.LocaleListCompat
-import com.google.firebase.Timestamp
 import com.midtrans.sdk.uikit.api.model.CustomColorTheme
 import com.midtrans.sdk.uikit.api.model.TransactionResult
 import com.midtrans.sdk.uikit.external.UiKitApi
 import com.midtrans.sdk.uikit.internal.util.UiKitConstants
 import com.mnrf.ejajan.databinding.ActivityParentTransactionBinding
-import java.time.Instant
+import com.mnrf.ejajan.view.main.parent.ParentActivity
+import com.mnrf.ejajan.view.utils.ViewModelFactory
 
 class TransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityParentTransactionBinding
 
-    // Define the ActivityResultLauncher at the class level so it can be used in multiple methods
+    private val topUpViewModel: TopUpViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
+
+    // ActivityResultLauncher untuk menangani hasil transaksi dari Midtrans UI Kit
     private val transactionLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
                 val transactionResult = result.data?.getParcelableExtra<TransactionResult>(
                     UiKitConstants.KEY_TRANSACTION_RESULT
                 )
-                if (transactionResult != null) {
-                    when (transactionResult.status) {
-                        "SUCCESS" -> {
-                            Toast.makeText(this, "Transaction Success. ID: ${transactionResult.transactionId}", Toast.LENGTH_LONG).show()
-                        }
-                        "PENDING" -> {
-                            Toast.makeText(this, "Transaction Pending. ID: ${transactionResult.transactionId}", Toast.LENGTH_LONG).show()
-                        }
-                        "FAILED" -> {
-                            Toast.makeText(this, "Transaction Failed. ID: ${transactionResult.transactionId}", Toast.LENGTH_LONG).show()
-                        }
-                        else -> {
-                            Toast.makeText(this, "Transaction Status Unknown", Toast.LENGTH_LONG).show()
-                        }
-                    }
-                } else {
-                    Toast.makeText(this, "Transaction Invalid", Toast.LENGTH_LONG).show()
-                }
+                handleTransactionResult(transactionResult)
+            } else {
+                Toast.makeText(this, "Transaction Canceled or Failed.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -55,67 +40,131 @@ class TransactionActivity : AppCompatActivity() {
         binding = ActivityParentTransactionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Check permission for READ_PHONE_STATE
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.READ_PHONE_STATE),
-                101
-            )
+        setupObservers()
+
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = "Transaction Top Up"
         }
 
-        // Button click listener to trigger the transaction process
         binding.btnConfirm.setOnClickListener {
             val amountText = binding.etAmount.text.toString()
-            /*if (amountText.isNotEmpty()) {
-                val amount = amountText.toDoubleOrNull()
-                if (amount != null && amount > 10000) {
-                    Toast.makeText(this, "Top Up Amount: Rp $amount", Toast.LENGTH_SHORT).show()
-                    startTransaction()  // Proceed with the transaction
-                } else {
-                    Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
-                }
+            val amount = amountText.toDoubleOrNull()
+
+            if (amount != null && amount > 0) {
+                topUpViewModel.startTransaction(amount)
             } else {
-                Toast.makeText(this, "Amount cannot be empty", Toast.LENGTH_SHORT).show()
-            }*/
-            intent = Intent(this, ConfirmationActivity::class.java)
-            intent.putExtra(ConfirmationActivity.TRANSACTION_SUCCESS, amountText)
-            startActivity(intent)
-            finish()
+                Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun startTransaction() {
-        // Fetch the Snap Token from your backend (this should be done via an API call)
-        // For now, we use a mock token. In your production app, make sure to fetch the token from the backend.
-        /*val testToken = "PT${Instant.now().toEpochMilli()}"*/
-        val snapToken = "25e3659b-f00c-4d98-bfff-9f72978c8df5"
-        /*val snapToken = testToken
-        println(snapToken)*/
+    private fun setupObservers() {
+        topUpViewModel.transactionResponse.observe(this) { response ->
+            if (response != null) {
+                // Start Midtrans UI Kit with the Snap Token
+                startUiKit(response.token)
+            }
+        }
 
-        // Initialize UiKitApi with your credentials and configuration
+        topUpViewModel.isLoading.observe(this) { isLoading ->
+            binding.btnConfirm.isEnabled = !isLoading
+        }
+
+        topUpViewModel.errorMessage.observe(this) { errorMessage ->
+            if (errorMessage != null) {
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun startUiKit(snapToken: String) {
         UiKitApi.Builder()
-            .withMerchantClientKey(CLIENT_KEY)
+            .withMerchantClientKey("SB-Mid-client-STcLf66h68-oCykv")
             .withContext(this)
-            .withMerchantUrl(BASE_URL)
+            .withMerchantUrl("https://capstone-c242-ps370.et.r.appspot.com/") // Ganti dengan URL backend Anda
             .enableLog(true)
             .withColorTheme(CustomColorTheme("#FFE51255", "#B61548", "#FFE51255"))
             .build()
 
-        // Now start the payment flow with the provided snapToken
         UiKitApi.getDefaultInstance().startPaymentUiFlow(this, transactionLauncher, snapToken)
-
-        // Set locale (optional)
-        setLocaleNew("en")
     }
 
-    private fun setLocaleNew(languageCode: String?) {
-        val locales = LocaleListCompat.forLanguageTags(languageCode)
-        AppCompatDelegate.setApplicationLocales(locales)
+    private fun handleTransactionResult(transactionResult: TransactionResult?) {
+        if (transactionResult != null) {
+            Log.d("TransactionResult", "Status: ${transactionResult.status}")
+            Log.d("TransactionResult", "Transaction ID: ${transactionResult.transactionId}")
+            Log.d("TransactionResult", "Message: ${transactionResult.message}")
+
+            when (transactionResult.status) {
+                "SUCCESS" -> {
+                    Toast.makeText(this, "Transaction Successful!", Toast.LENGTH_LONG).show()
+                    updateUI("SUCCESS", transactionResult.transactionId)
+                    navigateToParentActivity(transactionResult.transactionId)
+                    updateBalance(transactionResult.transactionId ?: "")
+                }
+                "PENDING" -> {
+                    Toast.makeText(this, "Transaction Pending.", Toast.LENGTH_LONG).show()
+                    updateUI("PENDING", transactionResult.transactionId)
+                }
+                "FAILED" -> {
+                    Toast.makeText(this, "Transaction Failed.", Toast.LENGTH_LONG).show()
+                    updateUI("FAILED", transactionResult.transactionId)
+                }
+                "INVALID" -> {
+                    Toast.makeText(this, "Transaction Invalid.", Toast.LENGTH_LONG).show()
+                    updateUI("INVALID", null)
+                }
+                else -> {
+                    Toast.makeText(this, "Transaction Status Unknown.", Toast.LENGTH_LONG).show()
+                    updateUI("UNKNOWN", null)
+                }
+            }
+        } else {
+            Log.e("TransactionResult", "Transaction Result is Null.")
+            Toast.makeText(this, "Transaction Result is Null.", Toast.LENGTH_LONG).show()
+            updateUI("NULL", null)
+        }
     }
 
-    companion object {
-        const val CLIENT_KEY = "SB-Mid-client-STcLf66h68-oCykv"
-        const val BASE_URL = "https://midtrans-api-934253159531.asia-southeast2.run.app/"
+    private fun updateUI(status: String, transactionId: String?) {
+        binding.tvTransactionStatus.text = "Status: $status"
+        if (transactionId != null) {
+            binding.tvTransactionId.text = "Transaction ID: $transactionId"
+        } else {
+            binding.tvTransactionId.text = "Transaction ID: Not Available"
+        }
+        // Nonaktifkan tombol konfirmasi setelah transaksi selesai
+        binding.btnConfirm.isEnabled = false
     }
+
+    private fun updateBalance(transactionId: String) {
+        // Kirim ke backend untuk memperbarui saldo
+        // Pastikan backend Anda memiliki endpoint untuk menangani ini
+        Log.d("UpdateBalance", "Transaction ID: $transactionId sent to backend.")
+        // Contoh sederhana
+        Toast.makeText(this, "Saldo berhasil diperbarui!", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun navigateToParentActivity(transactionId: String?) {
+        val intent = Intent(this, ParentActivity::class.java).apply {
+            putExtra("TRANSACTION_ID", transactionId)
+        }
+        startActivity(intent)
+        finish() // Mengakhiri activity ini
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+//    private fun navigateToConfirmationActivity(status: String, transactionId: String?) {
+//        val intent = Intent(this, ParentActivity::class.java).apply {
+//            putExtra("TRANSACTION_STATUS", status)
+//            putExtra("TRANSACTION_ID", transactionId)
+//        }
+//        startActivity(intent)
+//        finish() // Mengakhiri activity ini
+//    }
 }

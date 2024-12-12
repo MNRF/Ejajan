@@ -224,7 +224,7 @@
     <string name="image_slider">Penggeser Gambar</string>
     <string name="nutritional">Nutrisi</string>
     <string name="expenditure">Pengeluaran</string>
-    <string name="order_history">Pesanan Sejarah</string>
+    <string name="order_history">Riwayat Pemesanan</string>
     <string name="allergy_name">Nama Alergi</string>
     <string name="spending_details">Jumlah: %d, Periode: %s</string>
     <string name="empty_name">Nama pengguna tidak boleh kosong</string>
@@ -272,6 +272,7 @@
     <string name="skip">Melewati</string>
     <string name="please_wait_for_the_order_according_to_the_pickup_time">Mohon menunggu pesanan sesuai dengan waktu pengambilan</string>
     <string name="price_format_normal">Rp %1$d</string>
+    <string name="spending_history">Riwayat Pengeluaran</string>
 </resources>
 <!--
 <resources>

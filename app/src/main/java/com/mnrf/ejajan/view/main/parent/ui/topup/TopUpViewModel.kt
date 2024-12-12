@@ -1,9 +1,6 @@
 package com.mnrf.ejajan.view.main.parent.ui.topup
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.ktx.firestore
@@ -13,14 +10,30 @@ import com.mnrf.ejajan.data.model.UserModel
 import com.mnrf.ejajan.data.repository.UserRepository
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.mnrf.ejajan.data.response.ApiTransactionRequest
+import com.mnrf.ejajan.data.response.CustomerDetails
+import com.mnrf.ejajan.data.response.TransactionResponse
+import com.mnrf.ejajan.data.retrofit.ApiConfig
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TopUpViewModel(private val repository: UserRepository) : ViewModel() {
 
-    private val _parentProfile = MutableLiveData<ParentProfileModel>()
-    val parentProfile: LiveData<ParentProfileModel> get() = _parentProfile
+    private val _parentProfile = MutableLiveData<ParentProfileModel?>()
+    val parentProfile: MutableLiveData<ParentProfileModel?> get() = _parentProfile
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _transactionResponse = MutableLiveData<TransactionResponse>()
+    val transactionResponse: LiveData<TransactionResponse> get() = _transactionResponse
+
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> get() = _errorMessage
 
     private val db = Firebase.firestore
 
@@ -28,6 +41,56 @@ class TopUpViewModel(private val repository: UserRepository) : ViewModel() {
         _isLoading.value = true
         return repository.getSession().asLiveData()
     }
+
+    fun startTransaction(amount: Double) {
+        _isLoading.value = true
+
+        getSession().observeForever { user ->
+            user?.let {
+                fetchParentProfile(user.token) { profile ->
+                    if (profile != null) {
+                        val orderId = "order-${System.currentTimeMillis()}"
+                        val customerDetails = CustomerDetails(
+                            first_name = profile.name,
+                            last_name = "",
+                            email = profile.email,
+                            phone = ""
+                        )
+                        val request = ApiTransactionRequest(
+                            order_id = orderId,
+                            gross_amount = amount,
+                            customer_details = customerDetails
+                        )
+
+                        ApiConfig.getApiService().createTransaction(request)
+                            .enqueue(object : Callback<TransactionResponse> {
+                                override fun onResponse(
+                                    call: Call<TransactionResponse>,
+                                    response: Response<TransactionResponse>
+                                ) {
+                                    _isLoading.value = false
+                                    if (response.isSuccessful) {
+                                        _transactionResponse.value = response.body()
+                                    } else {
+                                        _errorMessage.value =
+                                            "Error: ${response.errorBody()?.string()}"
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<TransactionResponse>, t: Throwable) {
+                                    _isLoading.value = false
+                                    _errorMessage.value = t.message
+                                }
+                            })
+                    } else {
+                        _errorMessage.value = "Parent profile not found."
+                        _isLoading.value = false
+                    }
+                }
+            }
+        }
+    }
+
 
     fun topUp(amount: Int) {
         _isLoading.value = true

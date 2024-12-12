@@ -3,6 +3,7 @@ agp = "8.5.2"
 androidxCameraCore = "1.4.0"
 cameraExtensionsVersion = "1.4.0"
 converterGson = "2.9.0"
+corekit = "2.5.0"
 datastorePreferencesVersion = "1.0.0"
 firebaseBom = "33.6.0"
 glide = "4.16.0"
@@ -26,6 +27,7 @@ playServicesMlkitFaceDetection = "17.1.0"
 retrofit = "2.9.0"
 tensorflowLite = "2.13.0"
 uikit = "2.0.0-SANDBOX"
+uikitVersion = "2.5.0"
 viewpager2 = "1.1.0"
 navigationFragmentKtx = "2.8.4"
 navigationUiKtx = "2.8.4"
@@ -47,6 +49,7 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-datastore-preferences-v100 = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferencesVersion" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+corekit = { module = "com.midtrans:corekit", version.ref = "corekit" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
@@ -84,6 +87,7 @@ firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "fireb
 firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
 tensorflow-lite-support = { group = "org.tensorflow", name = "tensorflow-lite-support", version.ref = "tensorflowLiteSupport" }
 tensorflow-lite-metadata = { group = "org.tensorflow", name = "tensorflow-lite-metadata", version.ref = "tensorflowLiteMetadata" }
+uikit-v250 = { module = "com.midtrans:uikit", version.ref = "uikitVersion" }
 
 
 [plugins]

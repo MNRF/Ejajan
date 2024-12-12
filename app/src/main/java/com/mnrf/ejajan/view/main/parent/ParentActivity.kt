@@ -1,6 +1,7 @@
 package com.mnrf.ejajan.view.main.parent
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -14,6 +15,9 @@ import com.mnrf.ejajan.R
 import com.mnrf.ejajan.data.pref.ThemePreferences
 import com.mnrf.ejajan.data.pref.themeDataStore
 import com.mnrf.ejajan.databinding.ActivityParentBinding
+import com.mnrf.ejajan.view.main.parent.ui.topup.ConfirmationActivity.Companion.TRANSACTION_SUCCESS
+import com.mnrf.ejajan.view.main.parent.ui.topup.TopUpViewModel
+import com.mnrf.ejajan.view.utils.ViewModelFactory
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -21,6 +25,9 @@ class ParentActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityParentBinding
     private lateinit var pref: ThemePreferences
+    private val topUpViewModel: TopUpViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +53,11 @@ class ParentActivity : AppCompatActivity() {
 
         pref = ThemePreferences.getInstance(this.themeDataStore)
         applyThemeSettings()
+
+        val topUpAmount = intent.getStringExtra(TRANSACTION_SUCCESS)
+        if (topUpAmount != null) {
+            topUpViewModel.topUp(topUpAmount.toInt())
+        }
     }
 
     private fun applyThemeSettings() {
@@ -63,5 +75,10 @@ class ParentActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_activity_parent)
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    companion object {
+        const val TRANSACTION_SUCCESS = "transaction_success"
+        const val TRANSACTION_FAILED = "transaction_failed"
     }
 }

@@ -33,9 +33,19 @@ class LoginParentMerchant : AppCompatActivity() {
         // Periksa apakah ada pengguna yang sudah login
         currentUser = Firebase.auth.currentUser
         if (currentUser != null) {
-            navigateToRoleActivity()
+            val onboardingPreferences = OnboardingPreferences(this)
+            userRole = onboardingPreferences.getUserRole()
+
+            if (!userRole.isNullOrBlank()) {
+                navigateToRoleActivity()
+            } else {
+                showAlert("Role tidak ditemukan, silakan login ulang.") {
+                    Firebase.auth.signOut()
+                }
+            }
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,23 +83,36 @@ class LoginParentMerchant : AppCompatActivity() {
         val email = binding.edLoginEmail.text.toString()
         val password = binding.edLoginPassword.text.toString()
 
-        if (email.isBlank() || password.isBlank() ||
-            !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() || password.length < 8
-        ) {
-            showAlert("Isi dengan lengkap dan benar!")
+        if (email.isBlank() || password.isBlank()) {
+            showAlert("Email dan password tidak boleh kosong.")
             return
         }
 
-        // Call the ViewModel's login function
-        loginParentMerchantViewModel.login(email, password)
-        if ("@parent.ejajan.com" in email) {
-            userRole = "parent"
-        } else if ("@merchant.ejajan.com" in email) {
-            userRole = "merchant"
-        }else if ("@admin.ejajan.com" in email) {
-            userRole = "admin"
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            showAlert("Format email tidak valid.")
+            return
         }
+
+        if (password.length < 8) {
+            showAlert("Password minimal 8 karakter.")
+            return
+        }
+
+        userRole = when {
+            email.endsWith("@parent.ejajan.com") -> "parent"
+            email.endsWith("@merchant.ejajan.com") -> "merchant"
+            email.endsWith("@admin.ejajan.com") -> "admin"
+            else -> null
+        }
+
+        if (userRole == null) {
+            showAlert("Email tidak sesuai dengan role yang valid.")
+            return
+        }
+
+        loginParentMerchantViewModel.login(email, password)
     }
+
 
     private fun showLoading(isLoading: Boolean) {
         binding.pbLoginparentmerchant.visibility = if (isLoading) View.VISIBLE else View.GONE
@@ -110,6 +133,11 @@ class LoginParentMerchant : AppCompatActivity() {
     }
 
     private fun showAlert(message: String, onDismiss: (() -> Unit)? = null) {
+        if (isFinishing) {
+            Log.e(TAG, "Activity is finishing, cannot show alert.")
+            return
+        }
+
         Log.d(TAG, "showAlert dipanggil dengan pesan: $message")
         AlertDialog.Builder(this).apply {
             setTitle("Informasi")
@@ -122,6 +150,7 @@ class LoginParentMerchant : AppCompatActivity() {
             show()
         }
     }
+
 
     companion object {
         private const val TAG = "EmailPassword"

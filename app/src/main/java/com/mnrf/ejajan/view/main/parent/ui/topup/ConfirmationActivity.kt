@@ -20,7 +20,7 @@ import com.mnrf.ejajan.view.utils.ViewModelFactory
 
 class ConfirmationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityParentConfirmationBinding
-    private val TopUpViewModel: TopUpViewModel by viewModels {
+    private val topUpViewModel: TopUpViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
 
@@ -30,7 +30,7 @@ class ConfirmationActivity : AppCompatActivity() {
         setContentView(binding.root)
         val topUpAmount = intent.getStringExtra(TRANSACTION_SUCCESS)
         if (topUpAmount != null) {
-            TopUpViewModel.topUp(topUpAmount.toInt())
+            topUpViewModel.topUp(topUpAmount.toInt())
         }
 
         binding.btnBackToHome.setOnClickListener {

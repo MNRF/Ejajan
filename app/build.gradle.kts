@@ -105,6 +105,9 @@ dependencies {
 
     implementation(libs.tensorflow.lite)
 
+//    implementation (libs.uikit.v250)
+//    implementation (libs.corekit)
+
     //Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
