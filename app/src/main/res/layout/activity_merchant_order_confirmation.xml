@@ -8,16 +8,16 @@
     tools:context=".view.main.merchant.ui.activeorder.OrderConfirmationActivity">
 
     <FrameLayout
-        android:id="@+id/camera"
+        android:id="@+id/fm_camera"
         android:layout_width="350dp"
         android:layout_height="350dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="200dp"
         android:background="@drawable/circle_shape"
-        android:clipToOutline="true"
         android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:clipToOutline="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.camera.view.PreviewView
             android:id="@+id/viewFinder"
@@ -37,6 +37,6 @@
         android:text="@string/orderconfirmation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camera" />
+        app:layout_constraintTop_toBottomOf="@+id/fm_camera" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

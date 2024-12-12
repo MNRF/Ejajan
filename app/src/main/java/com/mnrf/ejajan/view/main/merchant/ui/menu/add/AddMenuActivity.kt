@@ -55,6 +55,11 @@ class AddMenuActivity : AppCompatActivity() {
         binding = ActivityMerchantAddMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = "Add Menu"
+        }
+
         binding.btnTambah.setOnClickListener {
             if (isMenuSubmitted) return@setOnClickListener // Prevent multiple submissions
 
@@ -149,6 +154,11 @@ class AddMenuActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 }

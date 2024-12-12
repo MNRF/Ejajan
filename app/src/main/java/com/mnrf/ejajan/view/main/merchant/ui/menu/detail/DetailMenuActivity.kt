@@ -48,6 +48,11 @@ class DetailMenuActivity : AppCompatActivity() {
         binding = ActivityMerchantDetailMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = "Detail Menu"
+        }
+
         currentImageUrl = intent.getStringExtra(MENU_IMAGE)
         Glide.with(binding.imgAbout.context)
             .load(currentImageUrl)
@@ -135,5 +140,10 @@ class DetailMenuActivity : AppCompatActivity() {
         const val MENU_PREPARATIONTIME = "menu_preparationtime"
         const val MENU_PRICE = "menu_price"
         const val MENU_IMAGE = "menu_image"
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
