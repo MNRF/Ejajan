@@ -25,3 +25,5 @@ data class MerchantProfileModel(
     val end6: String = "",
     val end7: String = ""
 ) : Parcelable
+
+
