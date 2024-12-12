@@ -45,13 +45,13 @@
 
         <TextView
             android:id="@+id/placeholder_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/tv_order_pickup_time"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cv_menu_image"
             app:layout_constraintTop_toTopOf="@+id/cv_menu_image"
             tools:background="#D3D3D3"
@@ -59,33 +59,39 @@
 
         <TextView
             android:id="@+id/tv_order_pickup_time"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/placeholder_name"
             app:layout_constraintTop_toTopOf="@+id/cv_menu_image"
             tools:background="#D3D3D3"
             tools:text="11:15" />
 
         <TextView
             android:id="@+id/placeholder_price"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="5dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/tv_order_status"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cv_menu_image"
             app:layout_constraintTop_toBottomOf="@id/placeholder_name"
             tools:background="#C0C0C0"
-            tools:text="Rp10.500"/>
+            tools:text="Rp10.500" />
 
         <TextView
             android:id="@+id/tv_order_status"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/placeholder_price"
             app:layout_constraintTop_toBottomOf="@id/placeholder_name"

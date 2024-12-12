@@ -19,6 +19,9 @@ class MerchantHomeViewModel(private val repository: UserRepository) : ViewModel(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _balance = MutableLiveData<String>()
+    val balance: LiveData<String> = _balance
+
     private val _orderDetail = MutableLiveData<MerchantOrderModel>()
     val orderDetail: LiveData<MerchantOrderModel> get() = _orderDetail
 
@@ -27,6 +30,21 @@ class MerchantHomeViewModel(private val repository: UserRepository) : ViewModel(
     fun getSession(): LiveData<UserModel> {
         _isLoading.value = true
         return repository.getSession().asLiveData()
+    }
+
+    fun observeBalance() {
+        getSession().observeForever { user ->
+            db.collection("merchantprofiles").whereEqualTo("uid", user.token).
+            addSnapshotListener { collection, exception ->
+                if (exception != null) {
+                    Log.e(TAG, "Error listening to changes", exception)
+                    return@addSnapshotListener
+                }
+                if (collection != null) {
+                    _balance.value = collection.documents.first().getString("balance")
+                }
+            }
+        }
     }
 
     private fun fetchMenuList() {
@@ -100,6 +118,7 @@ class MerchantHomeViewModel(private val repository: UserRepository) : ViewModel(
 
     init {
         fetchMenuList()
+        observeBalance()
     }
 
     companion object {

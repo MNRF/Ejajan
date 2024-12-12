@@ -40,9 +40,15 @@ class MerchantHomeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner) 
                 val formattedTime = timeFormatter.format(Date(pickupTimeInMillis.toLong()))
                 val time = "Diambil jam $formattedTime"
                 tvOrderPickupTime.text = time
-                val menuPrice = "Rp${order.menuPrice.toLong() * order.menuPrice.toLong()}"
-                placeholderPrice.text = menuPrice
-                tvOrderStatus.text = order.orderStatus
+                val qty = "${order.menuQty} porsi"
+                placeholderPrice.text = qty
+                val total = "Senilai Rp${order.menuPrice.toLong() * order.menuQty.toLong()}"
+                tvOrderStatus.text = total
+                /*when (order.orderStatus) {
+                    "Pending" -> tvOrderStatus.text = "Menunggu diterima"
+                    "Accepted" -> tvOrderStatus.text = "Sudah diterima"
+                }*/
+
 
                 btnTerimaPesanan.setOnClickListener {
                     merchantHomeViewModel.acceptOrder(order.id)

@@ -202,11 +202,11 @@ class LoginStudent : AppCompatActivity() {
                             startActivity(intent)
                             finish()
                         }
-                    } else {
+                    } /*else {
                         runOnUiThread {
                             Toast.makeText(this, "Tidak ada wajah terdeteksi.", Toast.LENGTH_SHORT).show()
                         }
-                    }
+                    }*/
                 }
                 .addOnFailureListener { e ->
                     runOnUiThread {

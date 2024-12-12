@@ -32,6 +32,8 @@ import com.mnrf.ejajan.databinding.ActivityLoginStudentBinding
 import com.mnrf.ejajan.view.main.merchant.MerchantActivity
 import com.mnrf.ejajan.view.main.merchant.ui.setting.SettingViewModel
 import com.mnrf.ejajan.view.main.student.StudentActivity
+import com.mnrf.ejajan.view.main.student.face.FaceConfirmActivity
+import com.mnrf.ejajan.view.main.student.face.FaceConfirmActivity.Companion
 import com.mnrf.ejajan.view.utils.ViewModelFactory
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -41,6 +43,7 @@ class OrderConfirmationActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var order: MerchantOrderModel
     private var imageCapture: ImageCapture? = null
+    private var isExecuted = true
 
     private val orderConfirmationViewModel: OrderConfirmationViewModel by viewModels {
         ViewModelFactory.getInstance(this)
@@ -56,6 +59,8 @@ class OrderConfirmationActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        isExecuted = false
 
         order = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(SELECTED, MerchantOrderModel::class.java)
@@ -141,56 +146,18 @@ class OrderConfirmationActivity : AppCompatActivity() {
                         binding.progressBar.visibility = View.VISIBLE
                     }
 
-                    if (faces.isNotEmpty()) {
-                        for (face in faces) {
-                            Log.d(TAG, "Face detected with bounds: ${face.boundingBox}")
-
-                            val leftEar = face.getLandmark(FaceLandmark.LEFT_EAR)
-                            leftEar?.let {
-                                val leftEarPos = it.position
-                                Log.d(TAG, "Left Ear Position: $leftEarPos")
-                            }
-
-                            val leftEyeContour = face.getContour(FaceContour.LEFT_EYE)?.points
-                            leftEyeContour?.forEach { point ->
-                                Log.d(TAG, "Left Eye Contour Point: $point")
-                            }
-
-                            face.trackingId?.let { id ->
-                                Log.d(TAG, "Tracking ID: $id")
-                            }
-
-                            runOnUiThread {
-                                //Implement Facial Recognition ML Model Here
-                                //TODO Implement facial recognition feature
-
-                                val faceContour = "th1sIs4dUmMyf4Cec0nToUr" // Hypothetical data
-                                orderConfirmationViewModel.getStudentUidbyFaceContour(faceContour) { studentUid ->
-                                    if (studentUid != null) {
-                                        if (studentUid == order.studentUid) {
-                                            orderConfirmationViewModel.confirmPickup(order.id)
-                                            Log.d(TAG, "Pickup confirmed for order ID: ${order.id}")
-                                        } else {
-                                            Log.e(TAG, "Student UID mismatch. Expected: ${order.studentUid}, Found: $studentUid")
-                                        }
-                                    } else {
-                                        Log.e(TAG, "Failed to fetch student UID for faceContour: $faceContour")
-                                    }
-                                }
-                                Toast.makeText(this, "Wajah berhasil terdeteksi.", Toast.LENGTH_SHORT).show()
-                            }
-                            Toast.makeText(this,
-                                "Pesanan selesai, saldo sudah diteruskan ke akun anda.",
-                                Toast.LENGTH_LONG).show()
-                            val intent = Intent(this, MerchantActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                    if (faces.isNotEmpty() && !isExecuted) {
+                        isExecuted = true // Ensure this block executes only once
+                        val faceContour = "th1sIs4dUmMyf4Cec0nToUr" // Hypothetical data
+                        completeOrder(faceContour)
+                        runOnUiThread {
+                            Toast.makeText(this, "Wajah berhasil terdeteksi.", Toast.LENGTH_SHORT).show()
                         }
-                    } else {
+                    } /*else if (faces.isEmpty() && !isExecuted) {
                         runOnUiThread {
                             Toast.makeText(this, "Tidak ada wajah terdeteksi.", Toast.LENGTH_SHORT).show()
                         }
-                    }
+                    }*/
                 }
                 .addOnFailureListener { e ->
                     runOnUiThread {
@@ -202,11 +169,41 @@ class OrderConfirmationActivity : AppCompatActivity() {
                 .addOnCompleteListener {
                     imageProxy.close()
                 }
-
         } else {
             imageProxy.close()
         }
     }
+
+    private fun completeOrder(faceContour: String) {
+        orderConfirmationViewModel.getStudentUidbyFaceContour(faceContour) { studentUid ->
+            if (studentUid != null) {
+                if (studentUid == order.studentUid) {
+                    orderConfirmationViewModel.confirmPickup(order)
+                    runOnUiThread {
+                        Toast.makeText(this,
+                            "Pesanan selesai, saldo sudah diteruskan ke akun anda.",
+                            Toast.LENGTH_LONG).show()
+                    }
+                    Log.d(TAG, "Pickup confirmed for order ID: ${order.id}")
+                    startActivity(Intent(this, MerchantActivity::class.java))
+                    finish()
+                } else {
+                    runOnUiThread {
+                        Toast.makeText(this, "UID Siswa tidak cocok, pesanan tidak dapat diproses.", Toast.LENGTH_SHORT).show()
+                    }
+                    Log.e(TAG, "Student UID mismatch. Expected: ${order.studentUid}, Found: $studentUid")
+                    isExecuted = false // Allow retry
+                }
+            } else {
+                runOnUiThread {
+                    Toast.makeText(this, "Gagal menemukan UID siswa untuk pesanan ini.", Toast.LENGTH_SHORT).show()
+                }
+                Log.e(TAG, "Failed to fetch student UID for faceContour: $faceContour")
+                isExecuted = false // Allow retry
+            }
+        }
+    }
+
 
     companion object {
         private const val CAMERA_PERMISSION_REQUEST_CODE = 1001

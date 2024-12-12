@@ -1,6 +1,7 @@
 package com.mnrf.ejajan.view.main.merchant.ui.home
 
 import android.content.Intent
+import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -59,11 +60,17 @@ class HomeMerchantFragment : Fragment() {
             adapter.submitList(orderList)
         }
 
+        merchantHomeViewModel.balance.observe(viewLifecycleOwner) { balance ->
+            val balanceFormatted = DecimalFormat("#,###").format(balance.toLongOrNull() ?: 0)
+            val saldo = "Saldo: Rp$balanceFormatted"
+            binding.tvSaldo.text = saldo
+        }
+
         setupImageSlider()
 
         binding.tvMerchantWelcome.text = getString(R.string.welcome_merchant)
         binding.tvMerchantDeskripsi.text = getString(R.string.deskripsi_homeMerchant)
-        binding.tvSaldo.text = getString(R.string.saldo_rp_0)
+        /*binding.tvSaldo.text = getString(R.string.saldo_rp_0)*/
 
         binding.seeallStatus.setOnClickListener {
             // Tambahkan logika di sini untuk aksi tombol

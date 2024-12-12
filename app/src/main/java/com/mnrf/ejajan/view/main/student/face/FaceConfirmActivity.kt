@@ -157,9 +157,9 @@ class FaceConfirmActivity : AppCompatActivity() {
                             Toast.makeText(this, "Konfirmasi Pesanan Berhasil.", Toast.LENGTH_SHORT).show()
                             createOrder()
                             orderAdd()
-                            val intent = Intent(this@FaceConfirmActivity, OrderSummaryActivity::class.java)
+                            /*val intent = Intent(this@FaceConfirmActivity, OrderSummaryActivity::class.java)
                             startActivity(intent)
-                            finish()
+                            finish()*/
                         }
                     } else {
                         runOnUiThread {
