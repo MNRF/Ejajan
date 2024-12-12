@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/parent_onboarding3"
-        android:layout_width="0dp"
-        android:layout_height="350dp"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
@@ -34,11 +34,11 @@
         app:layout_constraintTop_toBottomOf="@+id/skip2" />
 
     <androidx.cardview.widget.CardView
+        style="@style/Card"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parent_onboarding3"
-        style="@style/Card">
+        app:layout_constraintTop_toBottomOf="@+id/parent_onboarding3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -48,6 +48,9 @@
                 android:id="@+id/parent_judul3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 android:fontFamily="@font/inter28_bold"
                 android:gravity="center"
                 android:text="@string/parent_judul3"
@@ -62,12 +65,17 @@
                 android:id="@+id/parent_text3"
                 android:layout_width="377dp"
                 android:layout_height="75dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:fontFamily="@font/inter24_regular"
                 android:gravity="center"
                 android:text="@string/parent_desc3"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/parent_judul3" />
@@ -78,6 +86,8 @@
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         android:gravity="center"
         android:orientation="horizontal"
@@ -106,9 +116,12 @@
 
     <Button
         android:id="@+id/next"
+        style="@style/Button"
+        android:layout_width="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/Button"/>
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

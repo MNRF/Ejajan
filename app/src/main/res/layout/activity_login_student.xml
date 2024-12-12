@@ -11,30 +11,35 @@
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/welcome"
-        android:textSize="32sp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
         android:fontFamily="@font/inter28_bold"
+        android:gravity="center"
+        android:text="@string/welcome"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.2"
-        android:layout_marginHorizontal="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/camera"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/circle_shape"
-        android:elevation="4dp"
         android:clipToOutline="true"
-        app:layout_constraintTop_toBottomOf="@id/welcome"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStartCamera"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/welcome">
 
         <androidx.camera.view.PreviewView
             android:id="@+id/viewFinder"
@@ -44,30 +49,30 @@
 
     <Button
         android:id="@+id/buttonStartCamera"
+        style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginBottom="90dp"
         android:backgroundTint="@color/blue1"
+        android:fontFamily="@font/inter18_regular"
         android:paddingVertical="12dp"
         android:text="@string/start_camera"
-        style="@style/Button"
-        android:fontFamily="@font/inter18_regular"
         android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/camera"
         app:layout_constraintWidth_percent="0.8" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/blue1"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="60dp"
+        android:indeterminateTint="@color/blue2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.534"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.844" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

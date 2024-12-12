@@ -10,31 +10,33 @@
         android:id="@+id/skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/gray"
         android:text="@string/skip"
         android:textColor="@color/white"
-        android:backgroundTint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/merchant_onboarding1"
-        android:layout_width="450dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
         android:contentDescription="@string/image_chosee_role"
         android:src="@drawable/merchant1"
-        app:layout_constraintTop_toBottomOf="@id/skip"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/skip" />
 
     <androidx.cardview.widget.CardView
+        style="@style/Card"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/merchant_onboarding1"
-        style="@style/Card">
+        app:layout_constraintTop_toBottomOf="@+id/merchant_onboarding1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -44,8 +46,9 @@
                 android:id="@+id/merchant_judul1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 android:fontFamily="@font/inter28_bold"
                 android:gravity="center"
                 android:text="@string/merchant_judul1"
@@ -59,14 +62,16 @@
                 android:id="@+id/merchant_text1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/inter24_regular"
                 android:gravity="center"
                 android:text="@string/merchant_desc1"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:fontFamily="@font/inter24_regular"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/merchant_judul1" />
@@ -107,9 +112,12 @@
 
     <Button
         android:id="@+id/next"
+        style="@style/Button"
+        android:layout_width="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/Button"/>
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

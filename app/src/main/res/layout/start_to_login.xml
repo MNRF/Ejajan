@@ -22,8 +22,8 @@
 
     <ImageView
         android:id="@+id/start_login"
-        android:layout_width="0dp"
-        android:layout_height="350dp"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
@@ -35,7 +35,7 @@
 
     <androidx.cardview.widget.CardView
         style="@style/Card"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/start_login">
@@ -48,6 +48,9 @@
                 android:id="@+id/text_login"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 android:fontFamily="@font/inter28_bold"
                 android:gravity="center"
                 android:text="@string/start_login"
@@ -62,12 +65,17 @@
                 android:id="@+id/login_hero"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:fontFamily="@font/inter24_regular"
                 android:gravity="center"
                 android:text="@string/start_desc"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_login" />
@@ -76,15 +84,15 @@
 
     <Button
         android:id="@+id/btn_start_login"
-        android:text="@string/ready_to_start"
+        style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/ready_to_start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/Button"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
