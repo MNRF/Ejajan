@@ -88,10 +88,11 @@
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_marginStart="5dp"
+        android:includeFontPadding="false"
         android:text="@string/student"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_role_parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -103,9 +104,10 @@
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="60dp"
         android:text="@string/merchant"
+        android:textSize="12sp"
+        app:iconPadding="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_role_parent" />
 
     <Button
@@ -116,9 +118,9 @@
         android:layout_marginHorizontal="5dp"
         android:layout_marginBottom="60dp"
         android:text="@string/parent"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_role_merchant"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_role_student" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

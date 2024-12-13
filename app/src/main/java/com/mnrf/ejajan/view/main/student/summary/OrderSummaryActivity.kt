@@ -39,10 +39,13 @@ class OrderSummaryActivity : AppCompatActivity() {
 
         // Hitung total pembayaran
         val totalPayment = cartItems.sumOf { cartItem ->
-            val discountedPrice = cartItem.discountedPrice?.toIntOrNull() // Harga diskon
-            val normalPrice = cartItem.price.toIntOrNull() ?: 0 // Harga normal
-            val priceToUse = if (discountedPrice != null && discountedPrice > 0) discountedPrice else normalPrice
-            priceToUse * (cartItem.quantity.toIntOrNull() ?: 0)
+            //val discountedPrice = cartItem.discountedPrice?.toIntOrNull() // Harga diskon
+
+            val normalPrice = cartItem.price.toInt() // Harga normal
+            val discount = normalPrice.times((10/100))
+            val discountedPrice = (normalPrice.minus(discount))
+            val priceToUse = if (discountedPrice > 0) discountedPrice else normalPrice
+            priceToUse * (cartItem.quantity.toInt())
         }
         binding.tvTotalpembayaran.text = getString(R.string.total_payment_format, totalPayment)
 

@@ -113,7 +113,6 @@ class LoginParentMerchant : AppCompatActivity() {
         loginParentMerchantViewModel.login(email, password)
     }
 
-
     private fun showLoading(isLoading: Boolean) {
         binding.pbLoginparentmerchant.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
