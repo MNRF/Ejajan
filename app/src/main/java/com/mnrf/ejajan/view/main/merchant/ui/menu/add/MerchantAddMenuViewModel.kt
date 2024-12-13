@@ -30,35 +30,43 @@ class MerchantAddMenuViewModel(private val repository: UserRepository) : ViewMod
         }
     }
 
-    suspend fun addMenu (merchantUid: String, menuName: String, menuDescription: String, menuIngredients: String,
-                 menuPreparationtime: String, menuPrice: String, menuImageFile: File): Boolean {
+    suspend fun addMenu(
+        merchantUid: String,
+        menuName: String,
+        menuDescription: String,
+        menuIngredients: String,
+        menuPreparationtime: String,
+        menuPrice: String,
+        menuImageFile: File
+    ): Boolean {
         val uploadedImageUrl = uploadImage(menuImageFile)
-        var isSuccess: Boolean
-        try {
-            val user = hashMapOf(
-                "merchant_uid" to merchantUid,
-                "menu_name" to menuName,
-                "menu_description" to menuDescription,
-                "menu_ingredients" to menuIngredients,
-                "menu_preparationtime" to menuPreparationtime,
-                "menu_price" to menuPrice,
-                "menu_imageurl" to uploadedImageUrl
-            )
-            db.collection("menus")
-                .add(user)
-                .addOnSuccessListener { documentReference ->
-                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                }
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error adding document", e)
-                }
-            isSuccess = true
-        }catch (e: Exception) {
-            e.printStackTrace()
-            isSuccess = false
+
+        // Periksa apakah URL berhasil dibuat
+        if (uploadedImageUrl.isEmpty()) {
+            Log.e(TAG, "Image upload failed, aborting Firestore save")
+            return false
         }
-        return isSuccess
+
+        val menuData = hashMapOf(
+            "merchant_uid" to merchantUid,
+            "menu_name" to menuName,
+            "menu_description" to menuDescription,
+            "menu_ingredients" to menuIngredients,
+            "menu_preparationtime" to menuPreparationtime,
+            "menu_price" to menuPrice,
+            "menu_imageurl" to uploadedImageUrl
+        )
+
+        return try {
+            db.collection("menus").add(menuData).await() // Tunggu hingga selesai
+            Log.d(TAG, "Menu created successfully")
+            true
+        } catch (e: Exception) {
+            Log.e(TAG, "Error creating menu: ${e.localizedMessage}", e)
+            false
+        }
     }
+
 
     private suspend fun uploadImage(image: File): String {
         var downloadUrl = ""
@@ -66,14 +74,20 @@ class MerchantAddMenuViewModel(private val repository: UserRepository) : ViewMod
             val storageRef: StorageReference = storage.reference
             val fileRef = storageRef.child("images/${image.name}")
             val stream = FileInputStream(image)
+
+            // Upload gambar
             val uploadTask = fileRef.putStream(stream)
-            uploadTask.await()
+            uploadTask.await() // Tunggu hingga upload selesai
+
+            // Dapatkan URL unduhan
             downloadUrl = fileRef.downloadUrl.await().toString()
+            Log.d("UploadImage", "Image uploaded successfully: $downloadUrl")
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("UploadImage", "Error uploading image: ${e.localizedMessage}", e)
         }
         return downloadUrl
     }
+
 
     fun addPrePackagedMenu (merchantUid: String, menuName: String, menuDescription: String, menuBrand: String,
                  menuPreparationtime: String) {

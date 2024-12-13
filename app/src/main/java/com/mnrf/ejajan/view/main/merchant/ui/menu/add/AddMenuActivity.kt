@@ -61,17 +61,23 @@ class AddMenuActivity : AppCompatActivity() {
         }
 
         binding.btnTambah.setOnClickListener {
-            if (isMenuSubmitted) return@setOnClickListener // Prevent multiple submissions
+            if (isMenuSubmitted) return@setOnClickListener
 
-            currentImageUri?.let { uri ->
-                val file = uriToFile(uri)
-                file.reduceFileImage()
-                merchantAddMenuViewModel.getSession().observe(this) { user ->
-                    val merchantUid = user.token
+            if (currentImageUri == null) {
+                Log.e("AddMenu", "No image selected")
+                return@setOnClickListener
+            }
 
-                    if (!isMenuSubmitted && merchantUid.isNotEmpty()) {
-                        isMenuSubmitted = true
-                        lifecycleScope.launch { merchantAddMenuViewModel.addMenu(
+            val file = uriToFile(currentImageUri!!)
+            file.reduceFileImage()
+
+            merchantAddMenuViewModel.getSession().observe(this) { user ->
+                val merchantUid = user.token
+
+                if (!isMenuSubmitted && merchantUid.isNotEmpty()) {
+                    isMenuSubmitted = true
+                    lifecycleScope.launch {
+                        val isSuccess = merchantAddMenuViewModel.addMenu(
                             merchantUid,
                             binding.etFoodName.text.toString(),
                             binding.etDescription.text.toString(),
@@ -79,14 +85,15 @@ class AddMenuActivity : AppCompatActivity() {
                             binding.etAddPreparetime.text.toString(),
                             binding.etPriceFood.text.toString(),
                             file
-                        ) }
-                        val intent = Intent(this, MerchantActivity::class.java)
-                        startActivity(intent)
+                        )
+                        if (isSuccess) {
+                            startActivity(Intent(this@AddMenuActivity, MerchantActivity::class.java))
+                        } else {
+                            Log.e("AddMenu", "Failed to add menu")
+                        }
                     }
                 }
             }
-            menuMerchantViewModel.fetchMenuList()
-            finish()
         }
 
         binding.cvSettingImage.setOnClickListener {
@@ -95,31 +102,32 @@ class AddMenuActivity : AppCompatActivity() {
     }
 
     fun File.reduceFileImage(): File {
-        val file = this
-        val bitmap = BitmapFactory.decodeFile(file.path)
-        var compressQuality = 100
+        val bitmap = BitmapFactory.decodeFile(this.path)
+        var compressQuality = 80
         var streamLength: Int
         do {
             val bmpStream = ByteArrayOutputStream()
-            bitmap?.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
             val bmpPicByteArray = bmpStream.toByteArray()
             streamLength = bmpPicByteArray.size
             compressQuality -= 5
-        } while (streamLength > 1000000)
-        bitmap?.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
-        return file
+        } while (streamLength > 500000 && compressQuality > 10)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(this))
+        return this
     }
 
     private fun uriToFile(uri: Uri): File {
         val contentResolver = contentResolver
-        val tempFile = File.createTempFile("temp_", ".jpg", cacheDir) // Temporary file in cache
+        val tempFile = File.createTempFile("temp_", ".jpg", cacheDir)
         contentResolver.openInputStream(uri)?.use { inputStream ->
             tempFile.outputStream().use { outputStream ->
                 inputStream.copyTo(outputStream)
             }
         }
+        Log.d("UriToFile", "File created at ${tempFile.path}")
         return tempFile
     }
+
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
