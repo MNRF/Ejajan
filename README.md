@@ -56,5 +56,4 @@ Halaman untuk merchant dalam mengelola menu dan transaksi.
 ## **Demo Application**
 Lihat demo aplikasi untuk lebih memahami cara kerja E-Jajan:  
 ![Demo Apps](https://github.com/user-attachments/assets/ef95e03f-96bb-4fe5-805d-beb8b1261170)
-
 ---
