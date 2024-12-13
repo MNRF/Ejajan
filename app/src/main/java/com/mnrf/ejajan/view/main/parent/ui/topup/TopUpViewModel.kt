@@ -37,6 +37,26 @@ class TopUpViewModel(private val repository: UserRepository) : ViewModel() {
 
     private val db = Firebase.firestore
 
+    private val _transactionStatus = MutableLiveData<String?>()
+    val transactionStatus: LiveData<String?> get() = _transactionStatus
+
+    /*fun fetchTransactionStatus(transactionId: String) {
+        ApiConfig.getApiService().getTransactionStatus(transactionId).enqueue(object : Callback<TransactionResponse> {
+            override fun onResponse(call: Call<TransactionResponse>, response: Response<TransactionResponse>) {
+                if (response.isSuccessful) {
+                    _transactionStatus.value = response.body()?.status
+                } else {
+                    _transactionStatus.value = "Error: ${response.errorBody()?.string()}"
+                }
+            }
+
+            override fun onFailure(call: Call<TransactionResponse>, t: Throwable) {
+                _transactionStatus.value = "Failed to fetch status: ${t.message}"
+                Log.e("TransactionStatus", t.message ?: "Unknown error")
+            }
+        })
+    }*/
+
     fun getSession(): LiveData<UserModel> {
         _isLoading.value = true
         return repository.getSession().asLiveData()
@@ -62,7 +82,7 @@ class TopUpViewModel(private val repository: UserRepository) : ViewModel() {
                             customer_details = customerDetails
                         )
 
-                        ApiConfig.getApiService().createTransaction(request)
+                        ApiConfig.getCreateTransactionService().createTransaction(request)
                             .enqueue(object : Callback<TransactionResponse> {
                                 override fun onResponse(
                                     call: Call<TransactionResponse>,
@@ -100,7 +120,7 @@ class TopUpViewModel(private val repository: UserRepository) : ViewModel() {
             user?.let {
                 fetchParentProfile(user.token) { profile ->
                     if (profile != null) {
-                        val newBalance = (profile.balance?.toIntOrNull() ?: 0) + amount
+                        val newBalance = (profile.balance.toIntOrNull() ?: 0) + amount
                         updateBalance(profile.id, newBalance)
                     } else {
                         Log.e(TAG, "Profile not found for user.")
@@ -110,6 +130,37 @@ class TopUpViewModel(private val repository: UserRepository) : ViewModel() {
             }
         }
     }
+
+    fun checkTransactionStatus(orderId: String, callback: (String?) -> Unit) {
+        println("QWERTY1 $orderId")
+        ApiConfig.getCheckTransactionStatusService().getTransactionStatus(orderId)
+            .enqueue(object : Callback<TransactionResponse> {
+                override fun onResponse(
+                    call: Call<TransactionResponse>,
+                    response: Response<TransactionResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val transactionStatus = response.body()?.transaction_status
+                        Log.d(TAG, "Transaction status: $transactionStatus")
+                        callback(transactionStatus)
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+                        Log.e(TAG, "Error fetching status: $errorBody")
+                        println("ERROR BODY: $errorBody")
+                        callback(null)
+                    }
+                }
+
+                override fun onFailure(call: Call<TransactionResponse>, t: Throwable) {
+                    Log.e(TAG, "Failed to fetch status: ${t.message}")
+                    callback(null)
+                }
+            })
+    }
+
+
+
+
 
     private fun fetchParentProfile(userToken: String, callback: (ParentProfileModel?) -> Unit) {
         db.collection("parentprofiles")

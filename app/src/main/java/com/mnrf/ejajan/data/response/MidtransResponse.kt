@@ -14,7 +14,27 @@ data class CustomerDetails(
 )
 
 data class TransactionResponse(
-    val status: String,
-    val token: String,
-    val redirect_url: String
+    val token: String?, // Snap token
+    val status_code: String?, // HTTP-like status code
+    val transaction_id: String?,
+    val gross_amount: String?,
+    val currency: String?,
+    val order_id: String?,
+    val payment_type: String?,
+    val transaction_status: String?, // Key status like "settlement", "pending"
+    val fraud_status: String?,
+    val status_message: String?,
+    val merchant_id: String?,
+    val va_numbers: List<VANumber>?, // For virtual accounts
+    val payment_amounts: List<String>?,
+    val transaction_time: String?,
+    val settlement_time: String?,
+    val expiry_time: String?,
+    val finish_redirect_url: String?
 )
+
+data class VANumber(
+    val bank: String?,
+    val va_number: String?
+)
+

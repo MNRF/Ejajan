@@ -28,10 +28,12 @@ class ConfirmationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityParentConfirmationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val topUpAmount = intent.getStringExtra(TRANSACTION_SUCCESS)
         if (topUpAmount != null) {
             topUpViewModel.topUp(topUpAmount.toInt())
         }
+
 
         binding.btnBackToHome.setOnClickListener {
             val intent = Intent(this, ParentActivity::class.java)

@@ -1,6 +1,7 @@
 package com.mnrf.ejajan.view.main.parent.ui.home
 
 import android.content.Intent
+import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -69,7 +70,11 @@ class HomeParentFragment : Fragment() {
         }
 
         homeViewModel.parentProfile.observe(viewLifecycleOwner) { parentProfile ->
-            binding.tvSaldo.text = "Saldo: Rp.${parentProfile.balance}"
+            val balanceFormatted = DecimalFormat("#,###").format(parentProfile.balance.
+            toLongOrNull() ?: 0)
+            val saldo = "Saldo: Rp$balanceFormatted"
+            binding.tvSaldo.text = saldo
+            /*binding.tvSaldo.text = "Saldo: Rp${parentProfile.balance}"*/
         }
     }
 

@@ -174,7 +174,7 @@
                 android:textOn="THURSDAY"
                 app:layout_constraintBottom_toTopOf="@+id/toggleButton5"
                 app:layout_constraintEnd_toStartOf="@+id/textClockThursday"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toggleButton3" />
 

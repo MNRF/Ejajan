@@ -27,7 +27,6 @@ class MerchantHomeAdapter(private val viewModelStoreOwner: ViewModelStoreOwner) 
 
     inner class OrderViewHolder(private val binding: ItemMerchantOrderListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(order: MerchantOrderModel) {
             binding.apply {
                 Glide.with(binding.placeholderImage.context)
